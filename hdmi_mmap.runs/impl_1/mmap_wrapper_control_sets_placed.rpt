@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-| Date         : Thu Jan 17 18:30:34 2019
+| Date         : Mon Jan 21 11:13:30 2019
 | Host         : inyo running 64-bit Pop!_OS 18.10
 | Command      : report_control_sets -verbose -file mmap_wrapper_control_sets_placed.rpt
 | Design       : mmap_wrapper
@@ -23,8 +23,8 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Number of unique control sets                            |    18 |
-| Unused register locations in slices containing registers |    92 |
+| Number of unique control sets                            |    17 |
+| Unused register locations in slices containing registers |    84 |
 +----------------------------------------------------------+-------+
 
 
@@ -35,12 +35,12 @@ Table of Contents
 | Fanout | Control Sets |
 +--------+--------------+
 |      2 |            1 |
-|      4 |            5 |
-|      9 |            4 |
+|      4 |            3 |
+|      9 |            3 |
 |     10 |            1 |
 |     11 |            2 |
 |     12 |            1 |
-|    16+ |            4 |
+|    16+ |            6 |
 +--------+--------------+
 
 
@@ -50,39 +50,38 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             115 |           43 |
+| No           | No                    | No                     |             137 |           49 |
 | No           | No                    | Yes                    |               6 |            2 |
 | No           | Yes                   | No                     |              54 |           20 |
-| Yes          | No                    | No                     |              78 |           47 |
+| Yes          | No                    | No                     |             100 |           58 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |              23 |            6 |
+| Yes          | Yes                   | No                     |              11 |            4 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+---------------------------------------------+----------------------------------------+------------------------------------------------------------------------------------------------+------------------+----------------+
-|                 Clock Signal                |              Enable Signal             |                                        Set/Reset Signal                                        | Slice Load Count | Bel Load Count |
-+---------------------------------------------+----------------------------------------+------------------------------------------------------------------------------------------------+------------------+----------------+
-|  mmap_i/clk_wiz/inst/clk_out1               |                                        | mmap_i/display/rgb2dvi_0/U0/ClockGenInternal.ClockGenX/in0                                     |                1 |              2 |
-|  mmap_i/clk_wiz/inst/clk_out1               |                                        | mmap_i/display/rgb2dvi_0/U0/ClockGenInternal.ClockGenX/LockLostReset/SyncAsyncx/oSyncStages[1] |                1 |              4 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/linetest_0/inst/dwait0          | mmap_i/linetest_0/inst/number                                                                  |                1 |              4 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/linetest_0/inst/y0[8]_i_2_n_0   | mmap_i/linetest_0/inst/y0[8]_i_1_n_0                                                           |                1 |              4 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/linetest_0/inst/x0[8]_i_2_n_0   | mmap_i/linetest_0/inst/x0[8]_i_1_n_0                                                           |                1 |              4 |
-|  mmap_i/clk_wiz/inst/clk_out1               | mmap_i/display/vidsel_0/inst/enable    |                                                                                                |                1 |              4 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 |                                        |                                                                                                |                5 |              9 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/line_0/inst/sel                 |                                                                                                |                5 |              9 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/line_0/inst/q1[8]_i_1_n_0       |                                                                                                |                6 |              9 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/line_0/inst/q0[8]_i_1_n_0       |                                                                                                |                8 |              9 |
-|  mmap_i/clk_wiz/inst/clk_out1               |                                        | mmap_i/display/rgb2dvi_0/U0/DataEncoders[0].DataEncoder/pDataOutRaw[9]_i_1__1_n_0              |                3 |             10 |
-|  mmap_i/clk_wiz/inst/clk_out1               | mmap_i/display/videogen_0/inst/hreset  | mmap_i/display/videogen_0/inst/vcount0                                                         |                3 |             11 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/line_0/inst/D[10]_i_1_n_0       |                                                                                                |                5 |             11 |
-|  mmap_i/clk_wiz/inst/clk_out1               |                                        | mmap_i/display/videogen_0/inst/hreset                                                          |                3 |             12 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/line_0/inst/qstop_0             |                                                                                                |               13 |             18 |
-|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/line_0/inst/address[17]_i_1_n_0 |                                                                                                |                9 |             18 |
-|  mmap_i/clk_wiz/inst/clk_out1               |                                        | mmap_i/display/rgb2dvi_0/U0/DataEncoders[0].DataEncoder/SR[0]                                  |               14 |             32 |
-|  mmap_i/clk_wiz/inst/clk_out1               |                                        |                                                                                                |               38 |            106 |
-+---------------------------------------------+----------------------------------------+------------------------------------------------------------------------------------------------+------------------+----------------+
++---------------------------------------------+------------------------------------------+----------------------------------------------------------------------------------------------+------------------+----------------+
+|                 Clock Signal                |               Enable Signal              |                                       Set/Reset Signal                                       | Slice Load Count | Bel Load Count |
++---------------------------------------------+------------------------------------------+----------------------------------------------------------------------------------------------+------------------+----------------+
+|  mmap_i/clk_wiz/inst/clk_out1               |                                          | mmap_i/display/rgb2dvi/U0/ClockGenInternal.ClockGenX/in0                                     |                1 |              2 |
+|  mmap_i/clk_wiz/inst/clk_out1               | mmap_i/display/vidsel/enable0            |                                                                                              |                1 |              4 |
+|  mmap_i/clk_wiz/inst/clk_out1               | mmap_i/display/vidsel/enable1            |                                                                                              |                1 |              4 |
+|  mmap_i/clk_wiz/inst/clk_out1               |                                          | mmap_i/display/rgb2dvi/U0/ClockGenInternal.ClockGenX/LockLostReset/SyncAsyncx/oSyncStages[1] |                1 |              4 |
+|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/graphics/inst/sel                 |                                                                                              |                7 |              9 |
+|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/graphics/inst/q1[8]_i_1_n_0       |                                                                                              |                4 |              9 |
+|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/graphics/inst/q0[8]_i_1_n_0       |                                                                                              |                9 |              9 |
+|  mmap_i/clk_wiz/inst/clk_out1               |                                          | mmap_i/display/rgb2dvi/U0/DataEncoders[0].DataEncoder/pDataOutRaw[9]_i_1__1_n_0              |                3 |             10 |
+|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/graphics/inst/D[10]_i_1_n_0       |                                                                                              |                6 |             11 |
+|  mmap_i/clk_wiz/inst/clk_out1               | mmap_i/display/videogen/inst/hreset      | mmap_i/display/videogen/inst/vcount0                                                         |                4 |             11 |
+|  mmap_i/clk_wiz/inst/clk_out1               |                                          | mmap_i/display/videogen/inst/hreset                                                          |                3 |             12 |
+|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/graphics/inst/x1_0                |                                                                                              |                7 |             18 |
+|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/graphics/inst/address[17]_i_1_n_0 |                                                                                              |                9 |             18 |
+|  mmap_i/processing_system7_0/inst/FCLK_CLK1 | mmap_i/graphics/inst/qstop_1             |                                                                                              |               14 |             18 |
+|  mmap_i/processing_system7_0/inst/FCLK_CLK1 |                                          |                                                                                              |                8 |             19 |
+|  mmap_i/clk_wiz/inst/clk_out1               |                                          | mmap_i/display/rgb2dvi/U0/DataEncoders[0].DataEncoder/SR[0]                                  |               14 |             32 |
+|  mmap_i/clk_wiz/inst/clk_out1               |                                          |                                                                                              |               41 |            118 |
++---------------------------------------------+------------------------------------------+----------------------------------------------------------------------------------------------+------------------+----------------+
 
 

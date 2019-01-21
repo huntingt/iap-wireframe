@@ -27,16 +27,13 @@ set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_xlconstant
 # IP: bd/mmap/ip/mmap_blk_mem_gen_0_0/mmap_blk_mem_gen_0_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_blk_mem_gen_0_0 || ORIG_REF_NAME==mmap_blk_mem_gen_0_0} -quiet] -quiet
 
-# IP: bd/mmap/ip/mmap_xlconstant_0_1/mmap_xlconstant_0_1.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_xlconstant_0_1 || ORIG_REF_NAME==mmap_xlconstant_0_1} -quiet] -quiet
-
-# IP: bd/mmap/ip/mmap_line_0_0/mmap_line_0_0.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_line_0_0 || ORIG_REF_NAME==mmap_line_0_0} -quiet] -quiet
-
 # IP: bd/mmap/ip/mmap_linetest_0_0/mmap_linetest_0_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_linetest_0_0 || ORIG_REF_NAME==mmap_linetest_0_0} -quiet] -quiet
 
-# IP: bd/mmap/ip/mmap_xlconstant_0_2/mmap_xlconstant_0_2.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_xlconstant_0_2 || ORIG_REF_NAME==mmap_xlconstant_0_2} -quiet] -quiet
+# IP: bd/mmap/ip/mmap_blk_mem_gen_0_1/mmap_blk_mem_gen_0_1.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_blk_mem_gen_0_1 || ORIG_REF_NAME==mmap_blk_mem_gen_0_1} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_graphics_0_0/mmap_graphics_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_graphics_0_0 || ORIG_REF_NAME==mmap_graphics_0_0} -quiet] -quiet
 
 # XDC: bd/mmap/mmap_ooc.xdc

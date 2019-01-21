@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="mmap" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="STALE" Timestamp="1548084125"/>
-    <Generation Name="IMPLEMENTATION" State="STALE" Timestamp="1548084125"/>
-    <Generation Name="SIMULATION" State="STALE" Timestamp="1548084125"/>
-    <Generation Name="HW_HANDOFF" State="STALE" Timestamp="1548084125"/>
+    <Generation Name="SYNTHESIS" State="STALE" Timestamp="1548090483"/>
+    <Generation Name="IMPLEMENTATION" State="STALE" Timestamp="1548090483"/>
+    <Generation Name="SIMULATION" State="STALE" Timestamp="1548090483"/>
+    <Generation Name="HW_HANDOFF" State="STALE" Timestamp="1548090483"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip/mmap_processing_system7_0_0/mmap_processing_system7_0_0.xci" Type="IP">
         <Instance HierarchyPath="processing_system7_0"/>
@@ -74,16 +74,16 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip/mmap_line_0_0/mmap_line_0_0.xci" Type="IP">
-        <Instance HierarchyPath="line_0"/>
+      <File Name="ip/mmap_blk_mem_gen_0_1/mmap_blk_mem_gen_0_1.xci" Type="IP">
+        <Instance HierarchyPath="display/buffer_1"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip/mmap_linetest_0_0/mmap_linetest_0_0.xci" Type="IP">
-        <Instance HierarchyPath="linetest_0"/>
+      <File Name="ip/mmap_graphics_0_0/mmap_graphics_0_0.xci" Type="IP">
+        <Instance HierarchyPath="graphics"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
@@ -117,8 +117,32 @@
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip/mmap_blk_mem_gen_0_1/mmap_blk_mem_gen_0_1.xci" Type="IP">
-        <Instance HierarchyPath="display/buffer_1"/>
+      <File Name="ip/mmap_axis_data_fifo_0_0/mmap_axis_data_fifo_0_0.xci" Type="IP">
+        <Instance HierarchyPath="axis_data_fifo_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/mmap_gslice_0_0/mmap_gslice_0_0.xci" Type="IP">
+        <Instance HierarchyPath="gslice"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/mmap_linetest_0_2/mmap_linetest_0_2.xci" Type="IP">
+        <Instance HierarchyPath="linetest_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/mmap_axi_dma_0_0/mmap_axi_dma_0_0.xci" Type="IP">
+        <Instance HierarchyPath="axi_dma_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>

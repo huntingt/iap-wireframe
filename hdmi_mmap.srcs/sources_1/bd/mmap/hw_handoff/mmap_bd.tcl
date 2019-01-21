@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# line, linetest, videogen, vidsel
+# graphics, linetest, videogen, vidsel
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -168,6 +168,7 @@ proc create_hier_cell_display { parentCell nameHier } {
   # Create pins
   create_bd_pin -dir I -type rst aRst
   create_bd_pin -dir I -from 17 -to 0 address
+  create_bd_pin -dir I buffer_sel
   create_bd_pin -dir I -from 0 -to 0 data
   create_bd_pin -dir I -type clk data_clk
   create_bd_pin -dir O -type clk hdmi_out_clk_n
@@ -178,14 +179,8 @@ proc create_hier_cell_display { parentCell nameHier } {
   create_bd_pin -dir O vsync_out
   create_bd_pin -dir I -from 0 -to 0 write_en
 
-  # Create instance: black, and set properties
-  set black [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 black ]
-  set_property -dict [ list \
-   CONFIG.CONST_VAL {0} \
- ] $black
-
-  # Create instance: blk_mem_gen_0, and set properties
-  set blk_mem_gen_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 blk_mem_gen_0 ]
+  # Create instance: buffer_0, and set properties
+  set buffer_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 buffer_0 ]
   set_property -dict [ list \
    CONFIG.Byte_Size {9} \
    CONFIG.Coe_File {no_coe_file_loaded} \
@@ -194,14 +189,14 @@ proc create_hier_cell_display { parentCell nameHier } {
    CONFIG.Enable_B {Use_ENB_Pin} \
    CONFIG.Fill_Remaining_Memory_Locations {false} \
    CONFIG.Load_Init_File {false} \
-   CONFIG.Memory_Type {True_Dual_Port_RAM} \
+   CONFIG.Memory_Type {Simple_Dual_Port_RAM} \
    CONFIG.Operating_Mode_A {NO_CHANGE} \
    CONFIG.Port_B_Clock {100} \
    CONFIG.Port_B_Enable_Rate {100} \
-   CONFIG.Port_B_Write_Rate {50} \
+   CONFIG.Port_B_Write_Rate {0} \
    CONFIG.Read_Width_A {1} \
    CONFIG.Read_Width_B {1} \
-   CONFIG.Register_PortA_Output_of_Memory_Primitives {true} \
+   CONFIG.Register_PortA_Output_of_Memory_Primitives {false} \
    CONFIG.Register_PortB_Output_of_Memory_Primitives {true} \
    CONFIG.Remaining_Memory_Locations {0} \
    CONFIG.Use_Byte_Write_Enable {false} \
@@ -210,64 +205,87 @@ proc create_hier_cell_display { parentCell nameHier } {
    CONFIG.Write_Width_A {1} \
    CONFIG.Write_Width_B {1} \
    CONFIG.use_bram_block {Stand_Alone} \
- ] $blk_mem_gen_0
+ ] $buffer_0
 
-  # Create instance: high, and set properties
-  set high [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 high ]
+  # Create instance: buffer_1, and set properties
+  set buffer_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 buffer_1 ]
+  set_property -dict [ list \
+   CONFIG.Byte_Size {9} \
+   CONFIG.EN_SAFETY_CKT {false} \
+   CONFIG.Enable_32bit_Address {false} \
+   CONFIG.Enable_B {Use_ENB_Pin} \
+   CONFIG.Memory_Type {Simple_Dual_Port_RAM} \
+   CONFIG.Operating_Mode_A {NO_CHANGE} \
+   CONFIG.Port_B_Clock {100} \
+   CONFIG.Port_B_Enable_Rate {100} \
+   CONFIG.Read_Width_A {1} \
+   CONFIG.Read_Width_B {1} \
+   CONFIG.Register_PortA_Output_of_Memory_Primitives {false} \
+   CONFIG.Register_PortB_Output_of_Memory_Primitives {true} \
+   CONFIG.Use_Byte_Write_Enable {false} \
+   CONFIG.Use_RSTA_Pin {false} \
+   CONFIG.Write_Depth_A {262144} \
+   CONFIG.Write_Width_A {1} \
+   CONFIG.Write_Width_B {1} \
+   CONFIG.use_bram_block {Stand_Alone} \
+ ] $buffer_1
 
-  # Create instance: rgb2dvi_0, and set properties
-  set rgb2dvi_0 [ create_bd_cell -type ip -vlnv digilentinc.com:ip:rgb2dvi:1.2 rgb2dvi_0 ]
+  # Create instance: rgb2dvi, and set properties
+  set rgb2dvi [ create_bd_cell -type ip -vlnv digilentinc.com:ip:rgb2dvi:1.2 rgb2dvi ]
   set_property -dict [ list \
    CONFIG.kClkRange {2} \
- ] $rgb2dvi_0
+ ] $rgb2dvi
 
-  # Create instance: videogen_0, and set properties
+  # Create instance: videogen, and set properties
   set block_name videogen
-  set block_cell_name videogen_0
-  if { [catch {set videogen_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+  set block_cell_name videogen
+  if { [catch {set videogen [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
      catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
-   } elseif { $videogen_0 eq "" } {
+   } elseif { $videogen eq "" } {
      catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
   
-  # Create instance: vidsel_0, and set properties
+  # Create instance: vidsel, and set properties
   set block_name vidsel
-  set block_cell_name vidsel_0
-  if { [catch {set vidsel_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+  set block_cell_name vidsel
+  if { [catch {set vidsel [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
      catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
-   } elseif { $vidsel_0 eq "" } {
+   } elseif { $vidsel eq "" } {
      catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
   
   # Create port connections
-  connect_bd_net -net black_dout [get_bd_pins black/dout] [get_bd_pins blk_mem_gen_0/dinb]
-  connect_bd_net -net blk_mem_gen_0_doutb [get_bd_pins blk_mem_gen_0/doutb] [get_bd_pins vidsel_0/memc]
-  connect_bd_net -net clk_wiz_clk_out1 [get_bd_pins vga_clk] [get_bd_pins blk_mem_gen_0/clkb] [get_bd_pins rgb2dvi_0/PixelClk] [get_bd_pins videogen_0/vclock] [get_bd_pins vidsel_0/vclock]
-  connect_bd_net -net ground_dout [get_bd_pins aRst] [get_bd_pins rgb2dvi_0/aRst]
-  connect_bd_net -net high_dout [get_bd_pins blk_mem_gen_0/ena] [get_bd_pins high/dout]
-  connect_bd_net -net processing_system7_0_FCLK_CLK1 [get_bd_pins data_clk] [get_bd_pins blk_mem_gen_0/clka]
-  connect_bd_net -net rgb2dvi_0_TMDS_Clk_n [get_bd_pins hdmi_out_clk_n] [get_bd_pins rgb2dvi_0/TMDS_Clk_n]
-  connect_bd_net -net rgb2dvi_0_TMDS_Clk_p [get_bd_pins hdmi_out_clk_p] [get_bd_pins rgb2dvi_0/TMDS_Clk_p]
-  connect_bd_net -net rgb2dvi_0_TMDS_Data_n [get_bd_pins hdmi_out_data_n] [get_bd_pins rgb2dvi_0/TMDS_Data_n]
-  connect_bd_net -net rgb2dvi_0_TMDS_Data_p [get_bd_pins hdmi_out_data_p] [get_bd_pins rgb2dvi_0/TMDS_Data_p]
-  connect_bd_net -net test_0_address [get_bd_pins address] [get_bd_pins blk_mem_gen_0/addra]
-  connect_bd_net -net test_0_data [get_bd_pins data] [get_bd_pins blk_mem_gen_0/dina]
-  connect_bd_net -net test_0_enable [get_bd_pins write_en] [get_bd_pins blk_mem_gen_0/wea]
-  connect_bd_net -net videogen_0_blank [get_bd_pins videogen_0/blank] [get_bd_pins vidsel_0/blank]
-  connect_bd_net -net videogen_0_hcount [get_bd_pins videogen_0/hcount] [get_bd_pins vidsel_0/hcount]
-  connect_bd_net -net videogen_0_hsync [get_bd_pins videogen_0/hsync] [get_bd_pins vidsel_0/hsync]
-  connect_bd_net -net videogen_0_vcount [get_bd_pins videogen_0/vcount] [get_bd_pins vidsel_0/vcount]
-  connect_bd_net -net videogen_0_vsync [get_bd_pins videogen_0/vsync] [get_bd_pins vidsel_0/vsync]
-  connect_bd_net -net vidsel_0_address [get_bd_pins blk_mem_gen_0/addrb] [get_bd_pins vidsel_0/address]
-  connect_bd_net -net vidsel_0_blank_out [get_bd_pins rgb2dvi_0/vid_pVDE] [get_bd_pins vidsel_0/blank_out]
-  connect_bd_net -net vidsel_0_color [get_bd_pins rgb2dvi_0/vid_pData] [get_bd_pins vidsel_0/color]
-  connect_bd_net -net vidsel_0_enable [get_bd_pins blk_mem_gen_0/enb] [get_bd_pins blk_mem_gen_0/web] [get_bd_pins vidsel_0/enable]
-  connect_bd_net -net vidsel_0_hsync_out [get_bd_pins rgb2dvi_0/vid_pHSync] [get_bd_pins vidsel_0/hsync_out]
-  connect_bd_net -net vidsel_0_vsync_out [get_bd_pins vsync_out] [get_bd_pins rgb2dvi_0/vid_pVSync] [get_bd_pins vidsel_0/vsync_out]
+  connect_bd_net -net blk_mem_gen_0_doutb [get_bd_pins buffer_0/doutb] [get_bd_pins vidsel/memc_0]
+  connect_bd_net -net buffer_1_doutb [get_bd_pins buffer_1/doutb] [get_bd_pins vidsel/memc_1]
+  connect_bd_net -net buffer_sel_1 [get_bd_pins buffer_sel] [get_bd_pins vidsel/buffer_sel]
+  connect_bd_net -net clk_wiz_clk_out1 [get_bd_pins vga_clk] [get_bd_pins buffer_0/clkb] [get_bd_pins buffer_1/clkb] [get_bd_pins rgb2dvi/PixelClk] [get_bd_pins videogen/vclock] [get_bd_pins vidsel/vclock]
+  connect_bd_net -net ground_dout [get_bd_pins aRst] [get_bd_pins rgb2dvi/aRst]
+  connect_bd_net -net processing_system7_0_FCLK_CLK1 [get_bd_pins data_clk] [get_bd_pins buffer_0/clka] [get_bd_pins buffer_1/clka]
+  connect_bd_net -net rgb2dvi_0_TMDS_Clk_n [get_bd_pins hdmi_out_clk_n] [get_bd_pins rgb2dvi/TMDS_Clk_n]
+  connect_bd_net -net rgb2dvi_0_TMDS_Clk_p [get_bd_pins hdmi_out_clk_p] [get_bd_pins rgb2dvi/TMDS_Clk_p]
+  connect_bd_net -net rgb2dvi_0_TMDS_Data_n [get_bd_pins hdmi_out_data_n] [get_bd_pins rgb2dvi/TMDS_Data_n]
+  connect_bd_net -net rgb2dvi_0_TMDS_Data_p [get_bd_pins hdmi_out_data_p] [get_bd_pins rgb2dvi/TMDS_Data_p]
+  connect_bd_net -net test_0_address [get_bd_pins address] [get_bd_pins buffer_0/addra] [get_bd_pins buffer_1/addra]
+  connect_bd_net -net test_0_data [get_bd_pins data] [get_bd_pins buffer_0/dina] [get_bd_pins buffer_1/dina]
+  connect_bd_net -net test_0_enable [get_bd_pins write_en] [get_bd_pins buffer_0/wea] [get_bd_pins buffer_1/wea]
+  connect_bd_net -net videogen_0_blank [get_bd_pins videogen/blank] [get_bd_pins vidsel/blank]
+  connect_bd_net -net videogen_0_hcount [get_bd_pins videogen/hcount] [get_bd_pins vidsel/hcount]
+  connect_bd_net -net videogen_0_hsync [get_bd_pins videogen/hsync] [get_bd_pins vidsel/hsync]
+  connect_bd_net -net videogen_0_vcount [get_bd_pins videogen/vcount] [get_bd_pins vidsel/vcount]
+  connect_bd_net -net videogen_0_vsync [get_bd_pins videogen/vsync] [get_bd_pins vidsel/vsync]
+  connect_bd_net -net vidsel_0_a_enable0 [get_bd_pins buffer_0/ena] [get_bd_pins vidsel/a_enable0]
+  connect_bd_net -net vidsel_0_a_enable1 [get_bd_pins buffer_1/ena] [get_bd_pins vidsel/a_enable1]
+  connect_bd_net -net vidsel_0_address [get_bd_pins buffer_0/addrb] [get_bd_pins vidsel/address]
+  connect_bd_net -net vidsel_0_blank_out [get_bd_pins rgb2dvi/vid_pVDE] [get_bd_pins vidsel/blank_out]
+  connect_bd_net -net vidsel_0_color [get_bd_pins rgb2dvi/vid_pData] [get_bd_pins vidsel/color]
+  connect_bd_net -net vidsel_0_enable0 [get_bd_pins buffer_0/enb] [get_bd_pins buffer_1/addrb] [get_bd_pins vidsel/enable0]
+  connect_bd_net -net vidsel_0_enable1 [get_bd_pins buffer_1/enb] [get_bd_pins vidsel/enable1]
+  connect_bd_net -net vidsel_0_hsync_out [get_bd_pins rgb2dvi/vid_pHSync] [get_bd_pins vidsel/hsync_out]
+  connect_bd_net -net vidsel_0_vsync_out [get_bd_pins vsync_out] [get_bd_pins rgb2dvi/vid_pVSync] [get_bd_pins vidsel/vsync_out]
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -347,23 +365,23 @@ proc create_root_design { parentCell } {
   # Create instance: display
   create_hier_cell_display [current_bd_instance .] display
 
+  # Create instance: graphics, and set properties
+  set block_name graphics
+  set block_cell_name graphics
+  if { [catch {set graphics [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $graphics eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create instance: ground, and set properties
   set ground [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 ground ]
   set_property -dict [ list \
    CONFIG.CONST_VAL {0} \
  ] $ground
 
-  # Create instance: line_0, and set properties
-  set block_name line
-  set block_cell_name line_0
-  if { [catch {set line_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
-     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   } elseif { $line_0 eq "" } {
-     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   }
-  
   # Create instance: linetest_0, and set properties
   set block_name linetest
   set block_cell_name linetest_0
@@ -1154,21 +1172,20 @@ proc create_root_design { parentCell } {
 
   # Create port connections
   connect_bd_net -net clk_wiz_clk_out1 [get_bd_pins clk_wiz/clk_out1] [get_bd_pins display/vga_clk]
-  connect_bd_net -net display_vsync_out [get_bd_pins display/vsync_out] [get_bd_pins line_0/vsync]
+  connect_bd_net -net display_vsync_out [get_bd_pins display/vsync_out] [get_bd_pins graphics/vsync]
+  connect_bd_net -net graphics_0_address [get_bd_pins display/address] [get_bd_pins graphics/address]
+  connect_bd_net -net graphics_0_buffer_sel [get_bd_pins display/buffer_sel] [get_bd_pins graphics/buffer_sel]
+  connect_bd_net -net graphics_0_data [get_bd_pins display/data] [get_bd_pins graphics/data]
+  connect_bd_net -net graphics_0_ready [get_bd_pins graphics/ready] [get_bd_pins linetest_0/enable]
+  connect_bd_net -net graphics_0_writing [get_bd_pins display/write_en] [get_bd_pins graphics/writing]
   connect_bd_net -net ground_dout [get_bd_pins clk_wiz/reset] [get_bd_pins display/aRst] [get_bd_pins ground/dout]
-  connect_bd_net -net line_0_address [get_bd_pins display/address] [get_bd_pins line_0/address]
-  connect_bd_net -net line_0_data [get_bd_pins display/data] [get_bd_pins line_0/data]
-  connect_bd_net -net line_0_ready [get_bd_pins line_0/ready] [get_bd_pins linetest_0/enable]
-  connect_bd_net -net line_0_writing [get_bd_pins display/write_en] [get_bd_pins line_0/writing]
-  connect_bd_net -net linetest_0_color [get_bd_pins line_0/color] [get_bd_pins linetest_0/color]
-  connect_bd_net -net linetest_0_enable [get_bd_pins line_0/enable] [get_bd_pins linetest_0/ready]
-  connect_bd_net -net linetest_0_mode [get_bd_pins line_0/mode] [get_bd_pins linetest_0/mode]
-  connect_bd_net -net linetest_0_x0 [get_bd_pins line_0/x0] [get_bd_pins linetest_0/x0]
-  connect_bd_net -net linetest_0_x1 [get_bd_pins line_0/x1] [get_bd_pins linetest_0/x1]
-  connect_bd_net -net linetest_0_y0 [get_bd_pins line_0/y0] [get_bd_pins linetest_0/y0]
-  connect_bd_net -net linetest_0_y1 [get_bd_pins line_0/y1] [get_bd_pins linetest_0/y1]
+  connect_bd_net -net linetest_0_color [get_bd_pins graphics/color] [get_bd_pins linetest_0/color]
+  connect_bd_net -net linetest_0_mode [get_bd_pins graphics/mode] [get_bd_pins linetest_0/mode]
+  connect_bd_net -net linetest_0_ready [get_bd_pins graphics/enable] [get_bd_pins linetest_0/ready]
+  connect_bd_net -net linetest_0_x [get_bd_pins graphics/x] [get_bd_pins linetest_0/x]
+  connect_bd_net -net linetest_0_y [get_bd_pins graphics/y] [get_bd_pins linetest_0/y]
   connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK]
-  connect_bd_net -net processing_system7_0_FCLK_CLK1 [get_bd_pins display/data_clk] [get_bd_pins line_0/clk] [get_bd_pins linetest_0/clk] [get_bd_pins processing_system7_0/FCLK_CLK1]
+  connect_bd_net -net processing_system7_0_FCLK_CLK1 [get_bd_pins display/data_clk] [get_bd_pins graphics/clk] [get_bd_pins linetest_0/clk] [get_bd_pins processing_system7_0/FCLK_CLK1]
   connect_bd_net -net rgb2dvi_0_TMDS_Clk_n [get_bd_ports hdmi_out_clk_n] [get_bd_pins display/hdmi_out_clk_n]
   connect_bd_net -net rgb2dvi_0_TMDS_Clk_p [get_bd_ports hdmi_out_clk_p] [get_bd_pins display/hdmi_out_clk_p]
   connect_bd_net -net rgb2dvi_0_TMDS_Data_n [get_bd_ports hdmi_out_data_n] [get_bd_pins display/hdmi_out_data_n]

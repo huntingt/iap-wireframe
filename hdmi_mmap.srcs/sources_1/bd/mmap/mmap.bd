@@ -18,8 +18,11 @@
         "videogen": "",
         "vidsel": ""
       },
-      "line_0": "",
-      "linetest_0": ""
+      "axis_data_fifo_0": "",
+      "graphics": "",
+      "gslice": "",
+      "linetest_0": "",
+      "axi_dma_0": ""
     },
     "interface_ports": {
       "DDR": {
@@ -2178,12 +2181,21 @@
           }
         }
       },
-      "line_0": {
-        "vlnv": "xilinx.com:module_ref:line:1.0",
-        "xci_name": "mmap_line_0_0",
+      "axis_data_fifo_0": {
+        "vlnv": "xilinx.com:ip:axis_data_fifo:2.0",
+        "xci_name": "mmap_axis_data_fifo_0_0",
+        "parameters": {
+          "TDATA_NUM_BYTES": {
+            "value": "3"
+          }
+        }
+      },
+      "graphics": {
+        "vlnv": "xilinx.com:module_ref:graphics:1.0",
+        "xci_name": "mmap_graphics_0_0",
         "reference_info": {
           "ref_type": "hdl",
-          "ref_name": "line",
+          "ref_name": "graphics",
           "boundary_crc": "0x0"
         },
         "ports": {
@@ -2191,29 +2203,19 @@
             "type": "clk",
             "direction": "I"
           },
+          "x": {
+            "direction": "I",
+            "left": "8",
+            "right": "0"
+          },
+          "y": {
+            "direction": "I",
+            "left": "8",
+            "right": "0"
+          },
           "mode": {
             "direction": "I",
             "left": "1",
-            "right": "0"
-          },
-          "x0": {
-            "direction": "I",
-            "left": "8",
-            "right": "0"
-          },
-          "y0": {
-            "direction": "I",
-            "left": "8",
-            "right": "0"
-          },
-          "x1": {
-            "direction": "I",
-            "left": "8",
-            "right": "0"
-          },
-          "y1": {
-            "direction": "I",
-            "left": "8",
             "right": "0"
           },
           "color": {
@@ -2244,9 +2246,43 @@
           }
         }
       },
+      "gslice": {
+        "vlnv": "xilinx.com:module_ref:gslice:1.0",
+        "xci_name": "mmap_gslice_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "gslice",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "xymc": {
+            "direction": "I",
+            "left": "23",
+            "right": "0"
+          },
+          "x": {
+            "direction": "O",
+            "left": "8",
+            "right": "0"
+          },
+          "y": {
+            "direction": "O",
+            "left": "8",
+            "right": "0"
+          },
+          "mode": {
+            "direction": "O",
+            "left": "1",
+            "right": "0"
+          },
+          "color": {
+            "direction": "O"
+          }
+        }
+      },
       "linetest_0": {
         "vlnv": "xilinx.com:module_ref:linetest:1.0",
-        "xci_name": "mmap_linetest_0_0",
+        "xci_name": "mmap_linetest_0_2",
         "reference_info": {
           "ref_type": "hdl",
           "ref_name": "linetest",
@@ -2260,36 +2296,25 @@
           "enable": {
             "direction": "I"
           },
-          "mode": {
+          "xymc": {
             "direction": "O",
-            "left": "1",
+            "left": "23",
             "right": "0"
-          },
-          "x0": {
-            "direction": "O",
-            "left": "8",
-            "right": "0"
-          },
-          "y0": {
-            "direction": "O",
-            "left": "8",
-            "right": "0"
-          },
-          "x1": {
-            "direction": "O",
-            "left": "8",
-            "right": "0"
-          },
-          "y1": {
-            "direction": "O",
-            "left": "8",
-            "right": "0"
-          },
-          "color": {
-            "direction": "O"
           },
           "ready": {
             "direction": "O"
+          }
+        }
+      },
+      "axi_dma_0": {
+        "vlnv": "xilinx.com:ip:axi_dma:7.1",
+        "xci_name": "mmap_axi_dma_0_0",
+        "parameters": {
+          "c_include_s2mm": {
+            "value": "0"
+          },
+          "c_micro_dma": {
+            "value": "1"
           }
         }
       }
@@ -2355,7 +2380,8 @@
         "ports": [
           "processing_system7_0/FCLK_CLK1",
           "display/data_clk",
-          "line_0/clk",
+          "axis_data_fifo_0/s_axis_aclk",
+          "graphics/clk",
           "linetest_0/clk"
         ]
       },
@@ -2366,82 +2392,94 @@
           "display/aRst"
         ]
       },
-      "linetest_0_x0": {
+      "graphics_0_address": {
         "ports": [
-          "linetest_0/x0",
-          "line_0/x0"
-        ]
-      },
-      "linetest_0_y0": {
-        "ports": [
-          "linetest_0/y0",
-          "line_0/y0"
-        ]
-      },
-      "linetest_0_x1": {
-        "ports": [
-          "linetest_0/x1",
-          "line_0/x1"
-        ]
-      },
-      "linetest_0_y1": {
-        "ports": [
-          "linetest_0/y1",
-          "line_0/y1"
-        ]
-      },
-      "linetest_0_enable": {
-        "ports": [
-          "linetest_0/ready",
-          "line_0/enable"
-        ]
-      },
-      "line_0_writing": {
-        "ports": [
-          "line_0/writing",
-          "display/write_en"
-        ]
-      },
-      "line_0_address": {
-        "ports": [
-          "line_0/address",
+          "graphics/address",
           "display/address"
         ]
       },
-      "linetest_0_color": {
+      "graphics_0_data": {
         "ports": [
-          "linetest_0/color",
-          "line_0/color"
-        ]
-      },
-      "line_0_data": {
-        "ports": [
-          "line_0/data",
+          "graphics/data",
           "display/data"
         ]
       },
-      "line_0_ready": {
+      "graphics_0_writing": {
         "ports": [
-          "line_0/ready",
-          "linetest_0/enable"
+          "graphics/writing",
+          "display/write_en"
         ]
       },
-      "linetest_0_mode": {
+      "graphics_0_buffer_sel": {
         "ports": [
-          "linetest_0/mode",
-          "line_0/mode"
+          "graphics/buffer_sel",
+          "display/buffer_sel"
         ]
       },
       "display_vsync_out": {
         "ports": [
           "display/vsync_out",
-          "line_0/vsync"
+          "graphics/vsync"
         ]
       },
-      "line_0_buffer_sel": {
+      "graphics_ready": {
         "ports": [
-          "line_0/buffer_sel",
-          "display/buffer_sel"
+          "graphics/ready",
+          "axis_data_fifo_0/m_axis_tready"
+        ]
+      },
+      "axis_data_fifo_0_m_axis_tvalid": {
+        "ports": [
+          "axis_data_fifo_0/m_axis_tvalid",
+          "graphics/enable"
+        ]
+      },
+      "axis_data_fifo_0_m_axis_tdata": {
+        "ports": [
+          "axis_data_fifo_0/m_axis_tdata",
+          "gslice/xymc"
+        ]
+      },
+      "gslice_0_x": {
+        "ports": [
+          "gslice/x",
+          "graphics/x"
+        ]
+      },
+      "gslice_0_y": {
+        "ports": [
+          "gslice/y",
+          "graphics/y"
+        ]
+      },
+      "gslice_0_mode": {
+        "ports": [
+          "gslice/mode",
+          "graphics/mode"
+        ]
+      },
+      "gslice_0_color": {
+        "ports": [
+          "gslice/color",
+          "graphics/color"
+        ]
+      },
+      "linetest_0_xymc": {
+        "ports": [
+          "linetest_0/xymc",
+          "axis_data_fifo_0/s_axis_tdata"
+        ]
+      },
+      "linetest_0_ready": {
+        "ports": [
+          "linetest_0/ready",
+          "axis_data_fifo_0/s_axis_tvalid"
+        ]
+      },
+      "axis_data_fifo_0_s_axis_tready": {
+        "ports": [
+          "axis_data_fifo_0/s_axis_tready",
+          "linetest_0/enable"
         ]
       }
     },
@@ -2449,6 +2487,18 @@
       "/processing_system7_0": {
         "address_spaces": {
           "Data": {
+            "range": "4G",
+            "width": "32"
+          }
+        }
+      },
+      "/axi_dma_0": {
+        "address_spaces": {
+          "Data_SG": {
+            "range": "4G",
+            "width": "32"
+          },
+          "Data_MM2S": {
             "range": "4G",
             "width": "32"
           }

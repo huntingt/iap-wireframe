@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-//Date        : Thu Jan 17 18:27:50 2019
+//Date        : Mon Jan 21 11:05:44 2019
 //Host        : inyo running 64-bit Pop!_OS 18.10
 //Command     : generate_target mmap.bd
 //Design      : mmap
@@ -12,6 +12,7 @@
 module display_imp_SMLEIP
    (aRst,
     address,
+    buffer_sel,
     data,
     data_clk,
     hdmi_out_clk_n,
@@ -23,6 +24,7 @@ module display_imp_SMLEIP
     write_en);
   input aRst;
   input [17:0]address;
+  input buffer_sel;
   input [0:0]data;
   input data_clk;
   output hdmi_out_clk_n;
@@ -33,11 +35,11 @@ module display_imp_SMLEIP
   output vsync_out;
   input [0:0]write_en;
 
-  wire [0:0]black_dout;
   wire [0:0]blk_mem_gen_0_doutb;
+  wire [0:0]buffer_1_doutb;
+  wire buffer_sel_1;
   wire clk_wiz_clk_out1;
   wire ground_dout;
-  wire [0:0]high_dout;
   wire processing_system7_0_FCLK_CLK1;
   wire rgb2dvi_0_TMDS_Clk_n;
   wire rgb2dvi_0_TMDS_Clk_p;
@@ -51,13 +53,17 @@ module display_imp_SMLEIP
   wire videogen_0_hsync;
   wire [10:0]videogen_0_vcount;
   wire videogen_0_vsync;
+  wire vidsel_0_a_enable0;
+  wire vidsel_0_a_enable1;
   wire [17:0]vidsel_0_address;
   wire vidsel_0_blank_out;
   wire [23:0]vidsel_0_color;
-  wire vidsel_0_enable;
+  wire vidsel_0_enable0;
+  wire vidsel_0_enable1;
   wire vidsel_0_hsync_out;
   wire vidsel_0_vsync_out;
 
+  assign buffer_sel_1 = buffer_sel;
   assign clk_wiz_clk_out1 = vga_clk;
   assign ground_dout = aRst;
   assign hdmi_out_clk_n = rgb2dvi_0_TMDS_Clk_n;
@@ -69,23 +75,27 @@ module display_imp_SMLEIP
   assign test_0_data = data[0];
   assign test_0_enable = write_en[0];
   assign vsync_out = vidsel_0_vsync_out;
-  mmap_xlconstant_0_2 black
-       (.dout(black_dout));
-  mmap_blk_mem_gen_0_0 blk_mem_gen_0
+  mmap_blk_mem_gen_0_0 buffer_0
        (.addra(test_0_address),
         .addrb(vidsel_0_address),
         .clka(processing_system7_0_FCLK_CLK1),
         .clkb(clk_wiz_clk_out1),
         .dina(test_0_data),
-        .dinb(black_dout),
         .doutb(blk_mem_gen_0_doutb),
-        .ena(high_dout),
-        .enb(vidsel_0_enable),
-        .wea(test_0_enable),
-        .web(vidsel_0_enable));
-  mmap_xlconstant_0_1 high
-       (.dout(high_dout));
-  mmap_rgb2dvi_0_0 rgb2dvi_0
+        .ena(vidsel_0_a_enable0),
+        .enb(vidsel_0_enable0),
+        .wea(test_0_enable));
+  mmap_blk_mem_gen_0_1 buffer_1
+       (.addra(test_0_address),
+        .addrb({vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0,vidsel_0_enable0}),
+        .clka(processing_system7_0_FCLK_CLK1),
+        .clkb(clk_wiz_clk_out1),
+        .dina(test_0_data),
+        .doutb(buffer_1_doutb),
+        .ena(vidsel_0_a_enable1),
+        .enb(vidsel_0_enable1),
+        .wea(test_0_enable));
+  mmap_rgb2dvi_0_0 rgb2dvi
        (.PixelClk(clk_wiz_clk_out1),
         .TMDS_Clk_n(rgb2dvi_0_TMDS_Clk_n),
         .TMDS_Clk_p(rgb2dvi_0_TMDS_Clk_p),
@@ -96,30 +106,35 @@ module display_imp_SMLEIP
         .vid_pHSync(vidsel_0_hsync_out),
         .vid_pVDE(vidsel_0_blank_out),
         .vid_pVSync(vidsel_0_vsync_out));
-  mmap_videogen_0_0 videogen_0
+  mmap_videogen_0_0 videogen
        (.blank(videogen_0_blank),
         .hcount(videogen_0_hcount),
         .hsync(videogen_0_hsync),
         .vclock(clk_wiz_clk_out1),
         .vcount(videogen_0_vcount),
         .vsync(videogen_0_vsync));
-  mmap_vidsel_0_0 vidsel_0
-       (.address(vidsel_0_address),
+  mmap_vidsel_0_0 vidsel
+       (.a_enable0(vidsel_0_a_enable0),
+        .a_enable1(vidsel_0_a_enable1),
+        .address(vidsel_0_address),
         .blank(videogen_0_blank),
         .blank_out(vidsel_0_blank_out),
+        .buffer_sel(buffer_sel_1),
         .color(vidsel_0_color),
-        .enable(vidsel_0_enable),
+        .enable0(vidsel_0_enable0),
+        .enable1(vidsel_0_enable1),
         .hcount(videogen_0_hcount),
         .hsync(videogen_0_hsync),
         .hsync_out(vidsel_0_hsync_out),
-        .memc(blk_mem_gen_0_doutb),
+        .memc_0(blk_mem_gen_0_doutb),
+        .memc_1(buffer_1_doutb),
         .vclock(clk_wiz_clk_out1),
         .vcount(videogen_0_vcount),
         .vsync(videogen_0_vsync),
         .vsync_out(vidsel_0_vsync_out));
 endmodule
 
-(* CORE_GENERATION_INFO = "mmap,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=mmap,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=12,numReposBlks=11,numNonXlnxBlks=1,numHierBlks=1,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=4,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=1,da_board_cnt=1,da_clkrst_cnt=3,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "mmap.hwdef" *) 
+(* CORE_GENERATION_INFO = "mmap,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=mmap,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=11,numReposBlks=10,numNonXlnxBlks=1,numHierBlks=1,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=4,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=1,da_board_cnt=1,da_clkrst_cnt=3,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "mmap.hwdef" *) 
 module mmap
    (DDR_addr,
     DDR_ba,
@@ -176,18 +191,17 @@ module mmap
 
   wire clk_wiz_clk_out1;
   wire display_vsync_out;
+  wire [17:0]graphics_0_address;
+  wire graphics_0_buffer_sel;
+  wire graphics_0_data;
+  wire graphics_0_ready;
+  wire graphics_0_writing;
   wire [0:0]ground_dout;
-  wire [17:0]line_0_address;
-  wire line_0_data;
-  wire line_0_ready;
-  wire line_0_writing;
   wire linetest_0_color;
-  wire linetest_0_enable;
   wire [1:0]linetest_0_mode;
-  wire [8:0]linetest_0_x0;
-  wire [8:0]linetest_0_x1;
-  wire [8:0]linetest_0_y0;
-  wire [8:0]linetest_0_y1;
+  wire linetest_0_ready;
+  wire [8:0]linetest_0_x;
+  wire [8:0]linetest_0_y;
   wire [14:0]processing_system7_0_DDR_ADDR;
   wire [2:0]processing_system7_0_DDR_BA;
   wire processing_system7_0_DDR_CAS_N;
@@ -228,8 +242,9 @@ module mmap
         .reset(ground_dout));
   display_imp_SMLEIP display
        (.aRst(ground_dout),
-        .address(line_0_address),
-        .data(line_0_data),
+        .address(graphics_0_address),
+        .buffer_sel(graphics_0_buffer_sel),
+        .data(graphics_0_data),
         .data_clk(processing_system7_0_FCLK_CLK1),
         .hdmi_out_clk_n(rgb2dvi_0_TMDS_Clk_n),
         .hdmi_out_clk_p(rgb2dvi_0_TMDS_Clk_p),
@@ -237,33 +252,30 @@ module mmap
         .hdmi_out_data_p(rgb2dvi_0_TMDS_Data_p),
         .vga_clk(clk_wiz_clk_out1),
         .vsync_out(display_vsync_out),
-        .write_en(line_0_writing));
-  mmap_xlconstant_0_0 ground
-       (.dout(ground_dout));
-  mmap_line_0_0 line_0
-       (.address(line_0_address),
+        .write_en(graphics_0_writing));
+  mmap_graphics_0_0 graphics
+       (.address(graphics_0_address),
+        .buffer_sel(graphics_0_buffer_sel),
         .clk(processing_system7_0_FCLK_CLK1),
         .color(linetest_0_color),
-        .data(line_0_data),
-        .enable(linetest_0_enable),
+        .data(graphics_0_data),
+        .enable(linetest_0_ready),
         .mode(linetest_0_mode),
-        .ready(line_0_ready),
+        .ready(graphics_0_ready),
         .vsync(display_vsync_out),
-        .writing(line_0_writing),
-        .x0(linetest_0_x0),
-        .x1(linetest_0_x1),
-        .y0(linetest_0_y0),
-        .y1(linetest_0_y1));
+        .writing(graphics_0_writing),
+        .x(linetest_0_x),
+        .y(linetest_0_y));
+  mmap_xlconstant_0_0 ground
+       (.dout(ground_dout));
   mmap_linetest_0_0 linetest_0
        (.clk(processing_system7_0_FCLK_CLK1),
         .color(linetest_0_color),
-        .enable(line_0_ready),
+        .enable(graphics_0_ready),
         .mode(linetest_0_mode),
-        .ready(linetest_0_enable),
-        .x0(linetest_0_x0),
-        .x1(linetest_0_x1),
-        .y0(linetest_0_y0),
-        .y1(linetest_0_y1));
+        .ready(linetest_0_ready),
+        .x(linetest_0_x),
+        .y(linetest_0_y));
   mmap_processing_system7_0_0 processing_system7_0
        (.DDR_Addr(DDR_addr[14:0]),
         .DDR_BankAddr(DDR_ba[2:0]),
