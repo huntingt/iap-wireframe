@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="0">
+	<Run Id="mmap_line_0_0_synth_1" LaunchDir="/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/mmap_line_0_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="mmap_linetest_0_0_synth_1" LaunchDir="/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/mmap_linetest_0_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="synth_1" LaunchDir="/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado">
+		<Parent Id="mmap_line_0_0_synth_1"/>
+		<Parent Id="mmap_linetest_0_0_synth_1"/>
+	</Run>
+	<Run Id="impl_1" LaunchDir="/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/impl_1" FlowId="Vivado_Implementation" FromStepId="init_design" ToStepId="write_bitstream">
+		<Parent Id="synth_1"/>
+		<Parent Id="mmap_line_0_0_synth_1"/>
+		<Parent Id="mmap_linetest_0_0_synth_1"/>
+	</Run>
+	<Parameters>
+		<Parameter Name="runs.monitorLSFJobs" Val="true" Type="bool"/>
+	</Parameters>
+</Runs>
+

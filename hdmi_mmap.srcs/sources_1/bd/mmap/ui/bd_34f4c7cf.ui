@@ -1,0 +1,49 @@
+{
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 6.8.11  2018-08-07 bk=1.4403 VDI=40 GEI=35 GUI=JA:9.0 TLS
+#  -string -flagsOSRD
+preplace port DDR -pg 1 -y 520 -defaultsOSRD
+preplace port hdmi_out_clk_n -pg 1 -y 390 -defaultsOSRD
+preplace port hdmi_out_clk_p -pg 1 -y 370 -defaultsOSRD
+preplace port sysclk -pg 1 -y 380 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -y 540 -defaultsOSRD
+preplace portBus hdmi_out_data_n -pg 1 -y 430 -defaultsOSRD
+preplace portBus hdmi_out_data_p -pg 1 -y 410 -defaultsOSRD
+preplace inst clk_wiz -pg 1 -lvl 2 -y 370 -defaultsOSRD
+preplace inst linetest_0 -pg 1 -lvl 1 -y 130 -defaultsOSRD
+preplace inst display -pg 1 -lvl 3 -y 410 -defaultsOSRD
+preplace inst line_0 -pg 1 -lvl 2 -y 150 -defaultsOSRD
+preplace inst ground -pg 1 -lvl 1 -y 320 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 2 -y 580 -defaultsOSRD
+preplace netloc processing_system7_0_DDR 1 2 2 NJ 520 NJ
+preplace netloc rgb2dvi_0_TMDS_Clk_n 1 3 1 NJ
+preplace netloc rgb2dvi_0_TMDS_Clk_p 1 3 1 NJ
+preplace netloc linetest_0_y0 1 1 1 N
+preplace netloc line_0_ready 1 0 3 20 10 NJ 10 690
+preplace netloc linetest_0_y1 1 1 1 N
+preplace netloc linetest_0_x0 1 1 1 N
+preplace netloc linetest_0_x1 1 1 1 N
+preplace netloc sysclk_1 1 0 2 NJ 380 NJ
+preplace netloc processing_system7_0_FIXED_IO 1 2 2 NJ 540 NJ
+preplace netloc linetest_0_mode 1 1 1 N
+preplace netloc line_0_writing 1 2 1 710
+preplace netloc rgb2dvi_0_TMDS_Data_n 1 3 1 NJ
+preplace netloc linetest_0_enable 1 1 1 N
+preplace netloc ground_dout 1 1 2 260 460 NJ
+preplace netloc processing_system7_0_FCLK_CLK0 1 1 2 280 700 680
+preplace netloc rgb2dvi_0_TMDS_Data_p 1 3 1 NJ
+preplace netloc line_0_data 1 2 1 700
+preplace netloc linetest_0_color 1 1 1 N
+preplace netloc line_0_address 1 2 1 720
+preplace netloc processing_system7_0_FCLK_CLK1 1 0 3 20 250 270 440 690
+preplace netloc display_vsync_out 1 1 3 280 290 NJ 290 1180
+preplace netloc clk_wiz_clk_out1 1 2 1 N
+levelinfo -pg 1 0 140 480 1020 1200 -top 0 -bot 960
+"
+}
+{
+   "da_axi4_cnt":"1",
+   "da_board_cnt":"1",
+   "da_clkrst_cnt":"3",
+   "da_ps7_cnt":"1"
+}

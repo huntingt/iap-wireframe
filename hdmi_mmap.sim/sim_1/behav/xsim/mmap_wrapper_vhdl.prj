@@ -1,0 +1,13 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/bd5a/src/ClockGen.vhd" \
+"../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/bd5a/src/SyncAsync.vhd" \
+"../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/bd5a/src/SyncAsyncReset.vhd" \
+"../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/bd5a/src/DVI_Constants.vhd" \
+"../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/bd5a/src/OutputSERDES.vhd" \
+"../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/bd5a/src/TMDS_Encoder.vhd" \
+"../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/bd5a/src/rgb2dvi.vhd" \
+"../../../../hdmi_mmap.ip_user_files/bd/mmap/ip/mmap_rgb2dvi_0_0/sim/mmap_rgb2dvi_0_0.vhd" \
+
+# Do not sort compile order
+nosort
