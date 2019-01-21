@@ -1,14 +1,12 @@
 module linetest(input enable, clk, output reg [1:0] mode, output reg [8:0] x0, y0, x1, y1, output reg color, ready);
     reg [3:0] number = 0;
-    reg dwait = 0;
     always @(posedge clk) begin
-        if(enable == 1 & dwait == 0) begin
-            dwait <= 1;
+        if(enable == 1) begin
             number <= number < 10 ? number + 1 : 0;
             ready <= 1;
             if(number == 0) begin
                 mode <= 1;
-                color <= 1;
+                color <= ~color;
                 x0 <= 0;
                 y0 <= 0;
                 x1 <= 0;
@@ -62,21 +60,25 @@ module linetest(input enable, clk, output reg [1:0] mode, output reg [8:0] x0, y
                 mode <= 3;
             end
         end else begin
-            dwait <= 0;
             ready <= 0;
         end
     end
 endmodule
+
 /*
 modes:
 0 - point
 1 - line
 2 - fill
-3 - wait for sync
+3 - finish frame
 */
-module line#(parameter width=9)(input [1:0] mode, input [width-1:0] x0, y0, x1, y1, input color, enable, clk, vsync, output reg [2*width-1:0] address, output reg writing, ready, data);
-    initial ready = 1;
+module line#(parameter width=9)(input [1:0] mode, input [width-1:0] x0, y0, x1, y1, 
+        input color, enable, clk, vsync,
+        output reg [2*width-1:0] address, output ready, output reg writing, data, buffer_sel);
+    reg iready = 1;
     initial writing = 0;
+    
+    assign ready = iready & ~(enable & mode != 0);
     
     reg [1:0] cmode;
     
@@ -97,7 +99,7 @@ module line#(parameter width=9)(input [1:0] mode, input [width-1:0] x0, y0, x1, 
     assign dyu = dys >= 0 ? dys : -dys;
     
     always @(posedge clk) begin
-        if(enable & ready) begin
+        if(enable & iready) begin
             cmode <= mode;
             if(mode == 0) begin
             
@@ -109,7 +111,7 @@ module line#(parameter width=9)(input [1:0] mode, input [width-1:0] x0, y0, x1, 
                 
             end
             else if(mode == 1) begin
-                ready <= 0;
+                iready <= 0;
                 writing <= 0;
                 data <= color;
                 up <= ~((dxs >= 0)^(dys >= 0));
@@ -157,7 +159,7 @@ module line#(parameter width=9)(input [1:0] mode, input [width-1:0] x0, y0, x1, 
                 
                 
                 //setting fill settings
-                ready <= 0;
+                iready <= 0;
                 writing <= 0;
                 qstop <= (x0<x1) ? x0 : x1; //the value that x should return to on wrap;
                 q0 <= (x0<x1) ? x0 : x1;
@@ -169,10 +171,10 @@ module line#(parameter width=9)(input [1:0] mode, input [width-1:0] x0, y0, x1, 
             end
             else if (mode == 3) begin
                 cmode <= mode;
-                ready <= 0;
+                iready <= 0;
             end
         end
-        else if(~ready) begin
+        else if(~iready) begin
             if(cmode == 1) begin
                  //plot value
                 writing <= 1;
@@ -187,7 +189,7 @@ module line#(parameter width=9)(input [1:0] mode, input [width-1:0] x0, y0, x1, 
                 q0 <= q0 + 1;
                 //end condition
                 if(q0 >= qstop) begin
-                    ready <= 1;
+                    iready <= 1;
                 end
             end
             else if (cmode == 2) begin
@@ -196,7 +198,7 @@ module line#(parameter width=9)(input [1:0] mode, input [width-1:0] x0, y0, x1, 
                 if(q0 >= q1) begin
                     q0 <= qstop;
                     if(dq0 >= dq1) begin
-                        ready <= 1;
+                        iready <= 1;
                     end else begin
                         dq0 <= dq0 + 1;
                     end
@@ -204,7 +206,8 @@ module line#(parameter width=9)(input [1:0] mode, input [width-1:0] x0, y0, x1, 
             end
             else if (cmode == 3) begin
                 if(~vsync) begin
-                    ready <= 1;
+                    iready <= 1;
+                    buffer_sel <= !buffer_sel;
                 end
             end
         end

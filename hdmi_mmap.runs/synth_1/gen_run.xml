@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1547767684">
-  <File Type="VDS-TIMING-PB" Name="mmap_wrapper_timing_summary_synth.pb"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="mmap_wrapper_timing_summary_synth.rpt"/>
+  <File Type="PA-TCL" Name="mmap_wrapper.tcl"/>
+  <File Type="REPORTS-TCL" Name="mmap_wrapper_reports.tcl"/>
+  <File Type="RDS-RDS" Name="mmap_wrapper.vds"/>
   <File Type="RDS-DCP" Name="mmap_wrapper.dcp"/>
   <File Type="RDS-UTIL-PB" Name="mmap_wrapper_utilization_synth.pb"/>
   <File Type="RDS-UTIL" Name="mmap_wrapper_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="mmap_wrapper_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="mmap_wrapper.vds"/>
-  <File Type="REPORTS-TCL" Name="mmap_wrapper_reports.tcl"/>
-  <File Type="PA-TCL" Name="mmap_wrapper.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/videogen.v">
@@ -81,12 +78,12 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="mmap_linetest_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_processing_system7_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_rgb2dvi_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_line_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="mmap_vidsel_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_videogen_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_linetest_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_vidsel_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_blk_mem_gen_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_clk_wiz_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="mmap_rgb2dvi_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="mmap_processing_system7_0_0"/>
 </GenRun>

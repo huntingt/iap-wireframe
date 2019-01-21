@@ -2,48 +2,51 @@
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 6.8.11  2018-08-07 bk=1.4403 VDI=40 GEI=35 GUI=JA:9.0 TLS
 #  -string -flagsOSRD
-preplace port hdmi_out_clk_n -pg 1 -y 590 -defaultsOSRD
-preplace port hdmi_out_clk_p -pg 1 -y 570 -defaultsOSRD
-preplace port vsync_out -pg 1 -y 470 -defaultsOSRD
-preplace port vga_clk -pg 1 -y 150 -defaultsOSRD
-preplace port aRst -pg 1 -y 630 -defaultsOSRD
-preplace port data_clk -pg 1 -y 270 -defaultsOSRD
-preplace portBus write_en -pg 1 -y 410 -defaultsOSRD
-preplace portBus address -pg 1 -y 20 -defaultsOSRD
-preplace portBus hdmi_out_data_n -pg 1 -y 630 -defaultsOSRD
-preplace portBus hdmi_out_data_p -pg 1 -y 610 -defaultsOSRD
-preplace portBus data -pg 1 -y 290 -defaultsOSRD
-preplace inst black -pg 1 -lvl 2 -y 480 -defaultsOSRD
-preplace inst rgb2dvi_0 -pg 1 -lvl 4 -y 590 -defaultsOSRD
-preplace inst blk_mem_gen_0 -pg 1 -lvl 3 -y 360 -defaultsOSRD
-preplace inst videogen_0 -pg 1 -lvl 1 -y 150 -defaultsOSRD
-preplace inst high -pg 1 -lvl 2 -y 350 -defaultsOSRD
-preplace inst vidsel_0 -pg 1 -lvl 2 -y 140 -defaultsOSRD
+preplace port hdmi_out_clk_n -pg 1 -y 720 -defaultsOSRD
+preplace port buffer_sel -pg 1 -y 500 -defaultsOSRD
+preplace port hdmi_out_clk_p -pg 1 -y 700 -defaultsOSRD
+preplace port vsync_out -pg 1 -y 360 -defaultsOSRD
+preplace port vga_clk -pg 1 -y 280 -defaultsOSRD
+preplace port aRst -pg 1 -y 760 -defaultsOSRD
+preplace port data_clk -pg 1 -y 560 -defaultsOSRD
+preplace portBus write_en -pg 1 -y 600 -defaultsOSRD
+preplace portBus address -pg 1 -y 540 -defaultsOSRD
+preplace portBus hdmi_out_data_n -pg 1 -y 760 -defaultsOSRD
+preplace portBus hdmi_out_data_p -pg 1 -y 740 -defaultsOSRD
+preplace portBus data -pg 1 -y 580 -defaultsOSRD
+preplace inst buffer_0 -pg 1 -lvl 3 -y 160 -defaultsOSRD
+preplace inst buffer_1 -pg 1 -lvl 3 -y 540 -defaultsOSRD
+preplace inst vidsel -pg 1 -lvl 2 -y 400 -defaultsOSRD
+preplace inst videogen -pg 1 -lvl 1 -y 390 -defaultsOSRD
+preplace inst rgb2dvi -pg 1 -lvl 4 -y 720 -defaultsOSRD
 preplace netloc rgb2dvi_0_TMDS_Clk_n 1 4 1 NJ
-preplace netloc test_0_data 1 0 3 NJ 290 NJ 290 NJ
+preplace netloc test_0_data 1 0 3 NJ 580 NJ 580 630
+preplace netloc buffer_sel_1 1 0 2 NJ 500 280J
+preplace netloc vidsel_0_enable0 1 2 1 660
 preplace netloc rgb2dvi_0_TMDS_Clk_p 1 4 1 NJ
-preplace netloc vidsel_0_enable 1 2 1 610
-preplace netloc high_dout 1 2 1 600J
-preplace netloc black_dout 1 2 1 660J
-preplace netloc test_0_enable 1 0 3 NJ 410 NJ 410 630J
+preplace netloc vidsel_0_enable1 1 2 1 620
+preplace netloc test_0_enable 1 0 3 20J 570 NJ 570 640
 preplace netloc videogen_0_hcount 1 1 1 N
+preplace netloc vidsel_0_a_enable0 1 2 1 590
 preplace netloc videogen_0_vsync 1 1 1 N
 preplace netloc videogen_0_vcount 1 1 1 N
-preplace netloc test_0_address 1 0 3 NJ 20 NJ 20 680J
-preplace netloc vidsel_0_vsync_out 1 2 3 620 580 910 470 NJ
+preplace netloc vidsel_0_a_enable1 1 2 1 590
+preplace netloc test_0_address 1 0 3 NJ 540 NJ 540 600
+preplace netloc vidsel_0_vsync_out 1 2 3 NJ 360 910 360 NJ
 preplace netloc videogen_0_blank 1 1 1 N
 preplace netloc rgb2dvi_0_TMDS_Data_n 1 4 1 NJ
-preplace netloc ground_dout 1 0 4 NJ 630 NJ 630 NJ 630 NJ
-preplace netloc vidsel_0_address 1 2 1 640
-preplace netloc vidsel_0_blank_out 1 2 2 590 610 NJ
+preplace netloc ground_dout 1 0 4 NJ 760 NJ 760 NJ 760 NJ
+preplace netloc vidsel_0_address 1 2 1 620
+preplace netloc vidsel_0_blank_out 1 2 2 NJ 380 890
+preplace netloc buffer_1_doutb 1 1 2 290 620 NJ
 preplace netloc rgb2dvi_0_TMDS_Data_p 1 4 1 NJ
-preplace netloc blk_mem_gen_0_doutb 1 1 2 290 540 690J
+preplace netloc blk_mem_gen_0_doutb 1 1 2 290 240 NJ
 preplace netloc videogen_0_hsync 1 1 1 N
-preplace netloc processing_system7_0_FCLK_CLK1 1 0 3 NJ 270 NJ 270 NJ
-preplace netloc vidsel_0_hsync_out 1 2 2 650 570 NJ
-preplace netloc vidsel_0_color 1 2 2 670 550 NJ
-preplace netloc clk_wiz_clk_out1 1 0 4 20 260 280 420 680 650 NJ
-levelinfo -pg 1 0 150 440 800 1090 1290 -top 0 -bot 710
+preplace netloc processing_system7_0_FCLK_CLK1 1 0 3 NJ 560 NJ 560 610
+preplace netloc vidsel_0_hsync_out 1 2 2 NJ 340 900
+preplace netloc vidsel_0_color 1 2 2 NJ 320 920
+preplace netloc clk_wiz_clk_out1 1 0 4 20 280 280 260 650 780 NJ
+levelinfo -pg 1 0 150 440 780 1100 1300 -top 0 -bot 840
 "
 }
-
+0

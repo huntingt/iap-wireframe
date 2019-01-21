@@ -43,14 +43,22 @@ module vidsel(
             input [11:0] hcount,
             input [10:0] vcount,
             input hsync, vsync, blank,
-            input memc,
+            input memc_0, memc_1, buffer_sel,
             output reg [23:0] color,
             output reg hsync_out, vsync_out, blank_out,
             output [17:0] address,
-            output enable);
+            output enable0, enable1, a_enable0, a_enable1);
             
     assign address = {vcount[9:1],hcount[9:1]};
-    assign enable = (hcount < 1024) & (vcount < 1024);
+    
+    assign enable0 = (hcount < 1024) && (vcount < 1024) && !buffer_sel;
+    assign enable1 = (hcount < 1024) && (vcount < 1024) && buffer_sel;
+    
+    assign a_enable0 = buffer_sel;
+    assign a_enable1 = !buffer_sel;
+    
+    wire memc;
+    assign memc = buffer_sel ? memc_1 : memc_0;
     
     reg hsyncd1, vsyncd1, blankd1, hsyncd2, vsyncd2, blankd2;
     
@@ -74,21 +82,6 @@ module vidsel(
         vsync_out <= vsyncd2;
         blank_out <= blankd2;
         
-        color <= (hcountd2 < 1024) & (vcountd2 < 1024) ? {8'b0, {8{memc}}, 8'b0} : {3{8'b00001111}};
-    end
-endmodule
-
-module test(input clk, output reg [17:0] address, output reg data, enable);
-    initial address = 0;
-    initial data = 0;
-    always @(posedge clk) begin
-        enable <= 1;
-        if(address < 262143) begin
-            address <= address + 1;
-        end
-        else begin;
-            address <= 0;
-            data <= ~data;
-        end
+        color <= (hcountd2 < 1024) & (vcountd2 < 1024) ? {24{memc}} : {3{8'b00001111}};
     end
 endmodule

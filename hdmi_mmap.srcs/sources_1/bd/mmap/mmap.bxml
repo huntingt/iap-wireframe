@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="mmap" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1547767673"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1547767673"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1547767673"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1547767673"/>
+    <Generation Name="SYNTHESIS" State="STALE" Timestamp="1548084125"/>
+    <Generation Name="IMPLEMENTATION" State="STALE" Timestamp="1548084125"/>
+    <Generation Name="SIMULATION" State="STALE" Timestamp="1548084125"/>
+    <Generation Name="HW_HANDOFF" State="STALE" Timestamp="1548084125"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip/mmap_processing_system7_0_0/mmap_processing_system7_0_0.xci" Type="IP">
         <Instance HierarchyPath="processing_system7_0"/>
@@ -16,7 +16,7 @@
         <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="ip/mmap_rgb2dvi_0_0/mmap_rgb2dvi_0_0.xci" Type="IP">
-        <Instance HierarchyPath="display/rgb2dvi_0"/>
+        <Instance HierarchyPath="display/rgb2dvi"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
@@ -32,7 +32,7 @@
         <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="ip/mmap_videogen_0_0/mmap_videogen_0_0.xci" Type="IP">
-        <Instance HierarchyPath="display/videogen_0"/>
+        <Instance HierarchyPath="display/videogen"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
@@ -40,7 +40,7 @@
         <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="ip/mmap_vidsel_0_0/mmap_vidsel_0_0.xci" Type="IP">
-        <Instance HierarchyPath="display/vidsel_0"/>
+        <Instance HierarchyPath="display/vidsel"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
@@ -67,15 +67,7 @@
         <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="ip/mmap_blk_mem_gen_0_0/mmap_blk_mem_gen_0_0.xci" Type="IP">
-        <Instance HierarchyPath="display/blk_mem_gen_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip/mmap_xlconstant_0_1/mmap_xlconstant_0_1.xci" Type="IP">
-        <Instance HierarchyPath="display/high"/>
+        <Instance HierarchyPath="display/buffer_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
@@ -92,14 +84,6 @@
       </File>
       <File Name="ip/mmap_linetest_0_0/mmap_linetest_0_0.xci" Type="IP">
         <Instance HierarchyPath="linetest_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip/mmap_xlconstant_0_2/mmap_xlconstant_0_2.xci" Type="IP">
-        <Instance HierarchyPath="display/black"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
@@ -131,6 +115,14 @@
       <File Name="sim/mmap.protoinst">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/mmap_blk_mem_gen_0_1/mmap_blk_mem_gen_0_1.xci" Type="IP">
+        <Instance HierarchyPath="display/buffer_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
     </FileCollection>
