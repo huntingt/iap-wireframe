@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-// Date        : Mon Jan 21 11:07:32 2019
+// Date        : Wed Jan 23 19:46:11 2019
 // Host        : inyo running 64-bit Pop!_OS 18.10
 // Command     : write_verilog -force -mode funcsim
 //               /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_videogen_0_0/mmap_videogen_0_0_sim_netlist.v
@@ -222,19 +222,25 @@ module mmap_videogen_0_0_videogen
     \hcount[3]_i_2 
        (.I0(hcount[0]),
         .O(\hcount[3]_i_2_n_0 ));
-  FDRE \hcount_reg[0] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[0] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[3]_i_1_n_7 ),
         .Q(hcount[0]),
         .R(hreset));
-  FDRE \hcount_reg[10] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[10] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[11]_i_2_n_5 ),
         .Q(hcount[10]),
         .R(hreset));
-  FDRE \hcount_reg[11] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[11] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[11]_i_2_n_4 ),
@@ -247,19 +253,25 @@ module mmap_videogen_0_0_videogen
         .DI({1'b0,1'b0,1'b0,1'b0}),
         .O({\hcount_reg[11]_i_2_n_4 ,\hcount_reg[11]_i_2_n_5 ,\hcount_reg[11]_i_2_n_6 ,\hcount_reg[11]_i_2_n_7 }),
         .S(hcount[11:8]));
-  FDRE \hcount_reg[1] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[1] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[3]_i_1_n_6 ),
         .Q(hcount[1]),
         .R(hreset));
-  FDRE \hcount_reg[2] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[2] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[3]_i_1_n_5 ),
         .Q(hcount[2]),
         .R(hreset));
-  FDRE \hcount_reg[3] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[3] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[3]_i_1_n_4 ),
@@ -272,25 +284,33 @@ module mmap_videogen_0_0_videogen
         .DI({1'b0,1'b0,1'b0,1'b1}),
         .O({\hcount_reg[3]_i_1_n_4 ,\hcount_reg[3]_i_1_n_5 ,\hcount_reg[3]_i_1_n_6 ,\hcount_reg[3]_i_1_n_7 }),
         .S({hcount[3:1],\hcount[3]_i_2_n_0 }));
-  FDRE \hcount_reg[4] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[4] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[7]_i_1_n_7 ),
         .Q(hcount[4]),
         .R(hreset));
-  FDRE \hcount_reg[5] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[5] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[7]_i_1_n_6 ),
         .Q(hcount[5]),
         .R(hreset));
-  FDRE \hcount_reg[6] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[6] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[7]_i_1_n_5 ),
         .Q(hcount[6]),
         .R(hreset));
-  FDRE \hcount_reg[7] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[7] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[7]_i_1_n_4 ),
@@ -303,13 +323,17 @@ module mmap_videogen_0_0_videogen
         .DI({1'b0,1'b0,1'b0,1'b0}),
         .O({\hcount_reg[7]_i_1_n_4 ,\hcount_reg[7]_i_1_n_5 ,\hcount_reg[7]_i_1_n_6 ,\hcount_reg[7]_i_1_n_7 }),
         .S(hcount[7:4]));
-  FDRE \hcount_reg[8] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[8] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[11]_i_2_n_7 ),
         .Q(hcount[8]),
         .R(hreset));
-  FDRE \hcount_reg[9] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \hcount_reg[9] 
        (.C(vclock),
         .CE(1'b1),
         .D(\hcount_reg[11]_i_2_n_6 ),
@@ -476,67 +500,89 @@ module mmap_videogen_0_0_videogen
         .I3(vcount[7]),
         .I4(vcount[9]),
         .O(p_0_in[9]));
-  FDRE \vcount_reg[0] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \vcount_reg[0] 
        (.C(vclock),
         .CE(hreset),
         .D(\vcount[0]_i_1_n_0 ),
         .Q(vcount[0]),
         .R(vcount0));
-  FDRE \vcount_reg[10] 
+  FDRE #(
+    .INIT(1'b0)) 
+    \vcount_reg[10] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[10]),
         .Q(vcount[10]),
         .R(vcount0));
-  FDRE \vcount_reg[1] 
+  FDRE #(
+    .INIT(1'b1)) 
+    \vcount_reg[1] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[1]),
         .Q(vcount[1]),
         .R(vcount0));
-  FDRE \vcount_reg[2] 
+  FDRE #(
+    .INIT(1'b1)) 
+    \vcount_reg[2] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[2]),
         .Q(vcount[2]),
         .R(vcount0));
-  FDRE \vcount_reg[3] 
+  FDRE #(
+    .INIT(1'b1)) 
+    \vcount_reg[3] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[3]),
         .Q(vcount[3]),
         .R(vcount0));
-  FDRE \vcount_reg[4] 
+  FDRE #(
+    .INIT(1'b1)) 
+    \vcount_reg[4] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[4]),
         .Q(vcount[4]),
         .R(vcount0));
-  FDRE \vcount_reg[5] 
+  FDRE #(
+    .INIT(1'b1)) 
+    \vcount_reg[5] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[5]),
         .Q(vcount[5]),
         .R(vcount0));
-  FDRE \vcount_reg[6] 
+  FDRE #(
+    .INIT(1'b1)) 
+    \vcount_reg[6] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[6]),
         .Q(vcount[6]),
         .R(vcount0));
-  FDRE \vcount_reg[7] 
+  FDRE #(
+    .INIT(1'b1)) 
+    \vcount_reg[7] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[7]),
         .Q(vcount[7]),
         .R(vcount0));
-  FDRE \vcount_reg[8] 
+  FDRE #(
+    .INIT(1'b1)) 
+    \vcount_reg[8] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[8]),
         .Q(vcount[8]),
         .R(vcount0));
-  FDRE \vcount_reg[9] 
+  FDRE #(
+    .INIT(1'b1)) 
+    \vcount_reg[9] 
        (.C(vclock),
         .CE(hreset),
         .D(p_0_in[9]),
@@ -570,7 +616,9 @@ module mmap_videogen_0_0_videogen
         .I4(vcount[6]),
         .I5(vcount[4]),
         .O(vsync_i_3_n_0));
-  FDRE vsync_reg
+  FDRE #(
+    .INIT(1'b1)) 
+    vsync_reg
        (.C(vclock),
         .CE(1'b1),
         .D(vsync_i_1_n_0),

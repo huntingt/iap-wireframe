@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/ec67/hdl" --include "../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/70cf/hdl" --include "../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/85a3" --include "../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/8713/hdl" --include "/home/huntingt/tools/xilinx/Vivado/2018.3/data/xilinx_vip/include" \
+"../../../../hdmi_mmap.srcs/sources_1/new/graphics.v" \
+"../../../../hdmi_mmap.srcs/sim_1/new/sim1.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

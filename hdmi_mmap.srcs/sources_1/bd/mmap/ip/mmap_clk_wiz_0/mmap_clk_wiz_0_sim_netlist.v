@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-// Date        : Tue Jan 15 18:57:07 2019
+// Date        : Tue Jan 22 16:42:55 2019
 // Host        : inyo running 64-bit Pop!_OS 18.10
 // Command     : write_verilog -force -mode funcsim
 //               /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_clk_wiz_0/mmap_clk_wiz_0_sim_netlist.v
@@ -15,35 +15,23 @@
 (* NotValidForBitStream *)
 module mmap_clk_wiz_0
    (clk_out1,
-    reset,
-    locked,
     clk_in1);
   output clk_out1;
-  input reset;
-  output locked;
   input clk_in1;
 
   (* IBUF_LOW_PWR *) wire clk_in1;
   wire clk_out1;
-  wire locked;
-  wire reset;
 
   mmap_clk_wiz_0_mmap_clk_wiz_0_clk_wiz inst
        (.clk_in1(clk_in1),
-        .clk_out1(clk_out1),
-        .locked(locked),
-        .reset(reset));
+        .clk_out1(clk_out1));
 endmodule
 
 (* ORIG_REF_NAME = "mmap_clk_wiz_0_clk_wiz" *) 
 module mmap_clk_wiz_0_mmap_clk_wiz_0_clk_wiz
    (clk_out1,
-    reset,
-    locked,
     clk_in1);
   output clk_out1;
-  input reset;
-  output locked;
   input clk_in1;
 
   wire clk_in1;
@@ -52,8 +40,6 @@ module mmap_clk_wiz_0_mmap_clk_wiz_0_clk_wiz
   wire clk_out1_mmap_clk_wiz_0;
   wire clkfbout_buf_mmap_clk_wiz_0;
   wire clkfbout_mmap_clk_wiz_0;
-  wire locked;
-  wire reset;
   wire NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED;
   wire NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED;
   wire NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED;
@@ -68,6 +54,7 @@ module mmap_clk_wiz_0_mmap_clk_wiz_0_clk_wiz
   wire NLW_mmcm_adv_inst_CLKOUT5_UNCONNECTED;
   wire NLW_mmcm_adv_inst_CLKOUT6_UNCONNECTED;
   wire NLW_mmcm_adv_inst_DRDY_UNCONNECTED;
+  wire NLW_mmcm_adv_inst_LOCKED_UNCONNECTED;
   wire NLW_mmcm_adv_inst_PSDONE_UNCONNECTED;
   wire [15:0]NLW_mmcm_adv_inst_DO_UNCONNECTED;
 
@@ -165,13 +152,13 @@ module mmap_clk_wiz_0_mmap_clk_wiz_0_clk_wiz
         .DO(NLW_mmcm_adv_inst_DO_UNCONNECTED[15:0]),
         .DRDY(NLW_mmcm_adv_inst_DRDY_UNCONNECTED),
         .DWE(1'b0),
-        .LOCKED(locked),
+        .LOCKED(NLW_mmcm_adv_inst_LOCKED_UNCONNECTED),
         .PSCLK(1'b0),
         .PSDONE(NLW_mmcm_adv_inst_PSDONE_UNCONNECTED),
         .PSEN(1'b0),
         .PSINCDEC(1'b0),
         .PWRDWN(1'b0),
-        .RST(reset));
+        .RST(1'b0));
 endmodule
 `ifndef GLBL
 `define GLBL

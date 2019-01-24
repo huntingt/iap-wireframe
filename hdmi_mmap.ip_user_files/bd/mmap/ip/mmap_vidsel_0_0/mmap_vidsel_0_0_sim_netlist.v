@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-// Date        : Wed Jan 16 18:47:15 2019
+// Date        : Wed Jan 23 19:46:02 2019
 // Host        : inyo running 64-bit Pop!_OS 18.10
 // Command     : write_verilog -force -mode funcsim
 //               /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_vidsel_0_0/mmap_vidsel_0_0_sim_netlist.v
@@ -22,90 +22,93 @@ module mmap_vidsel_0_0
     hsync,
     vsync,
     blank,
-    memc,
     color,
     hsync_out,
     vsync_out,
     blank_out,
-    address,
-    enable);
+    vga_addr,
+    vga_color,
+    vga_clk,
+    vga_valid,
+    vga_vsync);
   input vclock;
   input [11:0]hcount;
   input [10:0]vcount;
   input hsync;
   input vsync;
   input blank;
-  input memc;
   output [23:0]color;
   output hsync_out;
   output vsync_out;
   output blank_out;
-  output [17:0]address;
-  output enable;
+  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga addr" *) output [17:0]vga_addr;
+  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga color" *) input vga_color;
+  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga clk" *) output vga_clk;
+  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga valid" *) output vga_valid;
+  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga vsync" *) output vga_vsync;
 
-  wire \<const0> ;
   wire blank;
   wire blank_out;
-  wire [18:10]\^color ;
-  wire enable;
+  wire [22:22]\^color ;
   wire [11:0]hcount;
   wire hsync;
   wire hsync_out;
-  wire memc;
   wire vclock;
   wire [10:0]vcount;
+  wire vga_color;
+  wire vga_valid;
+  wire vga_vsync;
   wire vsync;
-  wire vsync_out;
 
-  assign address[17:9] = vcount[9:1];
-  assign address[8:0] = hcount[9:1];
-  assign color[23] = \<const0> ;
-  assign color[22] = \<const0> ;
-  assign color[21] = \<const0> ;
-  assign color[20] = \<const0> ;
-  assign color[19] = \^color [18];
-  assign color[18] = \^color [18];
-  assign color[17] = \^color [18];
-  assign color[16] = \^color [18];
-  assign color[15] = \^color [14];
-  assign color[14] = \^color [14];
-  assign color[13] = \^color [14];
-  assign color[12] = \^color [14];
-  assign color[11] = \^color [10];
-  assign color[10] = \^color [10];
-  assign color[9] = \^color [10];
-  assign color[8] = \^color [10];
-  assign color[7] = \<const0> ;
-  assign color[6] = \<const0> ;
-  assign color[5] = \<const0> ;
-  assign color[4] = \<const0> ;
-  assign color[3] = \^color [18];
-  assign color[2] = \^color [18];
-  assign color[1] = \^color [18];
-  assign color[0] = \^color [18];
-  GND GND
-       (.G(\<const0> ));
+  assign color[23] = \^color [22];
+  assign color[22] = \^color [22];
+  assign color[21] = \^color [22];
+  assign color[20] = \^color [22];
+  assign color[19] = \^color [22];
+  assign color[18] = \^color [22];
+  assign color[17] = \^color [22];
+  assign color[16] = \^color [22];
+  assign color[15] = \^color [22];
+  assign color[14] = \^color [22];
+  assign color[13] = \^color [22];
+  assign color[12] = \^color [22];
+  assign color[11] = \^color [22];
+  assign color[10] = \^color [22];
+  assign color[9] = \^color [22];
+  assign color[8] = \^color [22];
+  assign color[7] = \^color [22];
+  assign color[6] = \^color [22];
+  assign color[5] = \^color [22];
+  assign color[4] = \^color [22];
+  assign color[3] = \^color [22];
+  assign color[2] = \^color [22];
+  assign color[1] = \^color [22];
+  assign color[0] = \^color [22];
+  assign vga_addr[17:9] = vcount[9:1];
+  assign vga_addr[8:0] = hcount[9:1];
+  assign vga_clk = vclock;
+  assign vsync_out = vga_vsync;
   mmap_vidsel_0_0_vidsel inst
        (.blank(blank),
         .blank_out(blank_out),
-        .color({\^color [18],\^color [14],\^color [10]}),
-        .enable(enable),
+        .color(\^color ),
         .hcount(hcount[11:10]),
         .hsync(hsync),
         .hsync_out(hsync_out),
-        .memc(memc),
         .vclock(vclock),
         .vcount(vcount[10]),
-        .vsync(vsync),
-        .vsync_out(vsync_out));
+        .vga_color(vga_color),
+        .vga_valid(vga_valid),
+        .vga_vsync(vga_vsync),
+        .vsync(vsync));
 endmodule
 
 (* ORIG_REF_NAME = "vidsel" *) 
 module mmap_vidsel_0_0_vidsel
-   (enable,
+   (vga_valid,
     color,
     hsync_out,
-    vsync_out,
+    vga_vsync,
     blank_out,
     hcount,
     vcount,
@@ -113,11 +116,11 @@ module mmap_vidsel_0_0_vidsel
     hsync,
     vsync,
     blank,
-    memc);
-  output enable;
-  output [2:0]color;
+    vga_color);
+  output vga_valid;
+  output [0:0]color;
   output hsync_out;
-  output vsync_out;
+  output vga_vsync;
   output blank_out;
   input [1:0]hcount;
   input [0:0]vcount;
@@ -125,17 +128,14 @@ module mmap_vidsel_0_0_vidsel
   input hsync;
   input vsync;
   input blank;
-  input memc;
+  input vga_color;
 
   wire blank;
   wire blank_out;
   wire blankd1;
   wire blankd2;
-  wire [2:0]color;
-  wire \color[11]_i_1_n_0 ;
-  wire \color[15]_i_1_n_0 ;
-  wire \color[19]_i_1_n_0 ;
-  wire enable;
+  wire [0:0]color;
+  wire \color[23]_i_1_n_0 ;
   wire [1:0]hcount;
   wire [11:10]hcountd1;
   wire [11:10]hcountd2;
@@ -143,13 +143,14 @@ module mmap_vidsel_0_0_vidsel
   wire hsync_out;
   wire hsyncd1;
   wire hsyncd2;
-  wire memc;
   wire vclock;
   wire [0:0]vcount;
   wire [10:10]vcountd1;
   wire [10:10]vcountd2;
+  wire vga_color;
+  wire vga_valid;
+  wire vga_vsync;
   wire vsync;
-  wire vsync_out;
   wire vsyncd1;
   wire vsyncd2;
 
@@ -171,56 +172,20 @@ module mmap_vidsel_0_0_vidsel
         .D(blankd1),
         .Q(blankd2),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
-  LUT4 #(
-    .INIT(16'hFFFE)) 
-    \color[11]_i_1 
-       (.I0(memc),
-        .I1(vcountd2),
-        .I2(hcountd2[11]),
-        .I3(hcountd2[10]),
-        .O(\color[11]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
   LUT4 #(
     .INIT(16'h0100)) 
-    \color[15]_i_1 
+    \color[23]_i_1 
        (.I0(vcountd2),
         .I1(hcountd2[11]),
         .I2(hcountd2[10]),
-        .I3(memc),
-        .O(\color[15]_i_1_n_0 ));
-  LUT3 #(
-    .INIT(8'hFE)) 
-    \color[19]_i_1 
-       (.I0(vcountd2),
-        .I1(hcountd2[11]),
-        .I2(hcountd2[10]),
-        .O(\color[19]_i_1_n_0 ));
-  FDRE \color_reg[11] 
+        .I3(vga_color),
+        .O(\color[23]_i_1_n_0 ));
+  FDRE \color_reg[23] 
        (.C(vclock),
         .CE(1'b1),
-        .D(\color[11]_i_1_n_0 ),
-        .Q(color[0]),
+        .D(\color[23]_i_1_n_0 ),
+        .Q(color),
         .R(1'b0));
-  FDRE \color_reg[15] 
-       (.C(vclock),
-        .CE(1'b1),
-        .D(\color[15]_i_1_n_0 ),
-        .Q(color[1]),
-        .R(1'b0));
-  FDRE \color_reg[19] 
-       (.C(vclock),
-        .CE(1'b1),
-        .D(\color[19]_i_1_n_0 ),
-        .Q(color[2]),
-        .R(1'b0));
-  LUT3 #(
-    .INIT(8'h01)) 
-    enable__0
-       (.I0(hcount[0]),
-        .I1(hcount[1]),
-        .I2(vcount),
-        .O(enable));
   FDRE \hcountd1_reg[10] 
        (.C(vclock),
         .CE(1'b1),
@@ -275,11 +240,18 @@ module mmap_vidsel_0_0_vidsel
         .D(vcountd1),
         .Q(vcountd2),
         .R(1'b0));
+  LUT3 #(
+    .INIT(8'h01)) 
+    vga_valid__0
+       (.I0(hcount[0]),
+        .I1(hcount[1]),
+        .I2(vcount),
+        .O(vga_valid));
   FDRE vsync_out_reg
        (.C(vclock),
         .CE(1'b1),
         .D(vsyncd2),
-        .Q(vsync_out),
+        .Q(vga_vsync),
         .R(1'b0));
   FDRE vsyncd1_reg
        (.C(vclock),

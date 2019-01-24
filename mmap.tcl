@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# line, linetest, videogen, vidsel
+# cube_test, buffer_mux, videogen, vidsel, dim_convert, gslice, xymc_packager
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -132,10 +132,13 @@ set bCheckIPs 1
 if { $bCheckIPs == 1 } {
    set list_check_ips "\ 
 xilinx.com:ip:clk_wiz:6.0\
-xilinx.com:ip:xlconstant:1.1\
+user.org:user:sparse_matrix_provider:1.0\
 xilinx.com:ip:processing_system7:5.5\
+xilinx.com:ip:proc_sys_reset:5.0\
 xilinx.com:ip:blk_mem_gen:8.4\
+xilinx.com:ip:xlconstant:1.1\
 digilentinc.com:ip:rgb2dvi:1.2\
+xilinx.com:ip:div_gen:5.1\
 "
 
    set list_ips_missing ""
@@ -161,10 +164,13 @@ digilentinc.com:ip:rgb2dvi:1.2\
 set bCheckModules 1
 if { $bCheckModules == 1 } {
    set list_check_mods "\ 
-line\
-linetest\
+cube_test\
+buffer_mux\
 videogen\
 vidsel\
+dim_convert\
+gslice\
+xymc_packager\
 "
 
    set list_mods_missing ""
@@ -192,6 +198,128 @@ if { $bCheckIPsPassed != 1 } {
 # DESIGN PROCs
 ##################################################################
 
+
+# Hierarchical cell: graphics_pipeline
+proc create_hier_cell_graphics_pipeline { parentCell nameHier } {
+
+  variable script_folder
+
+  if { $parentCell eq "" || $nameHier eq "" } {
+     catch {common::send_msg_id "BD_TCL-102" "ERROR" "create_hier_cell_graphics_pipeline() - Empty argument(s)!"}
+     return
+  }
+
+  # Get object for parentCell
+  set parentObj [get_bd_cells $parentCell]
+  if { $parentObj == "" } {
+     catch {common::send_msg_id "BD_TCL-100" "ERROR" "Unable to find parent cell <$parentCell>!"}
+     return
+  }
+
+  # Make sure parentObj is hier blk
+  set parentType [get_property TYPE $parentObj]
+  if { $parentType ne "hier" } {
+     catch {common::send_msg_id "BD_TCL-101" "ERROR" "Parent <$parentObj> has TYPE = <$parentType>. Expected to be <hier>."}
+     return
+  }
+
+  # Save current instance; Restore later
+  set oldCurInst [current_bd_instance .]
+
+  # Set parent object as current
+  current_bd_instance $parentObj
+
+  # Create cell and set as current instance
+  set hier_obj [create_bd_cell -type hier $nameHier]
+  current_bd_instance $hier_obj
+
+  # Create interface pins
+  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 mat
+  create_bd_intf_pin -mode Master -vlnv huntingt:user:pixel_rtl:1.0 pixel
+  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 xyzm
+
+  # Create pins
+  create_bd_pin -dir I -type clk xymc_aclk
+  create_bd_pin -dir I -type rst xymc_aresetn
+
+  # Create instance: dim_convert_0, and set properties
+  set block_name dim_convert
+  set block_cell_name dim_convert_0
+  if { [catch {set dim_convert_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $dim_convert_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: div_gen_0, and set properties
+  set div_gen_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:div_gen:5.1 div_gen_0 ]
+  set_property -dict [ list \
+   CONFIG.FlowControl {Blocking} \
+   CONFIG.OptimizeGoal {Resources} \
+   CONFIG.OutTLASTBehv {Pass_Dividend_TLAST} \
+   CONFIG.OutTready {true} \
+   CONFIG.dividend_and_quotient_width {32} \
+   CONFIG.dividend_has_tlast {true} \
+   CONFIG.fractional_width {16} \
+   CONFIG.latency {39} \
+ ] $div_gen_0
+
+  # Create instance: div_gen_1, and set properties
+  set div_gen_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:div_gen:5.1 div_gen_1 ]
+  set_property -dict [ list \
+   CONFIG.FlowControl {Blocking} \
+   CONFIG.OptimizeGoal {Resources} \
+   CONFIG.OutTLASTBehv {Pass_Dividend_TLAST} \
+   CONFIG.OutTready {true} \
+   CONFIG.dividend_and_quotient_width {32} \
+   CONFIG.dividend_has_tlast {true} \
+   CONFIG.fractional_width {16} \
+   CONFIG.latency {39} \
+ ] $div_gen_1
+
+  # Create instance: gslice, and set properties
+  set block_name gslice
+  set block_cell_name gslice
+  if { [catch {set gslice [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $gslice eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: xymc_packager_0, and set properties
+  set block_name xymc_packager
+  set block_cell_name xymc_packager_0
+  if { [catch {set xymc_packager_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $xymc_packager_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create interface connections
+  connect_bd_intf_net -intf_net Conn1 [get_bd_intf_pins mat] [get_bd_intf_pins dim_convert_0/mat]
+  connect_bd_intf_net -intf_net cube_test_0_xyzm [get_bd_intf_pins xyzm] [get_bd_intf_pins dim_convert_0/xyzm]
+  connect_bd_intf_net -intf_net dim_convert_0_w0 [get_bd_intf_pins dim_convert_0/w0] [get_bd_intf_pins div_gen_1/S_AXIS_DIVISOR]
+  connect_bd_intf_net -intf_net dim_convert_0_w1 [get_bd_intf_pins dim_convert_0/w1] [get_bd_intf_pins div_gen_0/S_AXIS_DIVISOR]
+  connect_bd_intf_net -intf_net dim_convert_0_x [get_bd_intf_pins dim_convert_0/x] [get_bd_intf_pins div_gen_1/S_AXIS_DIVIDEND]
+  connect_bd_intf_net -intf_net dim_convert_0_y [get_bd_intf_pins dim_convert_0/y] [get_bd_intf_pins div_gen_0/S_AXIS_DIVIDEND]
+  connect_bd_intf_net -intf_net div_gen_0_M_AXIS_DOUT [get_bd_intf_pins div_gen_0/M_AXIS_DOUT] [get_bd_intf_pins xymc_packager_0/y]
+  connect_bd_intf_net -intf_net div_gen_1_M_AXIS_DOUT [get_bd_intf_pins div_gen_1/M_AXIS_DOUT] [get_bd_intf_pins xymc_packager_0/x]
+  connect_bd_intf_net -intf_net gslice_pixel [get_bd_intf_pins pixel] [get_bd_intf_pins gslice/pixel]
+  connect_bd_intf_net -intf_net xymc_packager_0_xymc [get_bd_intf_pins gslice/xymc] [get_bd_intf_pins xymc_packager_0/xymc]
+
+  # Create port connections
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins xymc_aclk] [get_bd_pins dim_convert_0/aclk] [get_bd_pins div_gen_0/aclk] [get_bd_pins div_gen_1/aclk] [get_bd_pins gslice/xymc_aclk] [get_bd_pins xymc_packager_0/aclk]
+  connect_bd_net -net rst_ps7_0_100M_peripheral_aresetn [get_bd_pins xymc_aresetn] [get_bd_pins gslice/xymc_aresetn]
+
+  # Restore current instance
+  current_bd_instance $oldCurInst
+}
 
 # Hierarchical cell: display
 proc create_hier_cell_display { parentCell nameHier } {
@@ -228,33 +356,30 @@ proc create_hier_cell_display { parentCell nameHier } {
   current_bd_instance $hier_obj
 
   # Create interface pins
+  create_bd_intf_pin -mode Slave -vlnv huntingt:user:pixel_rtl:1.0 pixel
 
   # Create pins
-  create_bd_pin -dir I -type rst aRst
-  create_bd_pin -dir I -from 17 -to 0 address
-  create_bd_pin -dir I -from 0 -to 0 data
-  create_bd_pin -dir I -type clk data_clk
   create_bd_pin -dir O -type clk hdmi_out_clk_n
   create_bd_pin -dir O -type clk hdmi_out_clk_p
   create_bd_pin -dir O -from 2 -to 0 hdmi_out_data_n
   create_bd_pin -dir O -from 2 -to 0 hdmi_out_data_p
   create_bd_pin -dir I -type clk vga_clk
-  create_bd_pin -dir I -from 0 -to 0 write_en
 
-  # Create instance: blk_mem_gen_0, and set properties
-  set blk_mem_gen_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 blk_mem_gen_0 ]
+  # Create instance: buffer_0, and set properties
+  set buffer_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 buffer_0 ]
   set_property -dict [ list \
    CONFIG.Byte_Size {9} \
    CONFIG.Coe_File {no_coe_file_loaded} \
    CONFIG.EN_SAFETY_CKT {false} \
    CONFIG.Enable_32bit_Address {false} \
    CONFIG.Enable_B {Use_ENB_Pin} \
-   CONFIG.Fill_Remaining_Memory_Locations {true} \
+   CONFIG.Fill_Remaining_Memory_Locations {false} \
    CONFIG.Load_Init_File {false} \
    CONFIG.Memory_Type {Simple_Dual_Port_RAM} \
    CONFIG.Operating_Mode_A {NO_CHANGE} \
    CONFIG.Port_B_Clock {100} \
    CONFIG.Port_B_Enable_Rate {100} \
+   CONFIG.Port_B_Write_Rate {0} \
    CONFIG.Read_Width_A {1} \
    CONFIG.Read_Width_B {1} \
    CONFIG.Register_PortA_Output_of_Memory_Primitives {false} \
@@ -266,63 +391,100 @@ proc create_hier_cell_display { parentCell nameHier } {
    CONFIG.Write_Width_A {1} \
    CONFIG.Write_Width_B {1} \
    CONFIG.use_bram_block {Stand_Alone} \
- ] $blk_mem_gen_0
+ ] $buffer_0
 
-  # Create instance: high, and set properties
-  set high [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 high ]
+  # Create instance: buffer_1, and set properties
+  set buffer_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 buffer_1 ]
+  set_property -dict [ list \
+   CONFIG.Byte_Size {9} \
+   CONFIG.EN_SAFETY_CKT {false} \
+   CONFIG.Enable_32bit_Address {false} \
+   CONFIG.Enable_B {Use_ENB_Pin} \
+   CONFIG.Memory_Type {Simple_Dual_Port_RAM} \
+   CONFIG.Operating_Mode_A {NO_CHANGE} \
+   CONFIG.Port_B_Clock {100} \
+   CONFIG.Port_B_Enable_Rate {100} \
+   CONFIG.Read_Width_A {1} \
+   CONFIG.Read_Width_B {1} \
+   CONFIG.Register_PortA_Output_of_Memory_Primitives {false} \
+   CONFIG.Register_PortB_Output_of_Memory_Primitives {true} \
+   CONFIG.Use_Byte_Write_Enable {false} \
+   CONFIG.Use_RSTA_Pin {false} \
+   CONFIG.Write_Depth_A {262144} \
+   CONFIG.Write_Width_A {1} \
+   CONFIG.Write_Width_B {1} \
+   CONFIG.use_bram_block {Stand_Alone} \
+ ] $buffer_1
 
-  # Create instance: rgb2dvi_0, and set properties
-  set rgb2dvi_0 [ create_bd_cell -type ip -vlnv digilentinc.com:ip:rgb2dvi:1.2 rgb2dvi_0 ]
+  # Create instance: buffer_mux_0, and set properties
+  set block_name buffer_mux
+  set block_cell_name buffer_mux_0
+  if { [catch {set buffer_mux_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $buffer_mux_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  # Create instance: ground, and set properties
+  set ground [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 ground ]
+  set_property -dict [ list \
+   CONFIG.CONST_VAL {0} \
+ ] $ground
+
+  # Create instance: rgb2dvi, and set properties
+  set rgb2dvi [ create_bd_cell -type ip -vlnv digilentinc.com:ip:rgb2dvi:1.2 rgb2dvi ]
   set_property -dict [ list \
    CONFIG.kClkRange {2} \
- ] $rgb2dvi_0
+ ] $rgb2dvi
 
-  # Create instance: videogen_0, and set properties
+  # Create instance: videogen, and set properties
   set block_name videogen
-  set block_cell_name videogen_0
-  if { [catch {set videogen_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+  set block_cell_name videogen
+  if { [catch {set videogen [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
      catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
-   } elseif { $videogen_0 eq "" } {
+   } elseif { $videogen eq "" } {
      catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
   
-  # Create instance: vidsel_0, and set properties
+  # Create instance: vidsel, and set properties
   set block_name vidsel
-  set block_cell_name vidsel_0
-  if { [catch {set vidsel_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+  set block_cell_name vidsel
+  if { [catch {set vidsel [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
      catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
-   } elseif { $vidsel_0 eq "" } {
+   } elseif { $vidsel eq "" } {
      catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
   
+  # Create interface connections
+  connect_bd_intf_net -intf_net buffer_mux_0_buffer_0a [get_bd_intf_pins buffer_0/BRAM_PORTA] [get_bd_intf_pins buffer_mux_0/buffer_0a]
+  connect_bd_intf_net -intf_net buffer_mux_0_buffer_0b [get_bd_intf_pins buffer_0/BRAM_PORTB] [get_bd_intf_pins buffer_mux_0/buffer_0b]
+  connect_bd_intf_net -intf_net buffer_mux_0_buffer_1a [get_bd_intf_pins buffer_1/BRAM_PORTA] [get_bd_intf_pins buffer_mux_0/buffer_1a]
+  connect_bd_intf_net -intf_net buffer_mux_0_buffer_1b [get_bd_intf_pins buffer_1/BRAM_PORTB] [get_bd_intf_pins buffer_mux_0/buffer_1b]
+  connect_bd_intf_net -intf_net pixel_1 [get_bd_intf_pins pixel] [get_bd_intf_pins buffer_mux_0/pixel]
+  connect_bd_intf_net -intf_net vidsel_vga1 [get_bd_intf_pins buffer_mux_0/vga] [get_bd_intf_pins vidsel/vga]
+
   # Create port connections
-  connect_bd_net -net blk_mem_gen_0_doutb [get_bd_pins blk_mem_gen_0/doutb] [get_bd_pins vidsel_0/memc]
-  connect_bd_net -net clk_wiz_clk_out1 [get_bd_pins vga_clk] [get_bd_pins blk_mem_gen_0/clkb] [get_bd_pins rgb2dvi_0/PixelClk] [get_bd_pins videogen_0/vclock] [get_bd_pins vidsel_0/vclock]
-  connect_bd_net -net ground_dout [get_bd_pins aRst] [get_bd_pins rgb2dvi_0/aRst]
-  connect_bd_net -net high_dout [get_bd_pins blk_mem_gen_0/ena] [get_bd_pins high/dout]
-  connect_bd_net -net processing_system7_0_FCLK_CLK1 [get_bd_pins data_clk] [get_bd_pins blk_mem_gen_0/clka]
-  connect_bd_net -net rgb2dvi_0_TMDS_Clk_n [get_bd_pins hdmi_out_clk_n] [get_bd_pins rgb2dvi_0/TMDS_Clk_n]
-  connect_bd_net -net rgb2dvi_0_TMDS_Clk_p [get_bd_pins hdmi_out_clk_p] [get_bd_pins rgb2dvi_0/TMDS_Clk_p]
-  connect_bd_net -net rgb2dvi_0_TMDS_Data_n [get_bd_pins hdmi_out_data_n] [get_bd_pins rgb2dvi_0/TMDS_Data_n]
-  connect_bd_net -net rgb2dvi_0_TMDS_Data_p [get_bd_pins hdmi_out_data_p] [get_bd_pins rgb2dvi_0/TMDS_Data_p]
-  connect_bd_net -net test_0_address [get_bd_pins address] [get_bd_pins blk_mem_gen_0/addra]
-  connect_bd_net -net test_0_data [get_bd_pins data] [get_bd_pins blk_mem_gen_0/dina]
-  connect_bd_net -net test_0_enable [get_bd_pins write_en] [get_bd_pins blk_mem_gen_0/wea]
-  connect_bd_net -net videogen_0_blank [get_bd_pins videogen_0/blank] [get_bd_pins vidsel_0/blank]
-  connect_bd_net -net videogen_0_hcount [get_bd_pins videogen_0/hcount] [get_bd_pins vidsel_0/hcount]
-  connect_bd_net -net videogen_0_hsync [get_bd_pins videogen_0/hsync] [get_bd_pins vidsel_0/hsync]
-  connect_bd_net -net videogen_0_vcount [get_bd_pins videogen_0/vcount] [get_bd_pins vidsel_0/vcount]
-  connect_bd_net -net videogen_0_vsync [get_bd_pins videogen_0/vsync] [get_bd_pins vidsel_0/vsync]
-  connect_bd_net -net vidsel_0_address [get_bd_pins blk_mem_gen_0/addrb] [get_bd_pins vidsel_0/address]
-  connect_bd_net -net vidsel_0_blank_out [get_bd_pins rgb2dvi_0/vid_pVDE] [get_bd_pins vidsel_0/blank_out]
-  connect_bd_net -net vidsel_0_color [get_bd_pins rgb2dvi_0/vid_pData] [get_bd_pins vidsel_0/color]
-  connect_bd_net -net vidsel_0_enable [get_bd_pins blk_mem_gen_0/enb] [get_bd_pins vidsel_0/enable]
-  connect_bd_net -net vidsel_0_hsync_out [get_bd_pins rgb2dvi_0/vid_pHSync] [get_bd_pins vidsel_0/hsync_out]
-  connect_bd_net -net vidsel_0_vsync_out [get_bd_pins rgb2dvi_0/vid_pVSync] [get_bd_pins vidsel_0/vsync_out]
+  connect_bd_net -net ground_dout [get_bd_pins ground/dout] [get_bd_pins rgb2dvi/aRst]
+  connect_bd_net -net rgb2dvi_0_TMDS_Clk_n [get_bd_pins hdmi_out_clk_n] [get_bd_pins rgb2dvi/TMDS_Clk_n]
+  connect_bd_net -net rgb2dvi_0_TMDS_Clk_p [get_bd_pins hdmi_out_clk_p] [get_bd_pins rgb2dvi/TMDS_Clk_p]
+  connect_bd_net -net rgb2dvi_0_TMDS_Data_n [get_bd_pins hdmi_out_data_n] [get_bd_pins rgb2dvi/TMDS_Data_n]
+  connect_bd_net -net rgb2dvi_0_TMDS_Data_p [get_bd_pins hdmi_out_data_p] [get_bd_pins rgb2dvi/TMDS_Data_p]
+  connect_bd_net -net vga_clk_1 [get_bd_pins vga_clk] [get_bd_pins rgb2dvi/PixelClk] [get_bd_pins videogen/vclock] [get_bd_pins vidsel/vclock]
+  connect_bd_net -net videogen_0_blank [get_bd_pins videogen/blank] [get_bd_pins vidsel/blank]
+  connect_bd_net -net videogen_0_hcount [get_bd_pins videogen/hcount] [get_bd_pins vidsel/hcount]
+  connect_bd_net -net videogen_0_hsync [get_bd_pins videogen/hsync] [get_bd_pins vidsel/hsync]
+  connect_bd_net -net videogen_0_vcount [get_bd_pins videogen/vcount] [get_bd_pins vidsel/vcount]
+  connect_bd_net -net videogen_0_vsync [get_bd_pins videogen/vsync] [get_bd_pins vidsel/vsync]
+  connect_bd_net -net vidsel_0_blank_out [get_bd_pins rgb2dvi/vid_pVDE] [get_bd_pins vidsel/blank_out]
+  connect_bd_net -net vidsel_0_color [get_bd_pins rgb2dvi/vid_pData] [get_bd_pins vidsel/color]
+  connect_bd_net -net vidsel_0_hsync_out [get_bd_pins rgb2dvi/vid_pHSync] [get_bd_pins vidsel/hsync_out]
+  connect_bd_net -net vidsel_0_vsync_out [get_bd_pins rgb2dvi/vid_pVSync] [get_bd_pins vidsel/vsync_out]
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -397,39 +559,30 @@ proc create_root_design { parentCell } {
    CONFIG.MMCM_DIVCLK_DIVIDE {5} \
    CONFIG.PRIMITIVE {MMCM} \
    CONFIG.PRIM_IN_FREQ {125} \
+   CONFIG.USE_LOCKED {false} \
+   CONFIG.USE_RESET {false} \
  ] $clk_wiz
 
+  # Create instance: cube_test_0, and set properties
+  set block_name cube_test
+  set block_cell_name cube_test_0
+  if { [catch {set cube_test_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $cube_test_0 eq "" } {
+     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create instance: display
   create_hier_cell_display [current_bd_instance .] display
 
-  # Create instance: ground, and set properties
-  set ground [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 ground ]
-  set_property -dict [ list \
-   CONFIG.CONST_VAL {0} \
- ] $ground
+  # Create instance: graphics_pipeline
+  create_hier_cell_graphics_pipeline [current_bd_instance .] graphics_pipeline
 
-  # Create instance: line_0, and set properties
-  set block_name line
-  set block_cell_name line_0
-  if { [catch {set line_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
-     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   } elseif { $line_0 eq "" } {
-     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   }
-  
-  # Create instance: linetest_0, and set properties
-  set block_name linetest
-  set block_cell_name linetest_0
-  if { [catch {set linetest_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
-     catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   } elseif { $linetest_0 eq "" } {
-     catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   }
-  
+  # Create instance: matrix_provider, and set properties
+  set matrix_provider [ create_bd_cell -type ip -vlnv user.org:user:sparse_matrix_provider:1.0 matrix_provider ]
+
   # Create instance: processing_system7_0, and set properties
   set processing_system7_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:processing_system7:5.5 processing_system7_0 ]
   set_property -dict [ list \
@@ -441,7 +594,7 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_ACT_ENET0_PERIPHERAL_FREQMHZ {125.000000} \
    CONFIG.PCW_ACT_ENET1_PERIPHERAL_FREQMHZ {10.000000} \
    CONFIG.PCW_ACT_FPGA0_PERIPHERAL_FREQMHZ {100.000000} \
-   CONFIG.PCW_ACT_FPGA1_PERIPHERAL_FREQMHZ {50.000000} \
+   CONFIG.PCW_ACT_FPGA1_PERIPHERAL_FREQMHZ {10.000000} \
    CONFIG.PCW_ACT_FPGA2_PERIPHERAL_FREQMHZ {10.000000} \
    CONFIG.PCW_ACT_FPGA3_PERIPHERAL_FREQMHZ {10.000000} \
    CONFIG.PCW_ACT_I2C_PERIPHERAL_FREQMHZ {50} \
@@ -479,7 +632,7 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_CAN_PERIPHERAL_FREQMHZ {100} \
    CONFIG.PCW_CAN_PERIPHERAL_VALID {0} \
    CONFIG.PCW_CLK0_FREQ {100000000} \
-   CONFIG.PCW_CLK1_FREQ {50000000} \
+   CONFIG.PCW_CLK1_FREQ {10000000} \
    CONFIG.PCW_CLK2_FREQ {10000000} \
    CONFIG.PCW_CLK3_FREQ {10000000} \
    CONFIG.PCW_CORE0_FIQ_INTR {0} \
@@ -540,7 +693,7 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_EN_CAN0 {0} \
    CONFIG.PCW_EN_CAN1 {0} \
    CONFIG.PCW_EN_CLK0_PORT {1} \
-   CONFIG.PCW_EN_CLK1_PORT {1} \
+   CONFIG.PCW_EN_CLK1_PORT {0} \
    CONFIG.PCW_EN_CLK2_PORT {0} \
    CONFIG.PCW_EN_CLK3_PORT {0} \
    CONFIG.PCW_EN_CLKTRIG0_PORT {0} \
@@ -598,15 +751,15 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_EN_TTC1 {0} \
    CONFIG.PCW_EN_UART0 {1} \
    CONFIG.PCW_EN_UART1 {0} \
-   CONFIG.PCW_EN_USB0 {1} \
+   CONFIG.PCW_EN_USB0 {0} \
    CONFIG.PCW_EN_USB1 {0} \
    CONFIG.PCW_EN_WDT {0} \
    CONFIG.PCW_FCLK0_PERIPHERAL_CLKSRC {IO PLL} \
    CONFIG.PCW_FCLK0_PERIPHERAL_DIVISOR0 {5} \
    CONFIG.PCW_FCLK0_PERIPHERAL_DIVISOR1 {2} \
    CONFIG.PCW_FCLK1_PERIPHERAL_CLKSRC {IO PLL} \
-   CONFIG.PCW_FCLK1_PERIPHERAL_DIVISOR0 {5} \
-   CONFIG.PCW_FCLK1_PERIPHERAL_DIVISOR1 {4} \
+   CONFIG.PCW_FCLK1_PERIPHERAL_DIVISOR0 {1} \
+   CONFIG.PCW_FCLK1_PERIPHERAL_DIVISOR1 {1} \
    CONFIG.PCW_FCLK2_PERIPHERAL_CLKSRC {IO PLL} \
    CONFIG.PCW_FCLK2_PERIPHERAL_DIVISOR0 {1} \
    CONFIG.PCW_FCLK2_PERIPHERAL_DIVISOR1 {1} \
@@ -614,7 +767,7 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_FCLK3_PERIPHERAL_DIVISOR0 {1} \
    CONFIG.PCW_FCLK3_PERIPHERAL_DIVISOR1 {1} \
    CONFIG.PCW_FCLK_CLK0_BUF {TRUE} \
-   CONFIG.PCW_FCLK_CLK1_BUF {TRUE} \
+   CONFIG.PCW_FCLK_CLK1_BUF {FALSE} \
    CONFIG.PCW_FCLK_CLK2_BUF {FALSE} \
    CONFIG.PCW_FCLK_CLK3_BUF {FALSE} \
    CONFIG.PCW_FPGA0_PERIPHERAL_FREQMHZ {100} \
@@ -622,7 +775,7 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_FPGA2_PERIPHERAL_FREQMHZ {50} \
    CONFIG.PCW_FPGA3_PERIPHERAL_FREQMHZ {50} \
    CONFIG.PCW_FPGA_FCLK0_ENABLE {1} \
-   CONFIG.PCW_FPGA_FCLK1_ENABLE {1} \
+   CONFIG.PCW_FPGA_FCLK1_ENABLE {0} \
    CONFIG.PCW_FPGA_FCLK2_ENABLE {0} \
    CONFIG.PCW_FPGA_FCLK3_ENABLE {0} \
    CONFIG.PCW_GPIO_BASEADDR {0xE000A000} \
@@ -865,8 +1018,8 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_MIO_9_PULLUP {enabled} \
    CONFIG.PCW_MIO_9_SLEW {slow} \
    CONFIG.PCW_MIO_PRIMITIVE {54} \
-   CONFIG.PCW_MIO_TREE_PERIPHERALS {GPIO#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#GPIO#Quad SPI Flash#ENET Reset#GPIO#GPIO#GPIO#GPIO#UART 0#UART 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#USB 0#SD 0#SD 0#SD 0#SD 0#SD 0#SD 0#USB Reset#SD 0#GPIO#GPIO#GPIO#GPIO#Enet 0#Enet 0} \
-   CONFIG.PCW_MIO_TREE_SIGNALS {gpio[0]#qspi0_ss_b#qspi0_io[0]#qspi0_io[1]#qspi0_io[2]#qspi0_io[3]/HOLD_B#qspi0_sclk#gpio[7]#qspi_fbclk#reset#gpio[10]#gpio[11]#gpio[12]#gpio[13]#rx#tx#tx_clk#txd[0]#txd[1]#txd[2]#txd[3]#tx_ctl#rx_clk#rxd[0]#rxd[1]#rxd[2]#rxd[3]#rx_ctl#data[4]#dir#stp#nxt#data[0]#data[1]#data[2]#data[3]#clk#data[5]#data[6]#data[7]#clk#cmd#data[0]#data[1]#data[2]#data[3]#reset#cd#gpio[48]#gpio[49]#gpio[50]#gpio[51]#mdc#mdio} \
+   CONFIG.PCW_MIO_TREE_PERIPHERALS {GPIO#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#Quad SPI Flash#GPIO#Quad SPI Flash#ENET Reset#GPIO#GPIO#GPIO#GPIO#UART 0#UART 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#Enet 0#GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#GPIO#SD 0#SD 0#SD 0#SD 0#SD 0#SD 0#GPIO#SD 0#GPIO#GPIO#GPIO#GPIO#Enet 0#Enet 0} \
+   CONFIG.PCW_MIO_TREE_SIGNALS {gpio[0]#qspi0_ss_b#qspi0_io[0]#qspi0_io[1]#qspi0_io[2]#qspi0_io[3]/HOLD_B#qspi0_sclk#gpio[7]#qspi_fbclk#reset#gpio[10]#gpio[11]#gpio[12]#gpio[13]#rx#tx#tx_clk#txd[0]#txd[1]#txd[2]#txd[3]#tx_ctl#rx_clk#rxd[0]#rxd[1]#rxd[2]#rxd[3]#rx_ctl#gpio[28]#gpio[29]#gpio[30]#gpio[31]#gpio[32]#gpio[33]#gpio[34]#gpio[35]#gpio[36]#gpio[37]#gpio[38]#gpio[39]#clk#cmd#data[0]#data[1]#data[2]#data[3]#gpio[46]#cd#gpio[48]#gpio[49]#gpio[50]#gpio[51]#mdc#mdio} \
    CONFIG.PCW_M_AXI_GP0_ENABLE_STATIC_REMAP {0} \
    CONFIG.PCW_M_AXI_GP0_ID_WIDTH {12} \
    CONFIG.PCW_M_AXI_GP0_SUPPORT_NARROW_BURST {0} \
@@ -1155,11 +1308,11 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_UIPARAM_GENERATE_SUMMARY {NA} \
    CONFIG.PCW_USB0_BASEADDR {0xE0102000} \
    CONFIG.PCW_USB0_HIGHADDR {0xE0102fff} \
-   CONFIG.PCW_USB0_PERIPHERAL_ENABLE {1} \
+   CONFIG.PCW_USB0_PERIPHERAL_ENABLE {0} \
    CONFIG.PCW_USB0_PERIPHERAL_FREQMHZ {60} \
    CONFIG.PCW_USB0_RESET_ENABLE {1} \
    CONFIG.PCW_USB0_RESET_IO {MIO 46} \
-   CONFIG.PCW_USB0_USB0_IO {MIO 28 .. 39} \
+   CONFIG.PCW_USB0_USB0_IO {<Select>} \
    CONFIG.PCW_USB1_BASEADDR {0xE0103000} \
    CONFIG.PCW_USB1_HIGHADDR {0xE0103fff} \
    CONFIG.PCW_USB1_PERIPHERAL_ENABLE {0} \
@@ -1167,7 +1320,7 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_USB1_RESET_ENABLE {0} \
    CONFIG.PCW_USB_RESET_ENABLE {1} \
    CONFIG.PCW_USB_RESET_POLARITY {Active Low} \
-   CONFIG.PCW_USB_RESET_SELECT {Share reset pin} \
+   CONFIG.PCW_USB_RESET_SELECT {<Select>} \
    CONFIG.PCW_USE_AXI_FABRIC_IDLE {0} \
    CONFIG.PCW_USE_AXI_NONSECURE {0} \
    CONFIG.PCW_USE_CORESIGHT {0} \
@@ -1203,32 +1356,37 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_WDT_PERIPHERAL_FREQMHZ {133.333333} \
  ] $processing_system7_0
 
+  # Create instance: ps7_0_axi_periph, and set properties
+  set ps7_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 ps7_0_axi_periph ]
+  set_property -dict [ list \
+   CONFIG.NUM_MI {1} \
+ ] $ps7_0_axi_periph
+
+  # Create instance: rst_ps7_0_100M, and set properties
+  set rst_ps7_0_100M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_ps7_0_100M ]
+
   # Create interface connections
+  connect_bd_intf_net -intf_net cube_test_0_xyzm [get_bd_intf_pins cube_test_0/xyzm] [get_bd_intf_pins graphics_pipeline/xyzm]
+  connect_bd_intf_net -intf_net graphics_pipeline_pixel [get_bd_intf_pins display/pixel] [get_bd_intf_pins graphics_pipeline/pixel]
   connect_bd_intf_net -intf_net processing_system7_0_DDR [get_bd_intf_ports DDR] [get_bd_intf_pins processing_system7_0/DDR]
   connect_bd_intf_net -intf_net processing_system7_0_FIXED_IO [get_bd_intf_ports FIXED_IO] [get_bd_intf_pins processing_system7_0/FIXED_IO]
+  connect_bd_intf_net -intf_net processing_system7_0_M_AXI_GP0 [get_bd_intf_pins processing_system7_0/M_AXI_GP0] [get_bd_intf_pins ps7_0_axi_periph/S00_AXI]
+  connect_bd_intf_net -intf_net ps7_0_axi_periph_M00_AXI [get_bd_intf_pins matrix_provider/S00_AXI] [get_bd_intf_pins ps7_0_axi_periph/M00_AXI]
+  connect_bd_intf_net -intf_net sparse_matrix_provid_0_mat [get_bd_intf_pins graphics_pipeline/mat] [get_bd_intf_pins matrix_provider/mat]
 
   # Create port connections
   connect_bd_net -net clk_wiz_clk_out1 [get_bd_pins clk_wiz/clk_out1] [get_bd_pins display/vga_clk]
-  connect_bd_net -net ground_dout [get_bd_pins clk_wiz/reset] [get_bd_pins display/aRst] [get_bd_pins ground/dout]
-  connect_bd_net -net line_0_address [get_bd_pins display/address] [get_bd_pins line_0/address]
-  connect_bd_net -net line_0_data [get_bd_pins display/data] [get_bd_pins line_0/data]
-  connect_bd_net -net line_0_ready [get_bd_pins line_0/ready] [get_bd_pins linetest_0/enable]
-  connect_bd_net -net line_0_writing [get_bd_pins display/write_en] [get_bd_pins line_0/writing]
-  connect_bd_net -net linetest_0_color [get_bd_pins line_0/color] [get_bd_pins linetest_0/color]
-  connect_bd_net -net linetest_0_enable [get_bd_pins line_0/enable] [get_bd_pins linetest_0/ready]
-  connect_bd_net -net linetest_0_x0 [get_bd_pins line_0/x0] [get_bd_pins linetest_0/x0]
-  connect_bd_net -net linetest_0_x1 [get_bd_pins line_0/x1] [get_bd_pins linetest_0/x1]
-  connect_bd_net -net linetest_0_y0 [get_bd_pins line_0/y0] [get_bd_pins linetest_0/y0]
-  connect_bd_net -net linetest_0_y1 [get_bd_pins line_0/y1] [get_bd_pins linetest_0/y1]
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK]
-  connect_bd_net -net processing_system7_0_FCLK_CLK1 [get_bd_pins display/data_clk] [get_bd_pins line_0/clk] [get_bd_pins linetest_0/clk] [get_bd_pins processing_system7_0/FCLK_CLK1]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins cube_test_0/aclk] [get_bd_pins graphics_pipeline/xymc_aclk] [get_bd_pins matrix_provider/s00_axi_aclk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_ps7_0_100M/slowest_sync_clk]
+  connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_ps7_0_100M/ext_reset_in]
   connect_bd_net -net rgb2dvi_0_TMDS_Clk_n [get_bd_ports hdmi_out_clk_n] [get_bd_pins display/hdmi_out_clk_n]
   connect_bd_net -net rgb2dvi_0_TMDS_Clk_p [get_bd_ports hdmi_out_clk_p] [get_bd_pins display/hdmi_out_clk_p]
   connect_bd_net -net rgb2dvi_0_TMDS_Data_n [get_bd_ports hdmi_out_data_n] [get_bd_pins display/hdmi_out_data_n]
   connect_bd_net -net rgb2dvi_0_TMDS_Data_p [get_bd_ports hdmi_out_data_p] [get_bd_pins display/hdmi_out_data_p]
+  connect_bd_net -net rst_ps7_0_100M_peripheral_aresetn [get_bd_pins graphics_pipeline/xymc_aresetn] [get_bd_pins matrix_provider/s00_axi_aresetn] [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_ps7_0_100M/peripheral_aresetn]
   connect_bd_net -net sysclk_1 [get_bd_ports sysclk] [get_bd_pins clk_wiz/clk_in1]
 
   # Create address segments
+  create_bd_addr_seg -range 0x00010000 -offset 0x43C00000 [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs matrix_provider/S00_AXI/S00_AXI_reg] SEG_sparse_matrix_provid_0_S00_AXI_reg
 
 
   # Restore current instance

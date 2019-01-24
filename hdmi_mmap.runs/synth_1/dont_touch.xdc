@@ -21,19 +21,46 @@ set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_videogen_0
 # IP: bd/mmap/ip/mmap_vidsel_0_0/mmap_vidsel_0_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_vidsel_0_0 || ORIG_REF_NAME==mmap_vidsel_0_0} -quiet] -quiet
 
-# IP: bd/mmap/ip/mmap_xlconstant_0_0/mmap_xlconstant_0_0.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_xlconstant_0_0 || ORIG_REF_NAME==mmap_xlconstant_0_0} -quiet] -quiet
-
 # IP: bd/mmap/ip/mmap_blk_mem_gen_0_0/mmap_blk_mem_gen_0_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_blk_mem_gen_0_0 || ORIG_REF_NAME==mmap_blk_mem_gen_0_0} -quiet] -quiet
-
-# IP: bd/mmap/ip/mmap_linetest_0_0/mmap_linetest_0_0.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_linetest_0_0 || ORIG_REF_NAME==mmap_linetest_0_0} -quiet] -quiet
 
 # IP: bd/mmap/ip/mmap_blk_mem_gen_0_1/mmap_blk_mem_gen_0_1.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_blk_mem_gen_0_1 || ORIG_REF_NAME==mmap_blk_mem_gen_0_1} -quiet] -quiet
 
-# IP: bd/mmap/ip/mmap_graphics_0_0/mmap_graphics_0_0.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_graphics_0_0 || ORIG_REF_NAME==mmap_graphics_0_0} -quiet] -quiet
+# IP: bd/mmap/ip/mmap_rst_ps7_0_100M_1/mmap_rst_ps7_0_100M_1.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_rst_ps7_0_100M_1 || ORIG_REF_NAME==mmap_rst_ps7_0_100M_1} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_xlconstant_0_1/mmap_xlconstant_0_1.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_xlconstant_0_1 || ORIG_REF_NAME==mmap_xlconstant_0_1} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_buffer_mux_0_0/mmap_buffer_mux_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_buffer_mux_0_0 || ORIG_REF_NAME==mmap_buffer_mux_0_0} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_gslice_0_1/mmap_gslice_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_gslice_0 || ORIG_REF_NAME==mmap_gslice_0} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_dim_convert_0_0/mmap_dim_convert_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_dim_convert_0_0 || ORIG_REF_NAME==mmap_dim_convert_0_0} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_xymc_packager_0_0/mmap_xymc_packager_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_xymc_packager_0_0 || ORIG_REF_NAME==mmap_xymc_packager_0_0} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_div_gen_0_0/mmap_div_gen_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_div_gen_0_0 || ORIG_REF_NAME==mmap_div_gen_0_0} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_div_gen_1_0/mmap_div_gen_1_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_div_gen_1_0 || ORIG_REF_NAME==mmap_div_gen_1_0} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_cube_test_0_0/mmap_cube_test_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_cube_test_0_0 || ORIG_REF_NAME==mmap_cube_test_0_0} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_ps7_0_axi_periph_0/mmap_ps7_0_axi_periph_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_ps7_0_axi_periph_0 || ORIG_REF_NAME==mmap_ps7_0_axi_periph_0} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_sparse_matrix_provid_0_0/mmap_sparse_matrix_provid_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_sparse_matrix_provid_0_0 || ORIG_REF_NAME==mmap_sparse_matrix_provid_0_0} -quiet] -quiet
+
+# IP: bd/mmap/ip/mmap_auto_pc_0/mmap_auto_pc_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==mmap_auto_pc_0 || ORIG_REF_NAME==mmap_auto_pc_0} -quiet] -quiet
 
 # XDC: bd/mmap/mmap_ooc.xdc

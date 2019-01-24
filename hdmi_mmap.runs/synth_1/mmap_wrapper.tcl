@@ -31,10 +31,14 @@ set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part tul.com.tw:pynq-z2:part0:1.0 [current_project]
 set_property ip_repo_paths {
-  /home/huntingt/repos/ip_repo/point_decompression_1.0
+  /home/huntingt/repos/ip_repo/sparse_matrix_provider_1.0
+  /home/huntingt/repos/ip_repo/matrix_provider_1.0
+  /home/huntingt/repos/PYNQ
+  /home/huntingt/repos/ip_repo/myip_1.0
   /home/huntingt/repos/ip_repo/3d_to_2d_converter_1.0
   /home/huntingt/repos/ip_repo/simple_video_timer_1.0
-  /home/huntingt/repos/PYNQ
+  /home/huntingt/repos/ip_repo/point_decompression_1.0
+  /home/huntingt/repos/ip_repo
 } [current_project]
 update_ip_catalog
 set_property ip_output_repo /home/huntingt/repos/hdmi_mmap/hdmi_mmap.cache/ip [current_project]
@@ -51,6 +55,12 @@ set_property used_in_implementation false [get_files -all /home/huntingt/repos/h
 set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_clk_wiz_0/mmap_clk_wiz_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_blk_mem_gen_0_0/mmap_blk_mem_gen_0_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_blk_mem_gen_0_1/mmap_blk_mem_gen_0_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_rst_ps7_0_100M_1/mmap_rst_ps7_0_100M_1_board.xdc]
+set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_rst_ps7_0_100M_1/mmap_rst_ps7_0_100M_1.xdc]
+set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_rst_ps7_0_100M_1/mmap_rst_ps7_0_100M_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_div_gen_0_0/mmap_div_gen_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_div_gen_1_0/mmap_div_gen_1_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_auto_pc_0/mmap_auto_pc_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/mmap_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being

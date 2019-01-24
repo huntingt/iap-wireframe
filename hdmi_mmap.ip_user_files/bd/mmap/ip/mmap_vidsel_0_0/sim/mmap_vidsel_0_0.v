@@ -61,13 +61,15 @@ module mmap_vidsel_0_0 (
   hsync,
   vsync,
   blank,
-  memc,
   color,
   hsync_out,
   vsync_out,
   blank_out,
-  address,
-  enable
+  vga_addr,
+  vga_color,
+  vga_clk,
+  vga_valid,
+  vga_vsync
 );
 
 input wire vclock;
@@ -76,13 +78,20 @@ input wire [10 : 0] vcount;
 input wire hsync;
 input wire vsync;
 input wire blank;
-input wire memc;
 output wire [23 : 0] color;
 output wire hsync_out;
 output wire vsync_out;
 output wire blank_out;
-output wire [17 : 0] address;
-output wire enable;
+(* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga addr" *)
+output wire [17 : 0] vga_addr;
+(* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga color" *)
+input wire vga_color;
+(* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga clk" *)
+output wire vga_clk;
+(* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga valid" *)
+output wire vga_valid;
+(* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga vsync" *)
+output wire vga_vsync;
 
   vidsel inst (
     .vclock(vclock),
@@ -91,12 +100,14 @@ output wire enable;
     .hsync(hsync),
     .vsync(vsync),
     .blank(blank),
-    .memc(memc),
     .color(color),
     .hsync_out(hsync_out),
     .vsync_out(vsync_out),
     .blank_out(blank_out),
-    .address(address),
-    .enable(enable)
+    .vga_addr(vga_addr),
+    .vga_color(vga_color),
+    .vga_clk(vga_clk),
+    .vga_valid(vga_valid),
+    .vga_vsync(vga_vsync)
   );
 endmodule

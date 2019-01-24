@@ -73,10 +73,14 @@ set rc [catch {
   set_property webtalk.parent_dir /home/huntingt/repos/hdmi_mmap/hdmi_mmap.cache/wt [current_project]
   set_property parent.project_path /home/huntingt/repos/hdmi_mmap/hdmi_mmap.xpr [current_project]
   set_property ip_repo_paths {
-  /home/huntingt/repos/ip_repo/point_decompression_1.0
+  /home/huntingt/repos/ip_repo/sparse_matrix_provider_1.0
+  /home/huntingt/repos/ip_repo/matrix_provider_1.0
+  /home/huntingt/repos/PYNQ
+  /home/huntingt/repos/ip_repo/myip_1.0
   /home/huntingt/repos/ip_repo/3d_to_2d_converter_1.0
   /home/huntingt/repos/ip_repo/simple_video_timer_1.0
-  /home/huntingt/repos/PYNQ
+  /home/huntingt/repos/ip_repo/point_decompression_1.0
+  /home/huntingt/repos/ip_repo
 } [current_project]
   update_ip_catalog
   set_property ip_output_repo /home/huntingt/repos/hdmi_mmap/hdmi_mmap.cache/ip [current_project]

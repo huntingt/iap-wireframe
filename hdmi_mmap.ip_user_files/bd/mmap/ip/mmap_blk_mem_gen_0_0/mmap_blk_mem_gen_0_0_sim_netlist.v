@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-// Date        : Wed Jan 16 18:49:27 2019
+// Date        : Mon Jan 21 11:09:39 2019
 // Host        : inyo running 64-bit Pop!_OS 18.10
 // Command     : write_verilog -force -mode funcsim
 //               /home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_blk_mem_gen_0_0/mmap_blk_mem_gen_0_0_sim_netlist.v
@@ -126,7 +126,7 @@ module mmap_blk_mem_gen_0_0
   (* C_USE_BRAM_BLOCK = "0" *) 
   (* C_USE_BYTE_WEA = "0" *) 
   (* C_USE_BYTE_WEB = "0" *) 
-  (* C_USE_DEFAULT_DATA = "1" *) 
+  (* C_USE_DEFAULT_DATA = "0" *) 
   (* C_USE_ECC = "0" *) 
   (* C_USE_SOFTECC = "0" *) 
   (* C_USE_URAM = "0" *) 
@@ -468,7 +468,7 @@ module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_width
   wire enb;
   wire [0:0]wea;
 
-  mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init \prim_init.ram 
+  mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper \prim_noinit.ram 
        (.DOUTB(DOUTB),
         .ENA(ENA),
         .ENB(ENB),
@@ -515,7 +515,7 @@ module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_width__parameterized0
   wire enb;
   wire [0:0]wea;
 
-  mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init__parameterized0 \prim_init.ram 
+  mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper__parameterized0 \prim_noinit.ram 
        (.DOUTB(DOUTB),
         .ENA(ENA),
         .ENB(ENB),
@@ -562,7 +562,7 @@ module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_width__parameterized1
   wire enb;
   wire [0:0]wea;
 
-  mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init__parameterized1 \prim_init.ram 
+  mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper__parameterized1 \prim_noinit.ram 
        (.DOUTB(DOUTB),
         .ENA(ENA),
         .ENB(ENB),
@@ -609,7 +609,7 @@ module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_width__parameterized2
   wire enb;
   wire [0:0]wea;
 
-  mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init__parameterized2 \prim_init.ram 
+  mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper__parameterized2 \prim_noinit.ram 
        (.DOUTB(DOUTB),
         .ENA(ENA),
         .ENB(ENB),
@@ -622,8 +622,8 @@ module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_width__parameterized2
         .wea(wea));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper_init" *) 
-module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init
+(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper" *) 
+module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper
    (DOUTB,
     clka,
     clkb,
@@ -1098,8 +1098,8 @@ module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init
         .WEBWE({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper_init" *) 
-module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init__parameterized0
+(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper" *) 
+module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper__parameterized0
    (DOUTB,
     clka,
     clkb,
@@ -1574,8 +1574,8 @@ module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init__parameterized0
         .WEBWE({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper_init" *) 
-module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init__parameterized1
+(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper" *) 
+module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper__parameterized1
    (DOUTB,
     clka,
     clkb,
@@ -2050,8 +2050,8 @@ module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init__parameterized1
         .WEBWE({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}));
 endmodule
 
-(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper_init" *) 
-module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper_init__parameterized2
+(* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper" *) 
+module mmap_blk_mem_gen_0_0_blk_mem_gen_prim_wrapper__parameterized2
    (DOUTB,
     clka,
     clkb,
@@ -2589,7 +2589,7 @@ endmodule
 (* C_READ_LATENCY_B = "1" *) (* C_READ_WIDTH_A = "1" *) (* C_READ_WIDTH_B = "1" *) 
 (* C_RSTRAM_A = "0" *) (* C_RSTRAM_B = "0" *) (* C_RST_PRIORITY_A = "CE" *) 
 (* C_RST_PRIORITY_B = "CE" *) (* C_SIM_COLLISION_CHECK = "ALL" *) (* C_USE_BRAM_BLOCK = "0" *) 
-(* C_USE_BYTE_WEA = "0" *) (* C_USE_BYTE_WEB = "0" *) (* C_USE_DEFAULT_DATA = "1" *) 
+(* C_USE_BYTE_WEA = "0" *) (* C_USE_BYTE_WEB = "0" *) (* C_USE_DEFAULT_DATA = "0" *) 
 (* C_USE_ECC = "0" *) (* C_USE_SOFTECC = "0" *) (* C_USE_URAM = "0" *) 
 (* C_WEA_WIDTH = "1" *) (* C_WEB_WIDTH = "1" *) (* C_WRITE_DEPTH_A = "262144" *) 
 (* C_WRITE_DEPTH_B = "262144" *) (* C_WRITE_MODE_A = "NO_CHANGE" *) (* C_WRITE_MODE_B = "WRITE_FIRST" *) 

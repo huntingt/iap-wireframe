@@ -8,6 +8,9 @@ vhdl xil_defaultlib  \
 "../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/bd5a/src/TMDS_Encoder.vhd" \
 "../../../../hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/bd5a/src/rgb2dvi.vhd" \
 "../../../../hdmi_mmap.ip_user_files/bd/mmap/ip/mmap_rgb2dvi_0_0/sim/mmap_rgb2dvi_0_0.vhd" \
+"../../../../hdmi_mmap.ip_user_files/bd/mmap/ip/mmap_rst_ps7_0_100M_1/sim/mmap_rst_ps7_0_100M_1.vhd" \
+"../../../../hdmi_mmap.ip_user_files/bd/mmap/ip/mmap_div_gen_0_0/sim/mmap_div_gen_0_0.vhd" \
+"../../../../hdmi_mmap.ip_user_files/bd/mmap/ip/mmap_div_gen_1_0/sim/mmap_div_gen_1_0.vhd" \
 
 # Do not sort compile order
 nosort

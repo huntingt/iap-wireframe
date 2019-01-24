@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z020clg400-1" LaunchTime="1548086766">
+<GenRun Id="impl_1" LaunchPart="xc7z020clg400-1" LaunchTime="1548366638">
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <File Type="BG-DRC" Name="mmap_wrapper.drc"/>
   <File Type="BG-BGN" Name="mmap_wrapper.bgn"/>
@@ -85,6 +85,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/dim.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/bd/mmap/mmap.bd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -105,7 +112,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/dimmap.v">
+    <File Path="$PSRCDIR/sources_1/new/mat.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -149,12 +156,18 @@
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="mmap_graphics_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_xymc_packager_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_dim_convert_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_cube_test_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_sparse_matrix_provid_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_vidsel_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_videogen_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_gslice_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_div_gen_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_div_gen_1_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_blk_mem_gen_0_1"/>
-  <BlockFileSet Type="BlockSrcs" Name="mmap_linetest_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_blk_mem_gen_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_buffer_mux_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_clk_wiz_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_rgb2dvi_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_processing_system7_0_0"/>

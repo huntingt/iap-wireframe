@@ -1,5 +1,84 @@
 `timescale 1ns / 1ps
+module buffer_mux(input pixel_clk, pixel_color, pixel_valid, pixel_buffer_sel, input [17:0] pixel_addr, output pixel_vsync,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0a ADDR" *)
+        output [17:0] buffer_0_addra,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0a CLK" *)
+        output buffer_0_clka,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0a DIN" *)
+        output buffer_0_dina,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0a EN" *)
+        output buffer_0_ena,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0a WE" *)
+        output buffer_0_wea,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0a RST" *)
+        output buffer_0_rsta,
+        
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0b ADDR" *)
+        output [17:0] buffer_0_addrb,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0b CLK" *)
+        output buffer_0_clkb,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0b DOUT" *)
+        input buffer_0_doutb,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0b EN" *)
+        output buffer_0_enb,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0b RST" *)
+        output buffer_0_rstb,
+        
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1a ADDR" *)
+        output [17:0] buffer_1_addra,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1a CLK" *)
+        output buffer_1_clka,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1a DIN" *)
+        output buffer_1_dina,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1a EN" *)
+        output buffer_1_ena,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1a WE" *)
+        output buffer_1_wea,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1a RST" *)
+        output buffer_1_rsta,
+        
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1b ADDR" *)
+        output [17:0] buffer_1_addrb,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1b CLK" *)
+        output buffer_1_clkb,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1b DOUT" *)
+        input buffer_1_doutb,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1b EN" *)
+        output buffer_1_enb,
+        (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1b RST" *)
+        output buffer_1_rstb,
+        input vga_clk, input [17:0] vga_addr, output vga_color, input vga_valid, vga_vsync);
+    
+    assign pixel_vsync = vga_vsync;
+    
+    assign buffer_0_addra = pixel_addr;
+    assign buffer_0_clka = pixel_clk;
+    assign buffer_0_dina = pixel_color;
+    assign buffer_0_ena = pixel_valid;
+    assign buffer_0_wea = !pixel_buffer_sel;
+    assign buffer_0_rsta = 0;
+    
+    assign buffer_0_addrb = vga_addr;
+    assign buffer_0_clkb = vga_clk;
+    assign buffer_0_enb = pixel_buffer_sel;
+    assign buffer_0_rstb = 0;
+    
+    assign buffer_1_addra = pixel_addr;
+    assign buffer_1_clka = pixel_clk;
+    assign buffer_1_dina = pixel_color;
+    assign buffer_1_ena = pixel_valid;
+    assign buffer_1_wea = pixel_buffer_sel;
+    assign buffer_1_rsta = 0;
+    
+    assign buffer_1_addrb = vga_addr;
+    assign buffer_1_clkb = vga_clk;
+    assign buffer_1_enb = !pixel_buffer_sel;
+    assign buffer_1_rstb = 0;
+    
+    assign vga_color = pixel_buffer_sel ? buffer_0_doutb : buffer_1_doutb;
+endmodule
 
+`timescale 1ns / 1ps
 module videogen(input vclock,
             output reg [11:0] hcount, 
             output reg [10:0] vcount,
@@ -8,6 +87,10 @@ module videogen(input vclock,
    reg hblank,vblank;
    reg hsyncon,hsyncoff,hreset,hblankon;
    reg vsyncon,vsyncoff,vreset,vblankon;
+   
+   initial hcount = 0;
+   initial vcount = 1022;
+   initial vsync = 1;
    
    always @(*)begin
         hblankon = (hcount == 1280);
@@ -38,27 +121,20 @@ module videogen(input vclock,
    end
 endmodule
 
+`timescale 1ns / 1ps
 module vidsel(
             input vclock,
             input [11:0] hcount,
             input [10:0] vcount,
             input hsync, vsync, blank,
-            input memc_0, memc_1, buffer_sel,
             output reg [23:0] color,
             output reg hsync_out, vsync_out, blank_out,
-            output [17:0] address,
-            output enable0, enable1, a_enable0, a_enable1);
+            output [17:0] vga_addr, input vga_color, output vga_clk, vga_valid, vga_vsync);
             
-    assign address = {vcount[9:1],hcount[9:1]};
-    
-    assign enable0 = (hcount < 1024) && (vcount < 1024) && !buffer_sel;
-    assign enable1 = (hcount < 1024) && (vcount < 1024) && buffer_sel;
-    
-    assign a_enable0 = buffer_sel;
-    assign a_enable1 = !buffer_sel;
-    
-    wire memc;
-    assign memc = buffer_sel ? memc_1 : memc_0;
+    assign vga_addr = {vcount[9:1],hcount[9:1]};
+    assign vga_clk = vclock;
+    assign vga_vsync = vsync_out;
+    assign vga_valid = (hcount < 1024) && (vcount < 1024);
     
     reg hsyncd1, vsyncd1, blankd1, hsyncd2, vsyncd2, blankd2;
     
@@ -82,6 +158,6 @@ module vidsel(
         vsync_out <= vsyncd2;
         blank_out <= blankd2;
         
-        color <= (hcountd2 < 1024) & (vcountd2 < 1024) ? {24{memc}} : {3{8'b00001111}};
+        color <= (hcountd2 < 1024) & (vcountd2 < 1024) ? {24{vga_color}} : {3{8'b00000000}};
     end
 endmodule
