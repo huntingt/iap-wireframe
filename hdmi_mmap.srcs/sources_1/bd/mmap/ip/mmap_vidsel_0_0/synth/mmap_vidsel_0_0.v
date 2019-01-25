@@ -84,7 +84,7 @@ output wire hsync_out;
 output wire vsync_out;
 output wire blank_out;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga addr" *)
-output wire [17 : 0] vga_addr;
+output wire [19 : 0] vga_addr;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga color" *)
 input wire vga_color;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga clk" *)

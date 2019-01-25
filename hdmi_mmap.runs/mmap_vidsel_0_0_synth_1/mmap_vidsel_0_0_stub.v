@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-// Date        : Wed Jan 23 19:46:01 2019
+// Date        : Thu Jan 24 18:49:07 2019
 // Host        : inyo running 64-bit Pop!_OS 18.10
 // Command     : write_verilog -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
 //               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ mmap_vidsel_0_0_stub.v
@@ -16,7 +16,7 @@
 (* X_CORE_INFO = "vidsel,Vivado 2018.3" *)
 module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix(vclock, hcount, vcount, hsync, vsync, blank, color, 
   hsync_out, vsync_out, blank_out, vga_addr, vga_color, vga_clk, vga_valid, vga_vsync)
-/* synthesis syn_black_box black_box_pad_pin="vclock,hcount[11:0],vcount[10:0],hsync,vsync,blank,color[23:0],hsync_out,vsync_out,blank_out,vga_addr[17:0],vga_color,vga_clk,vga_valid,vga_vsync" */;
+/* synthesis syn_black_box black_box_pad_pin="vclock,hcount[11:0],vcount[10:0],hsync,vsync,blank,color[23:0],hsync_out,vsync_out,blank_out,vga_addr[19:0],vga_color,vga_clk,vga_valid,vga_vsync" */;
   input vclock;
   input [11:0]hcount;
   input [10:0]vcount;
@@ -27,7 +27,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix(vclock, hcount, vcount, hsync, 
   output hsync_out;
   output vsync_out;
   output blank_out;
-  output [17:0]vga_addr;
+  output [19:0]vga_addr;
   input vga_color;
   output vga_clk;
   output vga_valid;

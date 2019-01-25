@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-//Date        : Thu Jan 24 16:50:08 2019
+//Date        : Thu Jan 24 18:47:22 2019
 //Host        : inyo running 64-bit Pop!_OS 18.10
 //Command     : generate_target mmap.bd
 //Design      : mmap
@@ -25,7 +25,7 @@ module display_imp_SMLEIP
   output hdmi_out_clk_p;
   output [2:0]hdmi_out_data_n;
   output [2:0]hdmi_out_data_p;
-  input [17:0]pixel_addr;
+  input [19:0]pixel_addr;
   input pixel_buffer_sel;
   input pixel_clk;
   input pixel_color;
@@ -33,26 +33,26 @@ module display_imp_SMLEIP
   output pixel_vsync;
   input vga_clk;
 
-  wire [17:0]buffer_mux_0_buffer_0a_ADDR;
+  wire [19:0]buffer_mux_0_buffer_0a_ADDR;
   wire buffer_mux_0_buffer_0a_CLK;
   wire buffer_mux_0_buffer_0a_DIN;
   wire buffer_mux_0_buffer_0a_EN;
   wire buffer_mux_0_buffer_0a_WE;
-  wire [17:0]buffer_mux_0_buffer_0b_ADDR;
+  wire [19:0]buffer_mux_0_buffer_0b_ADDR;
   wire buffer_mux_0_buffer_0b_CLK;
   wire [0:0]buffer_mux_0_buffer_0b_DOUT;
   wire buffer_mux_0_buffer_0b_EN;
-  wire [17:0]buffer_mux_0_buffer_1a_ADDR;
+  wire [19:0]buffer_mux_0_buffer_1a_ADDR;
   wire buffer_mux_0_buffer_1a_CLK;
   wire buffer_mux_0_buffer_1a_DIN;
   wire buffer_mux_0_buffer_1a_EN;
   wire buffer_mux_0_buffer_1a_WE;
-  wire [17:0]buffer_mux_0_buffer_1b_ADDR;
+  wire [19:0]buffer_mux_0_buffer_1b_ADDR;
   wire buffer_mux_0_buffer_1b_CLK;
   wire [0:0]buffer_mux_0_buffer_1b_DOUT;
   wire buffer_mux_0_buffer_1b_EN;
   wire [0:0]ground_dout;
-  wire [17:0]pixel_1_addr;
+  wire [19:0]pixel_1_addr;
   wire pixel_1_buffer_sel;
   wire pixel_1_clk;
   wire pixel_1_color;
@@ -72,7 +72,7 @@ module display_imp_SMLEIP
   wire [23:0]vidsel_0_color;
   wire vidsel_0_hsync_out;
   wire vidsel_0_vsync_out;
-  wire [17:0]vidsel_vga1_addr;
+  wire [19:0]vidsel_vga1_addr;
   wire vidsel_vga1_clk;
   wire vidsel_vga1_color;
   wire vidsel_vga1_valid;
@@ -82,7 +82,7 @@ module display_imp_SMLEIP
   assign hdmi_out_clk_p = rgb2dvi_0_TMDS_Clk_p;
   assign hdmi_out_data_n[2:0] = rgb2dvi_0_TMDS_Data_n;
   assign hdmi_out_data_p[2:0] = rgb2dvi_0_TMDS_Data_p;
-  assign pixel_1_addr = pixel_addr[17:0];
+  assign pixel_1_addr = pixel_addr[19:0];
   assign pixel_1_buffer_sel = pixel_buffer_sel;
   assign pixel_1_clk = pixel_clk;
   assign pixel_1_color = pixel_color;
@@ -193,7 +193,7 @@ module graphics_pipeline_imp_1BR0SRF
     xyzm_tvalid);
   input [191:0]mat_tdata;
   input mat_tvalid;
-  output [17:0]pixel_addr;
+  output [19:0]pixel_addr;
   output pixel_buffer_sel;
   output pixel_clk;
   output pixel_color;
@@ -232,14 +232,14 @@ module graphics_pipeline_imp_1BR0SRF
   wire div_gen_1_M_AXIS_DOUT_TLAST;
   wire div_gen_1_M_AXIS_DOUT_TREADY;
   wire div_gen_1_M_AXIS_DOUT_TVALID;
-  wire [17:0]gslice_pixel_addr;
-  wire gslice_pixel_buffer_sel;
-  wire gslice_pixel_clk;
-  wire gslice_pixel_color;
-  wire gslice_pixel_valid;
-  wire gslice_pixel_vsync;
+  wire [19:0]gslice_0_pixel_addr;
+  wire gslice_0_pixel_buffer_sel;
+  wire gslice_0_pixel_clk;
+  wire gslice_0_pixel_color;
+  wire gslice_0_pixel_valid;
+  wire gslice_0_pixel_vsync;
   wire processing_system7_0_FCLK_CLK0;
-  wire rst_ps7_0_100M_peripheral_aresetn;
+  wire xymc_aresetn_1;
   wire [23:0]xymc_packager_0_xymc_TDATA;
   wire xymc_packager_0_xymc_TREADY;
   wire xymc_packager_0_xymc_TVALID;
@@ -248,14 +248,14 @@ module graphics_pipeline_imp_1BR0SRF
   assign Conn1_TVALID = mat_tvalid;
   assign cube_test_0_xyzm_TDATA = xyzm_tdata[55:0];
   assign cube_test_0_xyzm_TVALID = xyzm_tvalid;
-  assign gslice_pixel_vsync = pixel_vsync;
-  assign pixel_addr[17:0] = gslice_pixel_addr;
-  assign pixel_buffer_sel = gslice_pixel_buffer_sel;
-  assign pixel_clk = gslice_pixel_clk;
-  assign pixel_color = gslice_pixel_color;
-  assign pixel_valid = gslice_pixel_valid;
+  assign gslice_0_pixel_vsync = pixel_vsync;
+  assign pixel_addr[19:0] = gslice_0_pixel_addr;
+  assign pixel_buffer_sel = gslice_0_pixel_buffer_sel;
+  assign pixel_clk = gslice_0_pixel_clk;
+  assign pixel_color = gslice_0_pixel_color;
+  assign pixel_valid = gslice_0_pixel_valid;
   assign processing_system7_0_FCLK_CLK0 = xymc_aclk;
-  assign rst_ps7_0_100M_peripheral_aresetn = xymc_aresetn;
+  assign xymc_aresetn_1 = xymc_aresetn;
   assign xyzm_tready = cube_test_0_xyzm_TREADY;
   mmap_dim_convert_0_0 dim_convert_0
        (.aclk(processing_system7_0_FCLK_CLK0),
@@ -304,15 +304,15 @@ module graphics_pipeline_imp_1BR0SRF
         .s_axis_divisor_tdata(dim_convert_0_w0_TDATA),
         .s_axis_divisor_tready(dim_convert_0_w0_TREADY),
         .s_axis_divisor_tvalid(dim_convert_0_w0_TVALID));
-  mmap_gslice_0 gslice
-       (.pixel_addr(gslice_pixel_addr),
-        .pixel_buffer_sel(gslice_pixel_buffer_sel),
-        .pixel_clk(gslice_pixel_clk),
-        .pixel_color(gslice_pixel_color),
-        .pixel_valid(gslice_pixel_valid),
-        .pixel_vsync(gslice_pixel_vsync),
+  mmap_gslice_0_0 gslice_0
+       (.pixel_addr(gslice_0_pixel_addr),
+        .pixel_buffer_sel(gslice_0_pixel_buffer_sel),
+        .pixel_clk(gslice_0_pixel_clk),
+        .pixel_color(gslice_0_pixel_color),
+        .pixel_valid(gslice_0_pixel_valid),
+        .pixel_vsync(gslice_0_pixel_vsync),
         .xymc_aclk(processing_system7_0_FCLK_CLK0),
-        .xymc_aresetn(rst_ps7_0_100M_peripheral_aresetn),
+        .xymc_aresetn(xymc_aresetn_1),
         .xymc_tdata(xymc_packager_0_xymc_TDATA),
         .xymc_tready(xymc_packager_0_xymc_TREADY),
         .xymc_tvalid(xymc_packager_0_xymc_TVALID));
@@ -331,7 +331,7 @@ module graphics_pipeline_imp_1BR0SRF
         .y_tvalid(div_gen_0_M_AXIS_DOUT_TVALID));
 endmodule
 
-(* CORE_GENERATION_INFO = "mmap,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=mmap,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=22,numReposBlks=18,numNonXlnxBlks=2,numHierBlks=4,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=7,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=9,da_board_cnt=2,da_clkrst_cnt=15,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "mmap.hwdef" *) 
+(* CORE_GENERATION_INFO = "mmap,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=mmap,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=22,numReposBlks=18,numNonXlnxBlks=2,numHierBlks=4,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=7,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=9,da_board_cnt=2,da_clkrst_cnt=16,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "mmap.hwdef" *) 
 module mmap
    (DDR_addr,
     DDR_ba,
@@ -390,7 +390,7 @@ module mmap
   wire [55:0]cube_test_0_xyzm_TDATA;
   wire cube_test_0_xyzm_TREADY;
   wire cube_test_0_xyzm_TVALID;
-  wire [17:0]graphics_pipeline_pixel_addr;
+  wire [19:0]graphics_pipeline_pixel_addr;
   wire graphics_pipeline_pixel_buffer_sel;
   wire graphics_pipeline_pixel_clk;
   wire graphics_pipeline_pixel_color;

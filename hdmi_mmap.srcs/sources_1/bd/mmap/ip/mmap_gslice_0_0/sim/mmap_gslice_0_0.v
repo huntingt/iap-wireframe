@@ -50,12 +50,11 @@
 // IP VLNV: xilinx.com:module_ref:gslice:1.0
 // IP Revision: 1
 
-(* X_CORE_INFO = "gslice,Vivado 2018.3" *)
-(* CHECK_LICENSE_TYPE = "mmap_gslice_0,gslice,{}" *)
-(* CORE_GENERATION_INFO = "mmap_gslice_0,gslice,{x_ipProduct=Vivado 2018.3,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=gslice,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED}" *)
+`timescale 1ns/1ps
+
 (* IP_DEFINITION_SOURCE = "module_ref" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
-module mmap_gslice_0 (
+module mmap_gslice_0_0 (
   xymc_tdata,
   xymc_tvalid,
   xymc_tready,
@@ -93,7 +92,7 @@ output wire pixel_buffer_sel;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel clk" *)
 output wire pixel_clk;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel addr" *)
-output wire [17 : 0] pixel_addr;
+output wire [19 : 0] pixel_addr;
 
   gslice inst (
     .xymc_tdata(xymc_tdata),

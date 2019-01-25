@@ -1,11 +1,11 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-// Date        : Wed Jan 23 13:18:48 2019
+// Date        : Thu Jan 24 18:09:00 2019
 // Host        : inyo running 64-bit Pop!_OS 18.10
 // Command     : write_verilog -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
-//               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ mmap_gslice_0_stub.v
-// Design      : mmap_gslice_0
+//               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ mmap_gslice_0_0_stub.v
+// Design      : mmap_gslice_0_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z020clg400-1
 // --------------------------------------------------------------------------------
@@ -17,7 +17,7 @@
 module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix(xymc_tdata, xymc_tvalid, xymc_tready, 
   xymc_aresetn, xymc_aclk, pixel_vsync, pixel_color, pixel_valid, pixel_buffer_sel, pixel_clk, 
   pixel_addr)
-/* synthesis syn_black_box black_box_pad_pin="xymc_tdata[23:0],xymc_tvalid,xymc_tready,xymc_aresetn,xymc_aclk,pixel_vsync,pixel_color,pixel_valid,pixel_buffer_sel,pixel_clk,pixel_addr[17:0]" */;
+/* synthesis syn_black_box black_box_pad_pin="xymc_tdata[23:0],xymc_tvalid,xymc_tready,xymc_aresetn,xymc_aclk,pixel_vsync,pixel_color,pixel_valid,pixel_buffer_sel,pixel_clk,pixel_addr[19:0]" */;
   input [23:0]xymc_tdata;
   input xymc_tvalid;
   output xymc_tready;
@@ -28,5 +28,5 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix(xymc_tdata, xymc_tvalid, xymc_t
   output pixel_valid;
   output pixel_buffer_sel;
   output pixel_clk;
-  output [17:0]pixel_addr;
+  output [19:0]pixel_addr;
 endmodule

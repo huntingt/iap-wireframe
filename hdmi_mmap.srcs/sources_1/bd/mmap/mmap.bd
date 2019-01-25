@@ -24,7 +24,7 @@
       "graphics_pipeline": {
         "div_gen_0": "",
         "div_gen_1": "",
-        "gslice": "",
+        "gslice_0": "",
         "dim_convert_0": "",
         "xymc_packager_0": ""
       },
@@ -1859,7 +1859,7 @@
                 "value": "false"
               },
               "Write_Depth_A": {
-                "value": "262144"
+                "value": "1048576"
               },
               "Write_Width_A": {
                 "value": "1"
@@ -1913,7 +1913,7 @@
                 "value": "false"
               },
               "Write_Depth_A": {
-                "value": "262144"
+                "value": "1048576"
               },
               "Write_Width_A": {
                 "value": "1"
@@ -1963,7 +1963,7 @@
                   "ADDR": {
                     "physical_name": "buffer_0_addra",
                     "direction": "O",
-                    "left": "17",
+                    "left": "19",
                     "right": "0"
                   },
                   "CLK": {
@@ -1991,7 +1991,7 @@
                   "ADDR": {
                     "physical_name": "buffer_0_addrb",
                     "direction": "O",
-                    "left": "17",
+                    "left": "19",
                     "right": "0"
                   },
                   "CLK": {
@@ -2023,7 +2023,7 @@
                   "ADDR": {
                     "physical_name": "buffer_1_addra",
                     "direction": "O",
-                    "left": "17",
+                    "left": "19",
                     "right": "0"
                   },
                   "CLK": {
@@ -2051,7 +2051,7 @@
                   "ADDR": {
                     "physical_name": "buffer_1_addrb",
                     "direction": "O",
-                    "left": "17",
+                    "left": "19",
                     "right": "0"
                   },
                   "CLK": {
@@ -2075,7 +2075,7 @@
                   "addr": {
                     "physical_name": "pixel_addr",
                     "direction": "I",
-                    "left": "17",
+                    "left": "19",
                     "right": "0"
                   },
                   "vsync": {
@@ -2107,7 +2107,7 @@
                   "addr": {
                     "physical_name": "vga_addr",
                     "direction": "I",
-                    "left": "17",
+                    "left": "19",
                     "right": "0"
                   },
                   "vsync": {
@@ -2197,7 +2197,7 @@
                   "addr": {
                     "physical_name": "vga_addr",
                     "direction": "O",
-                    "left": "17",
+                    "left": "19",
                     "right": "0"
                   },
                   "vsync": {
@@ -2412,13 +2412,13 @@
             "mode": "Slave",
             "vlnv": "xilinx.com:interface:axis_rtl:1.0"
           },
-          "pixel": {
-            "mode": "Master",
-            "vlnv": "huntingt:user:pixel_rtl:1.0"
-          },
           "mat": {
             "mode": "Slave",
             "vlnv": "xilinx.com:interface:axis_rtl:1.0"
+          },
+          "pixel": {
+            "mode": "Master",
+            "vlnv": "huntingt:user:pixel_rtl:1.0"
           }
         },
         "ports": {
@@ -2492,9 +2492,9 @@
               }
             }
           },
-          "gslice": {
+          "gslice_0": {
             "vlnv": "xilinx.com:module_ref:gslice:1.0",
-            "xci_name": "mmap_gslice_0",
+            "xci_name": "mmap_gslice_0_0",
             "reference_info": {
               "ref_type": "hdl",
               "ref_name": "gslice",
@@ -2505,27 +2505,27 @@
                 "mode": "Master",
                 "vlnv": "huntingt:user:pixel_rtl:1.0",
                 "port_maps": {
-                  "addr": {
-                    "physical_name": "pixel_addr",
-                    "direction": "O",
-                    "left": "17",
-                    "right": "0"
-                  },
-                  "valid": {
-                    "physical_name": "pixel_valid",
-                    "direction": "O"
-                  },
                   "color": {
                     "physical_name": "pixel_color",
                     "direction": "O"
+                  },
+                  "addr": {
+                    "physical_name": "pixel_addr",
+                    "direction": "O",
+                    "left": "19",
+                    "right": "0"
+                  },
+                  "vsync": {
+                    "physical_name": "pixel_vsync",
+                    "direction": "I"
                   },
                   "buffer_sel": {
                     "physical_name": "pixel_buffer_sel",
                     "direction": "O"
                   },
-                  "vsync": {
-                    "physical_name": "pixel_vsync",
-                    "direction": "I"
+                  "valid": {
+                    "physical_name": "pixel_valid",
+                    "direction": "O"
                   },
                   "clk": {
                     "physical_name": "pixel_clk",
@@ -3279,12 +3279,6 @@
               "div_gen_1/S_AXIS_DIVIDEND"
             ]
           },
-          "xymc_packager_0_xymc": {
-            "interface_ports": [
-              "xymc_packager_0/xymc",
-              "gslice/xymc"
-            ]
-          },
           "dim_convert_0_y": {
             "interface_ports": [
               "dim_convert_0/y",
@@ -3321,34 +3315,40 @@
               "div_gen_0/S_AXIS_DIVISOR"
             ]
           },
-          "gslice_pixel": {
-            "interface_ports": [
-              "pixel",
-              "gslice/pixel"
-            ]
-          },
           "Conn1": {
             "interface_ports": [
               "mat",
               "dim_convert_0/mat"
             ]
+          },
+          "gslice_0_pixel": {
+            "interface_ports": [
+              "pixel",
+              "gslice_0/pixel"
+            ]
+          },
+          "xymc_packager_0_xymc": {
+            "interface_ports": [
+              "xymc_packager_0/xymc",
+              "gslice_0/xymc"
+            ]
           }
         },
         "nets": {
-          "rst_ps7_0_100M_peripheral_aresetn": {
-            "ports": [
-              "xymc_aresetn",
-              "gslice/xymc_aresetn"
-            ]
-          },
           "processing_system7_0_FCLK_CLK0": {
             "ports": [
               "xymc_aclk",
               "div_gen_0/aclk",
               "div_gen_1/aclk",
-              "gslice/xymc_aclk",
+              "gslice_0/xymc_aclk",
               "dim_convert_0/aclk",
               "xymc_packager_0/aclk"
+            ]
+          },
+          "xymc_aresetn_1": {
+            "ports": [
+              "xymc_aresetn",
+              "gslice_0/xymc_aresetn"
             ]
           }
         }
@@ -3479,16 +3479,16 @@
               }
             },
             "interface_nets": {
-              "s00_couplers_to_auto_pc": {
-                "interface_ports": [
-                  "S_AXI",
-                  "auto_pc/S_AXI"
-                ]
-              },
               "auto_pc_to_s00_couplers": {
                 "interface_ports": [
                   "M_AXI",
                   "auto_pc/M_AXI"
+                ]
+              },
+              "s00_couplers_to_auto_pc": {
+                "interface_ports": [
+                  "S_AXI",
+                  "auto_pc/S_AXI"
                 ]
               }
             },
@@ -3509,16 +3509,16 @@
           }
         },
         "interface_nets": {
-          "ps7_0_axi_periph_to_s00_couplers": {
-            "interface_ports": [
-              "S00_AXI",
-              "s00_couplers/S_AXI"
-            ]
-          },
           "s00_couplers_to_ps7_0_axi_periph": {
             "interface_ports": [
               "M00_AXI",
               "s00_couplers/M_AXI"
+            ]
+          },
+          "ps7_0_axi_periph_to_s00_couplers": {
+            "interface_ports": [
+              "S00_AXI",
+              "s00_couplers/S_AXI"
             ]
           }
         },
@@ -3660,12 +3660,6 @@
           "processing_system7_0/FIXED_IO"
         ]
       },
-      "graphics_pipeline_pixel": {
-        "interface_ports": [
-          "graphics_pipeline/pixel",
-          "display/pixel"
-        ]
-      },
       "processing_system7_0_DDR": {
         "interface_ports": [
           "DDR",
@@ -3688,6 +3682,12 @@
         "interface_ports": [
           "ps7_0_axi_periph/M00_AXI",
           "matrix_provider/S00_AXI"
+        ]
+      },
+      "graphics_pipeline_pixel": {
+        "interface_ports": [
+          "graphics_pipeline/pixel",
+          "display/pixel"
         ]
       }
     },

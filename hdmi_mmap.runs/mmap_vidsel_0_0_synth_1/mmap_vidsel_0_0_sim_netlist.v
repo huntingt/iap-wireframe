@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-// Date        : Wed Jan 23 19:46:01 2019
+// Date        : Thu Jan 24 18:49:07 2019
 // Host        : inyo running 64-bit Pop!_OS 18.10
 // Command     : write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
 //               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ mmap_vidsel_0_0_sim_netlist.v
@@ -41,7 +41,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
   output hsync_out;
   output vsync_out;
   output blank_out;
-  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga addr" *) output [17:0]vga_addr;
+  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga addr" *) output [19:0]vga_addr;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga color" *) input vga_color;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga clk" *) output vga_clk;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga valid" *) output vga_valid;
@@ -55,6 +55,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
   wire hsync_out;
   wire vclock;
   wire [10:0]vcount;
+  wire [9:7]\^vga_addr ;
   wire vga_color;
   wire vga_valid;
   wire vga_vsync;
@@ -84,46 +85,63 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
   assign color[2] = \^color [22];
   assign color[1] = \^color [22];
   assign color[0] = \^color [22];
-  assign vga_addr[17:9] = vcount[9:1];
-  assign vga_addr[8:0] = hcount[9:1];
+  assign vga_addr[19:10] = vcount[9:0];
+  assign vga_addr[9:7] = \^vga_addr [9:7];
+  assign vga_addr[6:0] = hcount[6:0];
   assign vga_clk = vclock;
   assign vsync_out = vga_vsync;
   decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_vidsel inst
        (.blank(blank),
         .blank_out(blank_out),
         .color(\^color ),
-        .hcount(hcount[11:10]),
+        .hcount(hcount[11:7]),
         .hsync(hsync),
         .hsync_out(hsync_out),
         .vclock(vclock),
         .vcount(vcount[10]),
+        .vga_addr(\^vga_addr [7]),
         .vga_color(vga_color),
         .vga_valid(vga_valid),
         .vga_vsync(vga_vsync),
         .vsync(vsync));
+  LUT2 #(
+    .INIT(4'h9)) 
+    \vga_addr[8]_INST_0 
+       (.I0(hcount[7]),
+        .I1(hcount[8]),
+        .O(\^vga_addr [8]));
+  LUT3 #(
+    .INIT(8'hE1)) 
+    \vga_addr[9]_INST_0 
+       (.I0(hcount[8]),
+        .I1(hcount[7]),
+        .I2(hcount[9]),
+        .O(\^vga_addr [9]));
 endmodule
 
 module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_vidsel
-   (vga_valid,
-    color,
+   (color,
     hsync_out,
     vga_vsync,
     blank_out,
+    vga_valid,
+    vga_addr,
     hcount,
-    vcount,
     vclock,
+    vcount,
     hsync,
     vsync,
     blank,
     vga_color);
-  output vga_valid;
   output [0:0]color;
   output hsync_out;
   output vga_vsync;
   output blank_out;
-  input [1:0]hcount;
-  input [0:0]vcount;
+  output vga_valid;
+  output [0:0]vga_addr;
+  input [4:0]hcount;
   input vclock;
+  input [0:0]vcount;
   input hsync;
   input vsync;
   input blank;
@@ -134,10 +152,11 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_vidsel
   wire blankd1;
   wire blankd2;
   wire [0:0]color;
+  wire color2__0;
   wire \color[23]_i_1_n_0 ;
-  wire [1:0]hcount;
-  wire [11:10]hcountd1;
-  wire [11:10]hcountd2;
+  wire [4:0]hcount;
+  wire [11:7]hcountd1;
+  wire [11:7]hcountd2;
   wire hsync;
   wire hsync_out;
   wire hsyncd1;
@@ -146,6 +165,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_vidsel
   wire [0:0]vcount;
   wire [10:10]vcountd1;
   wire [10:10]vcountd2;
+  wire [0:0]vga_addr;
   wire vga_color;
   wire vga_valid;
   wire vga_vsync;
@@ -171,13 +191,21 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_vidsel
         .D(blankd1),
         .Q(blankd2),
         .R(1'b0));
-  LUT4 #(
-    .INIT(16'h0100)) 
-    \color[23]_i_1 
+  LUT6 #(
+    .INIT(64'h0000000011111114)) 
+    color2
        (.I0(vcountd2),
-        .I1(hcountd2[11]),
-        .I2(hcountd2[10]),
-        .I3(vga_color),
+        .I1(hcountd2[10]),
+        .I2(hcountd2[9]),
+        .I3(hcountd2[8]),
+        .I4(hcountd2[7]),
+        .I5(hcountd2[11]),
+        .O(color2__0));
+  LUT2 #(
+    .INIT(4'h8)) 
+    \color[23]_i_1 
+       (.I0(color2__0),
+        .I1(vga_color),
         .O(\color[23]_i_1_n_0 ));
   FDRE \color_reg[23] 
        (.C(vclock),
@@ -188,14 +216,32 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_vidsel
   FDRE \hcountd1_reg[10] 
        (.C(vclock),
         .CE(1'b1),
-        .D(hcount[0]),
+        .D(hcount[3]),
         .Q(hcountd1[10]),
         .R(1'b0));
   FDRE \hcountd1_reg[11] 
        (.C(vclock),
         .CE(1'b1),
-        .D(hcount[1]),
+        .D(hcount[4]),
         .Q(hcountd1[11]),
+        .R(1'b0));
+  FDRE \hcountd1_reg[7] 
+       (.C(vclock),
+        .CE(1'b1),
+        .D(hcount[0]),
+        .Q(hcountd1[7]),
+        .R(1'b0));
+  FDRE \hcountd1_reg[8] 
+       (.C(vclock),
+        .CE(1'b1),
+        .D(hcount[1]),
+        .Q(hcountd1[8]),
+        .R(1'b0));
+  FDRE \hcountd1_reg[9] 
+       (.C(vclock),
+        .CE(1'b1),
+        .D(hcount[2]),
+        .Q(hcountd1[9]),
         .R(1'b0));
   FDRE \hcountd2_reg[10] 
        (.C(vclock),
@@ -208,6 +254,24 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_vidsel
         .CE(1'b1),
         .D(hcountd1[11]),
         .Q(hcountd2[11]),
+        .R(1'b0));
+  FDRE \hcountd2_reg[7] 
+       (.C(vclock),
+        .CE(1'b1),
+        .D(hcountd1[7]),
+        .Q(hcountd2[7]),
+        .R(1'b0));
+  FDRE \hcountd2_reg[8] 
+       (.C(vclock),
+        .CE(1'b1),
+        .D(hcountd1[8]),
+        .Q(hcountd2[8]),
+        .R(1'b0));
+  FDRE \hcountd2_reg[9] 
+       (.C(vclock),
+        .CE(1'b1),
+        .D(hcountd1[9]),
+        .Q(hcountd2[9]),
         .R(1'b0));
   FDRE hsync_out_reg
        (.C(vclock),
@@ -227,6 +291,11 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_vidsel
         .D(hsyncd1),
         .Q(hsyncd2),
         .R(1'b0));
+  LUT1 #(
+    .INIT(2'h1)) 
+    tmphcount
+       (.I0(hcount[0]),
+        .O(vga_addr));
   FDRE \vcountd1_reg[10] 
        (.C(vclock),
         .CE(1'b1),
@@ -239,12 +308,15 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_vidsel
         .D(vcountd1),
         .Q(vcountd2),
         .R(1'b0));
-  LUT3 #(
-    .INIT(8'h01)) 
+  LUT6 #(
+    .INIT(64'h0000000011111114)) 
     vga_valid__0
-       (.I0(hcount[0]),
-        .I1(hcount[1]),
-        .I2(vcount),
+       (.I0(vcount),
+        .I1(hcount[3]),
+        .I2(hcount[2]),
+        .I3(hcount[1]),
+        .I4(hcount[0]),
+        .I5(hcount[4]),
         .O(vga_valid));
   FDRE vsync_out_reg
        (.C(vclock),

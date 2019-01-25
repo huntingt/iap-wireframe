@@ -44,15 +44,15 @@ endmodule
 `timescale 1ns / 1ps
 module gslice(input [23:0] xymc_tdata, input xymc_tvalid, output xymc_tready,
         input xymc_aresetn, xymc_aclk,
-        input pixel_vsync, output pixel_color, pixel_valid, pixel_buffer_sel, pixel_clk, output [17:0] pixel_addr);
+        input pixel_vsync, output pixel_color, pixel_valid, pixel_buffer_sel, pixel_clk, output [19:0] pixel_addr);
     assign pixel_clk = xymc_aclk;
-    graphics g(.x(xymc_tdata[8:0]), .y(xymc_tdata[17:9]), .mode(xymc_tdata[19:18]), .color(xymc_tdata[20:20]), .ready(xymc_tready), .enable(xymc_tvalid),
+    graphics g(.x(xymc_tdata[9:0]), .y(xymc_tdata[19:10]), .mode(xymc_tdata[21:20]), .color(xymc_tdata[22:22]), .ready(xymc_tready), .enable(xymc_tvalid),
         .clk(xymc_aclk), .vsync(pixel_vsync), .data(pixel_color), .writing(pixel_valid), .buffer_sel(pixel_buffer_sel), .address(pixel_addr));
         
 endmodule
 
 `timescale 1ns / 1ps
-module graphics#(parameter width=9)(input [width-1:0] x, y, input [1:0] mode,
+module graphics#(parameter width=10)(input [width-1:0] x, y, input [1:0] mode,
         input color, enable, clk, vsync,
         output reg [2*width-1:0] address, output ready, output reg writing, data, buffer_sel);        
     

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1548366628">
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1548373664">
   <File Type="VDS-TIMING-PB" Name="mmap_wrapper_timing_summary_synth.pb"/>
   <File Type="VDS-TIMINGSUMMARY" Name="mmap_wrapper_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="mmap_wrapper.dcp"/>
@@ -18,14 +18,14 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/graphics.v">
+    <File Path="$PSRCDIR/sources_1/new/dim.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/dim.v">
+    <File Path="$PSRCDIR/sources_1/new/graphics.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -88,13 +88,12 @@
     <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
     <Step Id="synth_design"/>
   </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_videogen_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_xymc_packager_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_dim_convert_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_cube_test_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="mmap_sparse_matrix_provid_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_vidsel_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="mmap_videogen_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="mmap_gslice_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_sparse_matrix_provid_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_div_gen_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_div_gen_1_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_blk_mem_gen_0_1"/>
@@ -102,5 +101,6 @@
   <BlockFileSet Type="BlockSrcs" Name="mmap_buffer_mux_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_clk_wiz_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_rgb2dvi_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="mmap_gslice_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="mmap_processing_system7_0_0"/>
 </GenRun>

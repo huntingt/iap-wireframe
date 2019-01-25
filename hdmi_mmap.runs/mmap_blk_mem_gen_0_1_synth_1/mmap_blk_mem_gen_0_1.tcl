@@ -33,10 +33,14 @@ set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part tul.com.tw:pynq-z2:part0:1.0 [current_project]
 set_property ip_repo_paths {
-  /home/huntingt/repos/ip_repo/point_decompression_1.0
+  /home/huntingt/repos/ip_repo/sparse_matrix_provider_1.0
+  /home/huntingt/repos/ip_repo/matrix_provider_1.0
+  /home/huntingt/repos/PYNQ
+  /home/huntingt/repos/ip_repo/myip_1.0
   /home/huntingt/repos/ip_repo/3d_to_2d_converter_1.0
   /home/huntingt/repos/ip_repo/simple_video_timer_1.0
-  /home/huntingt/repos/PYNQ
+  /home/huntingt/repos/ip_repo/point_decompression_1.0
+  /home/huntingt/repos/ip_repo
 } [current_project]
 update_ip_catalog
 set_property ip_output_repo /home/huntingt/repos/hdmi_mmap/hdmi_mmap.cache/ip [current_project]

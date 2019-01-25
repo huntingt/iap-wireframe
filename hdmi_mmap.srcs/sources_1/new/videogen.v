@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
-module buffer_mux(input pixel_clk, pixel_color, pixel_valid, pixel_buffer_sel, input [17:0] pixel_addr, output pixel_vsync,
+module buffer_mux(input pixel_clk, pixel_color, pixel_valid, pixel_buffer_sel, input [19:0] pixel_addr, output pixel_vsync,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0a ADDR" *)
-        output [17:0] buffer_0_addra,
+        output [19:0] buffer_0_addra,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0a CLK" *)
         output buffer_0_clka,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0a DIN" *)
@@ -14,7 +14,7 @@ module buffer_mux(input pixel_clk, pixel_color, pixel_valid, pixel_buffer_sel, i
         output buffer_0_rsta,
         
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0b ADDR" *)
-        output [17:0] buffer_0_addrb,
+        output [19:0] buffer_0_addrb,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0b CLK" *)
         output buffer_0_clkb,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_0b DOUT" *)
@@ -25,7 +25,7 @@ module buffer_mux(input pixel_clk, pixel_color, pixel_valid, pixel_buffer_sel, i
         output buffer_0_rstb,
         
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1a ADDR" *)
-        output [17:0] buffer_1_addra,
+        output [19:0] buffer_1_addra,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1a CLK" *)
         output buffer_1_clka,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1a DIN" *)
@@ -38,7 +38,7 @@ module buffer_mux(input pixel_clk, pixel_color, pixel_valid, pixel_buffer_sel, i
         output buffer_1_rsta,
         
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1b ADDR" *)
-        output [17:0] buffer_1_addrb,
+        output [19:0] buffer_1_addrb,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1b CLK" *)
         output buffer_1_clkb,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1b DOUT" *)
@@ -47,7 +47,7 @@ module buffer_mux(input pixel_clk, pixel_color, pixel_valid, pixel_buffer_sel, i
         output buffer_1_enb,
         (* X_INTERFACE_INFO = "xilinx.com:interface:bram_rtl:1.0 buffer_1b RST" *)
         output buffer_1_rstb,
-        input vga_clk, input [17:0] vga_addr, output vga_color, input vga_valid, vga_vsync);
+        input vga_clk, input [19:0] vga_addr, output vga_color, input vga_valid, vga_vsync);
     
     assign pixel_vsync = vga_vsync;
     
@@ -129,12 +129,13 @@ module vidsel(
             input hsync, vsync, blank,
             output reg [23:0] color,
             output reg hsync_out, vsync_out, blank_out,
-            output [17:0] vga_addr, input vga_color, output vga_clk, vga_valid, vga_vsync);
-            
-    assign vga_addr = {vcount[9:1],hcount[9:1]};
+            output [19:0] vga_addr, input vga_color, output vga_clk, vga_valid, vga_vsync);
+         
+    wire [11:0] tmphcount = hcount - 128;
+    assign vga_addr = {vcount[9:0],tmphcount[9:0]};
     assign vga_clk = vclock;
     assign vga_vsync = vsync_out;
-    assign vga_valid = (hcount < 1024) && (vcount < 1024);
+    assign vga_valid = hcount >= 128 && hcount < 1152 && vcount < 1024;
     
     reg hsyncd1, vsyncd1, blankd1, hsyncd2, vsyncd2, blankd2;
     
@@ -158,6 +159,6 @@ module vidsel(
         vsync_out <= vsyncd2;
         blank_out <= blankd2;
         
-        color <= (hcountd2 < 1024) & (vcountd2 < 1024) ? {24{vga_color}} : {3{8'b00000000}};
+        color <= (hcountd2 >= 128 && hcountd2 < 1152 && vcountd2 < 1024) ? {24{vga_color}} : {3{8'b00000000}};
     end
 endmodule

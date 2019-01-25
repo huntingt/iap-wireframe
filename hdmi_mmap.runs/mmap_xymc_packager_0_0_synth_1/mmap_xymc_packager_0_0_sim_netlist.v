@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-// Date        : Thu Jan 24 16:51:49 2019
+// Date        : Thu Jan 24 18:08:52 2019
 // Host        : inyo running 64-bit Pop!_OS 18.10
 // Command     : write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
 //               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ mmap_xymc_packager_0_0_sim_netlist.v
@@ -47,7 +47,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
   wire x_tlast;
   wire x_tready;
   wire x_tvalid;
-  wire [20:0]\^xymc_tdata ;
+  wire [22:0]\^xymc_tdata ;
   wire xymc_tready;
   wire xymc_tvalid;
   wire [47:0]y_tdata;
@@ -55,15 +55,13 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
   wire y_tvalid;
 
   assign xymc_tdata[23] = \<const0> ;
-  assign xymc_tdata[22] = \<const0> ;
-  assign xymc_tdata[21] = \<const0> ;
-  assign xymc_tdata[20:0] = \^xymc_tdata [20:0];
+  assign xymc_tdata[22:0] = \^xymc_tdata [22:0];
   assign y_tready = x_tready;
   GND GND
        (.G(\<const0> ));
   decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager inst
        (.aclk(aclk),
-        .x_tdata({x_tdata[47],x_tdata[31:24]}),
+        .x_tdata({x_tdata[47],x_tdata[31:23]}),
         .x_tlast(x_tlast),
         .x_tready(x_tready),
         .x_tvalid(x_tvalid),
@@ -87,13 +85,13 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
     y_tvalid,
     x_tvalid,
     xymc_tready);
-  output [20:0]xymc_tdata;
+  output [22:0]xymc_tdata;
   output xymc_tvalid;
   output x_tready;
   input y_tlast;
   input x_tlast;
   input aclk;
-  input [8:0]x_tdata;
+  input [9:0]x_tdata;
   input [47:0]y_tdata;
   input y_tvalid;
   input x_tvalid;
@@ -106,11 +104,11 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   wire \FSM_onehot_i_index_reg_n_0_[1] ;
   wire \FSM_onehot_i_index_reg_n_0_[2] ;
   wire aclk;
-  wire [8:0]x_tdata;
+  wire [9:0]x_tdata;
   wire x_tlast;
   wire x_tready;
   wire x_tvalid;
-  wire [20:0]xymc_tdata;
+  wire [22:0]xymc_tdata;
   wire \xymc_tdata[0]_i_1_n_0 ;
   wire \xymc_tdata[10]_i_1_n_0 ;
   wire \xymc_tdata[11]_i_1_n_0 ;
@@ -124,7 +122,9 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   wire \xymc_tdata[19]_i_1_n_0 ;
   wire \xymc_tdata[1]_i_1_n_0 ;
   wire \xymc_tdata[20]_i_1_n_0 ;
-  wire \xymc_tdata[20]_i_2_n_0 ;
+  wire \xymc_tdata[21]_i_1_n_0 ;
+  wire \xymc_tdata[22]_i_1_n_0 ;
+  wire \xymc_tdata[22]_i_2_n_0 ;
   wire \xymc_tdata[2]_i_1_n_0 ;
   wire \xymc_tdata[3]_i_1_n_0 ;
   wire \xymc_tdata[4]_i_1_n_0 ;
@@ -140,7 +140,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   wire [47:0]y_tdata;
   wire y_tlast;
   wire y_tvalid;
-  wire [47:24]yn;
+  wire [47:23]yn;
   wire yn_carry__0_i_1_n_0;
   wire yn_carry__0_i_2_n_0;
   wire yn_carry__0_i_3_n_0;
@@ -242,7 +242,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   wire [2:0]NLW_yn_carry__10_O_UNCONNECTED;
   wire [3:0]NLW_yn_carry__2_O_UNCONNECTED;
   wire [3:0]NLW_yn_carry__3_O_UNCONNECTED;
-  wire [3:0]NLW_yn_carry__4_O_UNCONNECTED;
+  wire [2:0]NLW_yn_carry__4_O_UNCONNECTED;
   wire [3:0]NLW_yn_carry__7_O_UNCONNECTED;
   wire [3:0]NLW_yn_carry__8_O_UNCONNECTED;
   wire [3:0]NLW_yn_carry__9_O_UNCONNECTED;
@@ -276,7 +276,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
     .INIT(1'b1)) 
     \FSM_onehot_i_index_reg[0] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\FSM_onehot_i_index[0]_i_1_n_0 ),
         .Q(\FSM_onehot_i_index_reg_n_0_[0] ),
         .R(1'b0));
@@ -285,7 +285,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
     .INIT(1'b0)) 
     \FSM_onehot_i_index_reg[1] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\FSM_onehot_i_index[1]_i_1_n_0 ),
         .Q(\FSM_onehot_i_index_reg_n_0_[1] ),
         .R(1'b0));
@@ -294,7 +294,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
     .INIT(1'b0)) 
     \FSM_onehot_i_index_reg[2] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\FSM_onehot_i_index[2]_i_1_n_0 ),
         .Q(\FSM_onehot_i_index_reg_n_0_[2] ),
         .R(1'b0));
@@ -308,10 +308,11 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
         .O(\xymc_tdata[0]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair0" *) 
   LUT5 #(
     .INIT(32'h2A002AFF)) 
     \xymc_tdata[10]_i_1 
-       (.I0(yn[25]),
+       (.I0(yn[23]),
         .I1(y_tlast),
         .I2(x_tlast),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
@@ -320,7 +321,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   LUT5 #(
     .INIT(32'h2A002AFF)) 
     \xymc_tdata[11]_i_1 
-       (.I0(yn[26]),
+       (.I0(yn[24]),
         .I1(y_tlast),
         .I2(x_tlast),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
@@ -329,7 +330,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   LUT5 #(
     .INIT(32'h2A002AFF)) 
     \xymc_tdata[12]_i_1 
-       (.I0(yn[27]),
+       (.I0(yn[25]),
         .I1(y_tlast),
         .I2(x_tlast),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
@@ -338,7 +339,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   LUT5 #(
     .INIT(32'h2A002AFF)) 
     \xymc_tdata[13]_i_1 
-       (.I0(yn[28]),
+       (.I0(yn[26]),
         .I1(y_tlast),
         .I2(x_tlast),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
@@ -347,7 +348,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   LUT5 #(
     .INIT(32'h2A002AFF)) 
     \xymc_tdata[14]_i_1 
-       (.I0(yn[29]),
+       (.I0(yn[27]),
         .I1(y_tlast),
         .I2(x_tlast),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
@@ -356,7 +357,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   LUT5 #(
     .INIT(32'h2A002AFF)) 
     \xymc_tdata[15]_i_1 
-       (.I0(yn[30]),
+       (.I0(yn[28]),
         .I1(y_tlast),
         .I2(x_tlast),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
@@ -365,35 +366,38 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
   LUT5 #(
     .INIT(32'h2A002AFF)) 
     \xymc_tdata[16]_i_1 
-       (.I0(yn[31]),
+       (.I0(yn[29]),
         .I1(y_tlast),
         .I2(x_tlast),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
         .O(\xymc_tdata[16]_i_1_n_0 ));
   LUT5 #(
-    .INIT(32'h070007FF)) 
+    .INIT(32'h2A002AFF)) 
     \xymc_tdata[17]_i_1 
+       (.I0(yn[30]),
+        .I1(y_tlast),
+        .I2(x_tlast),
+        .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
+        .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
+        .O(\xymc_tdata[17]_i_1_n_0 ));
+  LUT5 #(
+    .INIT(32'h2A002AFF)) 
+    \xymc_tdata[18]_i_1 
+       (.I0(yn[31]),
+        .I1(y_tlast),
+        .I2(x_tlast),
+        .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
+        .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
+        .O(\xymc_tdata[18]_i_1_n_0 ));
+  LUT5 #(
+    .INIT(32'h070007FF)) 
+    \xymc_tdata[19]_i_1 
        (.I0(y_tlast),
         .I1(x_tlast),
         .I2(yn[47]),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
-        .O(\xymc_tdata[17]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    \xymc_tdata[18]_i_1 
-       (.I0(\FSM_onehot_i_index_reg_n_0_[0] ),
-        .I1(x_tlast),
-        .O(\xymc_tdata[18]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
-  LUT3 #(
-    .INIT(8'h8B)) 
-    \xymc_tdata[19]_i_1 
-       (.I0(y_tlast),
-        .I1(\FSM_onehot_i_index_reg_n_0_[0] ),
-        .I2(\FSM_onehot_i_index_reg_n_0_[1] ),
         .O(\xymc_tdata[19]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair4" *) 
   LUT5 #(
@@ -405,24 +409,39 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
         .O(\xymc_tdata[1]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    \xymc_tdata[20]_i_1 
+       (.I0(\FSM_onehot_i_index_reg_n_0_[0] ),
+        .I1(x_tlast),
+        .O(\xymc_tdata[20]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  LUT3 #(
+    .INIT(8'h8B)) 
+    \xymc_tdata[21]_i_1 
+       (.I0(y_tlast),
+        .I1(\FSM_onehot_i_index_reg_n_0_[0] ),
+        .I2(\FSM_onehot_i_index_reg_n_0_[1] ),
+        .O(\xymc_tdata[21]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'hAAA800A800A800A8)) 
-    \xymc_tdata[20]_i_1 
+    \xymc_tdata[22]_i_1 
        (.I0(xymc_tready),
         .I1(\FSM_onehot_i_index_reg_n_0_[2] ),
         .I2(\FSM_onehot_i_index_reg_n_0_[1] ),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(y_tvalid),
         .I5(x_tvalid),
-        .O(\xymc_tdata[20]_i_1_n_0 ));
+        .O(\xymc_tdata[22]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT3 #(
     .INIT(8'h2A)) 
-    \xymc_tdata[20]_i_2 
+    \xymc_tdata[22]_i_2 
        (.I0(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I1(y_tlast),
         .I2(x_tlast),
-        .O(\xymc_tdata[20]_i_2_n_0 ));
+        .O(\xymc_tdata[22]_i_2_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair5" *) 
   LUT5 #(
     .INIT(32'h2A002AFF)) 
@@ -460,7 +479,6 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
         .O(\xymc_tdata[5]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT5 #(
     .INIT(32'h2A002AFF)) 
     \xymc_tdata[6]_i_1 
@@ -470,6 +488,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
         .O(\xymc_tdata[6]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT5 #(
     .INIT(32'h2A002AFF)) 
     \xymc_tdata[7]_i_1 
@@ -479,149 +498,160 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
         .O(\xymc_tdata[7]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT5 #(
-    .INIT(32'h070007FF)) 
+    .INIT(32'h2A002AFF)) 
     \xymc_tdata[8]_i_1 
-       (.I0(y_tlast),
-        .I1(x_tlast),
-        .I2(x_tdata[8]),
+       (.I0(x_tdata[8]),
+        .I1(y_tlast),
+        .I2(x_tlast),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
         .O(\xymc_tdata[8]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT5 #(
-    .INIT(32'h2A002AFF)) 
+    .INIT(32'h070007FF)) 
     \xymc_tdata[9]_i_1 
-       (.I0(yn[24]),
-        .I1(y_tlast),
-        .I2(x_tlast),
+       (.I0(y_tlast),
+        .I1(x_tlast),
+        .I2(x_tdata[9]),
         .I3(\FSM_onehot_i_index_reg_n_0_[0] ),
         .I4(\FSM_onehot_i_index_reg_n_0_[1] ),
         .O(\xymc_tdata[9]_i_1_n_0 ));
   FDRE \xymc_tdata_reg[0] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[0]_i_1_n_0 ),
         .Q(xymc_tdata[0]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[10] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[10]_i_1_n_0 ),
         .Q(xymc_tdata[10]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[11] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[11]_i_1_n_0 ),
         .Q(xymc_tdata[11]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[12] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[12]_i_1_n_0 ),
         .Q(xymc_tdata[12]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[13] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[13]_i_1_n_0 ),
         .Q(xymc_tdata[13]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[14] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[14]_i_1_n_0 ),
         .Q(xymc_tdata[14]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[15] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[15]_i_1_n_0 ),
         .Q(xymc_tdata[15]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[16] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[16]_i_1_n_0 ),
         .Q(xymc_tdata[16]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[17] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[17]_i_1_n_0 ),
         .Q(xymc_tdata[17]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[18] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[18]_i_1_n_0 ),
         .Q(xymc_tdata[18]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[19] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[19]_i_1_n_0 ),
         .Q(xymc_tdata[19]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[1] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[1]_i_1_n_0 ),
         .Q(xymc_tdata[1]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[20] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
-        .D(\xymc_tdata[20]_i_2_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
+        .D(\xymc_tdata[20]_i_1_n_0 ),
         .Q(xymc_tdata[20]),
+        .R(1'b0));
+  FDRE \xymc_tdata_reg[21] 
+       (.C(aclk),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
+        .D(\xymc_tdata[21]_i_1_n_0 ),
+        .Q(xymc_tdata[21]),
+        .R(1'b0));
+  FDRE \xymc_tdata_reg[22] 
+       (.C(aclk),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
+        .D(\xymc_tdata[22]_i_2_n_0 ),
+        .Q(xymc_tdata[22]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[2] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[2]_i_1_n_0 ),
         .Q(xymc_tdata[2]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[3] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[3]_i_1_n_0 ),
         .Q(xymc_tdata[3]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[4] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[4]_i_1_n_0 ),
         .Q(xymc_tdata[4]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[5] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[5]_i_1_n_0 ),
         .Q(xymc_tdata[5]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[6] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[6]_i_1_n_0 ),
         .Q(xymc_tdata[6]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[7] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[7]_i_1_n_0 ),
         .Q(xymc_tdata[7]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[8] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[8]_i_1_n_0 ),
         .Q(xymc_tdata[8]),
         .R(1'b0));
   FDRE \xymc_tdata_reg[9] 
        (.C(aclk),
-        .CE(\xymc_tdata[20]_i_1_n_0 ),
+        .CE(\xymc_tdata[22]_i_1_n_0 ),
         .D(\xymc_tdata[9]_i_1_n_0 ),
         .Q(xymc_tdata[9]),
         .R(1'b0));
@@ -803,7 +833,7 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_xymc_packager
         .CO({yn_carry__4_n_0,yn_carry__4_n_1,yn_carry__4_n_2,yn_carry__4_n_3}),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0}),
-        .O(NLW_yn_carry__4_O_UNCONNECTED[3:0]),
+        .O({yn[23],NLW_yn_carry__4_O_UNCONNECTED[2:0]}),
         .S({yn_carry__4_i_1_n_0,yn_carry__4_i_2_n_0,yn_carry__4_i_3_n_0,yn_carry__4_i_4_n_0}));
   LUT1 #(
     .INIT(2'h1)) 

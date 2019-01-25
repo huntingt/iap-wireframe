@@ -2,8 +2,8 @@
 # Vivado v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Start of session at: Mon Jan 21 11:09:41 2019
-# Process ID: 11378
+# Start of session at: Thu Jan 24 17:44:25 2019
+# Process ID: 13259
 # Current directory: /home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/mmap_blk_mem_gen_0_1_synth_1
 # Command line: vivado -log mmap_blk_mem_gen_0_1.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source mmap_blk_mem_gen_0_1.tcl
 # Log file: /home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/mmap_blk_mem_gen_0_1_synth_1/mmap_blk_mem_gen_0_1.vds
@@ -11,10 +11,14 @@
 #-----------------------------------------------------------
 source mmap_blk_mem_gen_0_1.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/huntingt/repos/ip_repo/point_decompression_1.0'.
-INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/huntingt/repos/ip_repo/3d_to_2d_converter_1.0'.
-INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/huntingt/repos/ip_repo/simple_video_timer_1.0'.
+WARNING: [IP_Flow 19-3685] Ignored loading user repository '/home/huntingt/repos/ip_repo/sparse_matrix_provider_1.0'. The path is contained within another repository.
+WARNING: [IP_Flow 19-3685] Ignored loading user repository '/home/huntingt/repos/ip_repo/matrix_provider_1.0'. The path is contained within another repository.
 INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/huntingt/repos/PYNQ'.
+WARNING: [IP_Flow 19-3685] Ignored loading user repository '/home/huntingt/repos/ip_repo/myip_1.0'. The path is contained within another repository.
+WARNING: [IP_Flow 19-3685] Ignored loading user repository '/home/huntingt/repos/ip_repo/3d_to_2d_converter_1.0'. The path is contained within another repository.
+WARNING: [IP_Flow 19-3685] Ignored loading user repository '/home/huntingt/repos/ip_repo/simple_video_timer_1.0'. The path is contained within another repository.
+WARNING: [IP_Flow 19-3685] Ignored loading user repository '/home/huntingt/repos/ip_repo/point_decompression_1.0'. The path is contained within another repository.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/huntingt/repos/ip_repo'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/huntingt/tools/xilinx/Vivado/2018.3/data/ip'.
-INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP mmap_blk_mem_gen_0_1, cache-ID = 49506613cbe88f17.
-INFO: [Common 17-206] Exiting Vivado at Mon Jan 21 11:09:53 2019...
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP mmap_blk_mem_gen_0_1, cache-ID = 8a5c61aed5b9c614.
+INFO: [Common 17-206] Exiting Vivado at Thu Jan 24 17:44:37 2019...

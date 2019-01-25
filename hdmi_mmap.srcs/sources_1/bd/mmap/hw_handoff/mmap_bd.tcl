@@ -209,13 +209,13 @@ proc create_hier_cell_graphics_pipeline { parentCell nameHier } {
    CONFIG.latency {39} \
  ] $div_gen_1
 
-  # Create instance: gslice, and set properties
+  # Create instance: gslice_0, and set properties
   set block_name gslice
-  set block_cell_name gslice
-  if { [catch {set gslice [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+  set block_cell_name gslice_0
+  if { [catch {set gslice_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
      catch {common::send_msg_id "BD_TCL-105" "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
-   } elseif { $gslice eq "" } {
+   } elseif { $gslice_0 eq "" } {
      catch {common::send_msg_id "BD_TCL-106" "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
@@ -240,12 +240,12 @@ proc create_hier_cell_graphics_pipeline { parentCell nameHier } {
   connect_bd_intf_net -intf_net dim_convert_0_y [get_bd_intf_pins dim_convert_0/y] [get_bd_intf_pins div_gen_0/S_AXIS_DIVIDEND]
   connect_bd_intf_net -intf_net div_gen_0_M_AXIS_DOUT [get_bd_intf_pins div_gen_0/M_AXIS_DOUT] [get_bd_intf_pins xymc_packager_0/y]
   connect_bd_intf_net -intf_net div_gen_1_M_AXIS_DOUT [get_bd_intf_pins div_gen_1/M_AXIS_DOUT] [get_bd_intf_pins xymc_packager_0/x]
-  connect_bd_intf_net -intf_net gslice_pixel [get_bd_intf_pins pixel] [get_bd_intf_pins gslice/pixel]
-  connect_bd_intf_net -intf_net xymc_packager_0_xymc [get_bd_intf_pins gslice/xymc] [get_bd_intf_pins xymc_packager_0/xymc]
+  connect_bd_intf_net -intf_net gslice_0_pixel [get_bd_intf_pins pixel] [get_bd_intf_pins gslice_0/pixel]
+  connect_bd_intf_net -intf_net xymc_packager_0_xymc [get_bd_intf_pins gslice_0/xymc] [get_bd_intf_pins xymc_packager_0/xymc]
 
   # Create port connections
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins xymc_aclk] [get_bd_pins dim_convert_0/aclk] [get_bd_pins div_gen_0/aclk] [get_bd_pins div_gen_1/aclk] [get_bd_pins gslice/xymc_aclk] [get_bd_pins xymc_packager_0/aclk]
-  connect_bd_net -net rst_ps7_0_100M_peripheral_aresetn [get_bd_pins xymc_aresetn] [get_bd_pins gslice/xymc_aresetn]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins xymc_aclk] [get_bd_pins dim_convert_0/aclk] [get_bd_pins div_gen_0/aclk] [get_bd_pins div_gen_1/aclk] [get_bd_pins gslice_0/xymc_aclk] [get_bd_pins xymc_packager_0/aclk]
+  connect_bd_net -net xymc_aresetn_1 [get_bd_pins xymc_aresetn] [get_bd_pins gslice_0/xymc_aresetn]
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -317,7 +317,7 @@ proc create_hier_cell_display { parentCell nameHier } {
    CONFIG.Remaining_Memory_Locations {0} \
    CONFIG.Use_Byte_Write_Enable {false} \
    CONFIG.Use_RSTA_Pin {false} \
-   CONFIG.Write_Depth_A {262144} \
+   CONFIG.Write_Depth_A {1048576} \
    CONFIG.Write_Width_A {1} \
    CONFIG.Write_Width_B {1} \
    CONFIG.use_bram_block {Stand_Alone} \
@@ -340,7 +340,7 @@ proc create_hier_cell_display { parentCell nameHier } {
    CONFIG.Register_PortB_Output_of_Memory_Primitives {true} \
    CONFIG.Use_Byte_Write_Enable {false} \
    CONFIG.Use_RSTA_Pin {false} \
-   CONFIG.Write_Depth_A {262144} \
+   CONFIG.Write_Depth_A {1048576} \
    CONFIG.Write_Width_A {1} \
    CONFIG.Write_Width_B {1} \
    CONFIG.use_bram_block {Stand_Alone} \

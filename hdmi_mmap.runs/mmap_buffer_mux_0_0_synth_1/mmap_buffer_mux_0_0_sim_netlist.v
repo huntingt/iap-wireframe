@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-// Date        : Wed Jan 23 19:45:02 2019
+// Date        : Thu Jan 24 18:49:00 2019
 // Host        : inyo running 64-bit Pop!_OS 18.10
 // Command     : write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix
 //               decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ mmap_buffer_mux_0_0_sim_netlist.v
@@ -53,32 +53,32 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel color" *) input pixel_color;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel valid" *) input pixel_valid;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel buffer_sel" *) input pixel_buffer_sel;
-  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel addr" *) input [17:0]pixel_addr;
+  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel addr" *) input [19:0]pixel_addr;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel vsync" *) output pixel_vsync;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a ADDR" *) output [17:0]buffer_0_addra;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a ADDR" *) output [19:0]buffer_0_addra;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a CLK" *) output buffer_0_clka;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a DIN" *) output buffer_0_dina;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a EN" *) output buffer_0_ena;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a WE" *) output buffer_0_wea;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME buffer_0a, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER, READ_LATENCY 1" *) output buffer_0_rsta;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b ADDR" *) output [17:0]buffer_0_addrb;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b ADDR" *) output [19:0]buffer_0_addrb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b CLK" *) output buffer_0_clkb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b DOUT" *) input buffer_0_doutb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b EN" *) output buffer_0_enb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME buffer_0b, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER, READ_LATENCY 1" *) output buffer_0_rstb;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a ADDR" *) output [17:0]buffer_1_addra;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a ADDR" *) output [19:0]buffer_1_addra;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a CLK" *) output buffer_1_clka;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a DIN" *) output buffer_1_dina;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a EN" *) output buffer_1_ena;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a WE" *) output buffer_1_wea;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME buffer_1a, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER, READ_LATENCY 1" *) output buffer_1_rsta;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1b ADDR" *) output [17:0]buffer_1_addrb;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1b ADDR" *) output [19:0]buffer_1_addrb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1b CLK" *) output buffer_1_clkb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1b DOUT" *) input buffer_1_doutb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1b EN" *) output buffer_1_enb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1b RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME buffer_1b, MEM_SIZE 8192, MEM_WIDTH 32, MEM_ECC NONE, MASTER_TYPE OTHER, READ_LATENCY 1" *) output buffer_1_rstb;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga clk" *) input vga_clk;
-  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga addr" *) input [17:0]vga_addr;
+  (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga addr" *) input [19:0]vga_addr;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga color" *) output vga_color;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga valid" *) input vga_valid;
   (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga vsync" *) input vga_vsync;
@@ -87,18 +87,18 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
   wire buffer_0_doutb;
   wire buffer_1_doutb;
   wire buffer_1_enb;
-  wire [17:0]pixel_addr;
+  wire [19:0]pixel_addr;
   wire pixel_buffer_sel;
   wire pixel_clk;
   wire pixel_color;
   wire pixel_valid;
-  wire [17:0]vga_addr;
+  wire [19:0]vga_addr;
   wire vga_clk;
   wire vga_color;
   wire vga_vsync;
 
-  assign buffer_0_addra[17:0] = pixel_addr;
-  assign buffer_0_addrb[17:0] = vga_addr;
+  assign buffer_0_addra[19:0] = pixel_addr;
+  assign buffer_0_addrb[19:0] = vga_addr;
   assign buffer_0_clka = pixel_clk;
   assign buffer_0_clkb = vga_clk;
   assign buffer_0_dina = pixel_color;
@@ -107,8 +107,8 @@ module decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix
   assign buffer_0_rsta = \<const0> ;
   assign buffer_0_rstb = \<const0> ;
   assign buffer_0_wea = buffer_1_enb;
-  assign buffer_1_addra[17:0] = pixel_addr;
-  assign buffer_1_addrb[17:0] = vga_addr;
+  assign buffer_1_addra[19:0] = pixel_addr;
+  assign buffer_1_addrb[19:0] = vga_addr;
   assign buffer_1_clka = pixel_clk;
   assign buffer_1_clkb = vga_clk;
   assign buffer_1_dina = pixel_color;

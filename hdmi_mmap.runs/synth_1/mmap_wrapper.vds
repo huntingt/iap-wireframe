@@ -2,8 +2,8 @@
 # Vivado v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Start of session at: Thu Jan 24 16:51:53 2019
-# Process ID: 496
+# Start of session at: Thu Jan 24 18:49:15 2019
+# Process ID: 32028
 # Current directory: /home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1
 # Command line: vivado -log mmap_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source mmap_wrapper.tcl
 # Log file: /home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/mmap_wrapper.vds
@@ -20,29 +20,29 @@ WARNING: [IP_Flow 19-3685] Ignored loading user repository '/home/huntingt/repos
 WARNING: [IP_Flow 19-3685] Ignored loading user repository '/home/huntingt/repos/ip_repo/point_decompression_1.0'. The path is contained within another repository.
 INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/huntingt/repos/ip_repo'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/huntingt/tools/xilinx/Vivado/2018.3/data/ip'.
-add_files: Time (s): cpu = 00:00:43 ; elapsed = 00:00:34 . Memory (MB): peak = 1553.023 ; gain = 192.094 ; free physical = 2665 ; free virtual = 14060
+add_files: Time (s): cpu = 00:00:44 ; elapsed = 00:00:32 . Memory (MB): peak = 1578.031 ; gain = 208.105 ; free physical = 2303 ; free virtual = 13578
 Command: synth_design -top mmap_wrapper -part xc7z020clg400-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 941 
+INFO: Helper process launched with PID 32382 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1553.023 ; gain = 0.000 ; free physical = 2558 ; free virtual = 13953
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1578.031 ; gain = 0.000 ; free physical = 2183 ; free virtual = 13451
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'mmap_wrapper' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/hdl/mmap_wrapper.v:12]
 INFO: [Synth 8-6157] synthesizing module 'mmap' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:335]
-INFO: [Synth 8-6157] synthesizing module 'mmap_clk_wiz_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_clk_wiz_0_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_clk_wiz_0' (1#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_clk_wiz_0_stub.v:5]
-INFO: [Synth 8-6157] synthesizing module 'mmap_cube_test_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_cube_test_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_cube_test_0_0' (2#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_cube_test_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_clk_wiz_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_clk_wiz_0' (1#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_clk_wiz_0_stub.v:5]
+INFO: [Synth 8-6157] synthesizing module 'mmap_cube_test_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_cube_test_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_cube_test_0_0' (2#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_cube_test_0_0_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'display_imp_SMLEIP' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:12]
-INFO: [Synth 8-6157] synthesizing module 'mmap_blk_mem_gen_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_blk_mem_gen_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_blk_mem_gen_0_0' (3#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_blk_mem_gen_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'mmap_blk_mem_gen_0_1' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_blk_mem_gen_0_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_blk_mem_gen_0_1' (4#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_blk_mem_gen_0_1_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'mmap_buffer_mux_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_buffer_mux_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_buffer_mux_0_0' (5#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_buffer_mux_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_blk_mem_gen_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_blk_mem_gen_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_blk_mem_gen_0_0' (3#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_blk_mem_gen_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_blk_mem_gen_0_1' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_blk_mem_gen_0_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_blk_mem_gen_0_1' (4#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_blk_mem_gen_0_1_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_buffer_mux_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_buffer_mux_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_buffer_mux_0_0' (5#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_buffer_mux_0_0_stub.v:6]
 WARNING: [Synth 8-350] instance 'buffer_mux_0' of module 'mmap_buffer_mux_0_0' requires 33 connections, but only 29 given [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:112]
 INFO: [Synth 8-6157] synthesizing module 'mmap_xlconstant_0_1' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_xlconstant_0_1/synth/mmap_xlconstant_0_1.v:57]
 INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_5_xlconstant' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/4649/hdl/xlconstant_v1_1_vl_rfs.v:23]
@@ -50,38 +50,38 @@ INFO: [Synth 8-6157] synthesizing module 'xlconstant_v1_1_5_xlconstant' [/home/h
 	Parameter CONST_WIDTH bound to: 1 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'xlconstant_v1_1_5_xlconstant' (6#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ipshared/4649/hdl/xlconstant_v1_1_vl_rfs.v:23]
 INFO: [Synth 8-6155] done synthesizing module 'mmap_xlconstant_0_1' (7#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_xlconstant_0_1/synth/mmap_xlconstant_0_1.v:57]
-INFO: [Synth 8-6157] synthesizing module 'mmap_rgb2dvi_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_rgb2dvi_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_rgb2dvi_0_0' (8#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_rgb2dvi_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'mmap_videogen_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_videogen_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_videogen_0_0' (9#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_videogen_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_rgb2dvi_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_rgb2dvi_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_rgb2dvi_0_0' (8#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_rgb2dvi_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_videogen_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_videogen_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_videogen_0_0' (9#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_videogen_0_0_stub.v:6]
 WARNING: [Synth 8-350] instance 'videogen' of module 'mmap_videogen_0_0' requires 7 connections, but only 6 given [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:155]
-INFO: [Synth 8-6157] synthesizing module 'mmap_vidsel_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_vidsel_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_vidsel_0_0' (10#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_vidsel_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_vidsel_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_vidsel_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_vidsel_0_0' (10#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_vidsel_0_0_stub.v:6]
 INFO: [Synth 8-6155] done synthesizing module 'display_imp_SMLEIP' (11#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:12]
 INFO: [Synth 8-6157] synthesizing module 'graphics_pipeline_imp_1BR0SRF' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:180]
-INFO: [Synth 8-6157] synthesizing module 'mmap_dim_convert_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_dim_convert_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_dim_convert_0_0' (12#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_dim_convert_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'mmap_div_gen_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_div_gen_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_div_gen_0_0' (13#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_div_gen_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'mmap_div_gen_1_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_div_gen_1_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_div_gen_1_0' (14#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_div_gen_1_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'mmap_gslice_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_gslice_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_gslice_0' (15#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_gslice_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'mmap_xymc_packager_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_xymc_packager_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_xymc_packager_0_0' (16#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_xymc_packager_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_dim_convert_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_dim_convert_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_dim_convert_0_0' (12#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_dim_convert_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_div_gen_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_div_gen_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_div_gen_0_0' (13#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_div_gen_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_div_gen_1_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_div_gen_1_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_div_gen_1_0' (14#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_div_gen_1_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_gslice_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_gslice_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_gslice_0_0' (15#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_gslice_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_xymc_packager_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_xymc_packager_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_xymc_packager_0_0' (16#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_xymc_packager_0_0_stub.v:6]
 INFO: [Synth 8-6155] done synthesizing module 'graphics_pipeline_imp_1BR0SRF' (17#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:180]
-INFO: [Synth 8-6157] synthesizing module 'mmap_sparse_matrix_provid_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_sparse_matrix_provid_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_sparse_matrix_provid_0_0' (18#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_sparse_matrix_provid_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'mmap_processing_system7_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_processing_system7_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_processing_system7_0_0' (19#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_processing_system7_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_sparse_matrix_provid_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_sparse_matrix_provid_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_sparse_matrix_provid_0_0' (18#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_sparse_matrix_provid_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_processing_system7_0_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_processing_system7_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_processing_system7_0_0' (19#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_processing_system7_0_0_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'mmap_ps7_0_axi_periph_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:687]
 INFO: [Synth 8-6157] synthesizing module 's00_couplers_imp_1DL44RN' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:1002]
-INFO: [Synth 8-6157] synthesizing module 'mmap_auto_pc_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_auto_pc_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_auto_pc_0' (20#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_auto_pc_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_auto_pc_0' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_auto_pc_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_auto_pc_0' (20#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_auto_pc_0_stub.v:6]
 INFO: [Synth 8-6155] done synthesizing module 's00_couplers_imp_1DL44RN' (21#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:1002]
 INFO: [Synth 8-6155] done synthesizing module 'mmap_ps7_0_axi_periph_0' (22#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:687]
-INFO: [Synth 8-6157] synthesizing module 'mmap_rst_ps7_0_100M_1' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_rst_ps7_0_100M_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'mmap_rst_ps7_0_100M_1' (23#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-496-inyo/realtime/mmap_rst_ps7_0_100M_1_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'mmap_rst_ps7_0_100M_1' [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_rst_ps7_0_100M_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'mmap_rst_ps7_0_100M_1' (23#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/.Xil/Vivado-32028-inyo/realtime/mmap_rst_ps7_0_100M_1_stub.v:6]
 WARNING: [Synth 8-350] instance 'rst_ps7_0_100M' of module 'mmap_rst_ps7_0_100M_1' requires 10 connections, but only 6 given [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:678]
 INFO: [Synth 8-6155] done synthesizing module 'mmap' (24#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/synth/mmap.v:335]
 INFO: [Synth 8-6155] done synthesizing module 'mmap_wrapper' (25#1) [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/hdl/mmap_wrapper.v:12]
@@ -90,7 +90,7 @@ WARNING: [Synth 8-3331] design s00_couplers_imp_1DL44RN has unconnected port M_A
 WARNING: [Synth 8-3331] design mmap_ps7_0_axi_periph_0 has unconnected port ACLK
 WARNING: [Synth 8-3331] design mmap_ps7_0_axi_periph_0 has unconnected port ARESETN
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1553.023 ; gain = 0.000 ; free physical = 2572 ; free virtual = 13967
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1578.031 ; gain = 0.000 ; free physical = 2199 ; free virtual = 13467
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -103,10 +103,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1553.023 ; gain = 0.000 ; free physical = 2571 ; free virtual = 13966
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1578.031 ; gain = 0.000 ; free physical = 2199 ; free virtual = 13467
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1553.023 ; gain = 0.000 ; free physical = 2571 ; free virtual = 13966
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1578.031 ; gain = 0.000 ; free physical = 2199 ; free virtual = 13467
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7z020clg400-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -131,8 +131,6 @@ Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mma
 Finished Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_rst_ps7_0_100M_1/mmap_rst_ps7_0_100M_1/mmap_rst_ps7_0_100M_3_in_context.xdc] for cell 'mmap_i/rst_ps7_0_100M'
 Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_buffer_mux_0_0/mmap_buffer_mux_0_0/mmap_buffer_mux_0_0_in_context.xdc] for cell 'mmap_i/display/buffer_mux_0'
 Finished Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_buffer_mux_0_0/mmap_buffer_mux_0_0/mmap_buffer_mux_0_0_in_context.xdc] for cell 'mmap_i/display/buffer_mux_0'
-Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_gslice_0_1/mmap_gslice_0/mmap_gslice_0_in_context.xdc] for cell 'mmap_i/graphics_pipeline/gslice'
-Finished Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_gslice_0_1/mmap_gslice_0/mmap_gslice_0_in_context.xdc] for cell 'mmap_i/graphics_pipeline/gslice'
 Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_dim_convert_0_0/mmap_dim_convert_0_0/mmap_dim_convert_0_0_in_context.xdc] for cell 'mmap_i/graphics_pipeline/dim_convert_0'
 Finished Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_dim_convert_0_0/mmap_dim_convert_0_0/mmap_dim_convert_0_0_in_context.xdc] for cell 'mmap_i/graphics_pipeline/dim_convert_0'
 Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_xymc_packager_0_0/mmap_xymc_packager_0_0/mmap_xymc_packager_0_0_in_context.xdc] for cell 'mmap_i/graphics_pipeline/xymc_packager_0'
@@ -145,6 +143,8 @@ Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mma
 Finished Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_cube_test_0_0/mmap_cube_test_0_0/mmap_cube_test_0_0_in_context.xdc] for cell 'mmap_i/cube_test_0'
 Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_sparse_matrix_provid_0_0/mmap_sparse_matrix_provid_0_0/mmap_sparse_matrix_provid_0_0_in_context.xdc] for cell 'mmap_i/matrix_provider'
 Finished Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_sparse_matrix_provid_0_0/mmap_sparse_matrix_provid_0_0/mmap_sparse_matrix_provid_0_0_in_context.xdc] for cell 'mmap_i/matrix_provider'
+Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_gslice_0_0/mmap_gslice_0_0/mmap_gslice_0_0_in_context.xdc] for cell 'mmap_i/graphics_pipeline/gslice_0'
+Finished Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_gslice_0_0/mmap_gslice_0_0/mmap_gslice_0_0_in_context.xdc] for cell 'mmap_i/graphics_pipeline/gslice_0'
 Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_auto_pc_0/mmap_auto_pc_0/mmap_auto_pc_0_in_context.xdc] for cell 'mmap_i/ps7_0_axi_periph/s00_couplers/auto_pc'
 Finished Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.srcs/sources_1/bd/mmap/ip/mmap_auto_pc_0/mmap_auto_pc_0/mmap_auto_pc_0_in_context.xdc] for cell 'mmap_i/ps7_0_axi_periph/s00_couplers/auto_pc'
 Parsing XDC File [/home/huntingt/downloads/base.xdc]
@@ -153,26 +153,26 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/mmap_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/dont_touch.xdc]
 Finished Parsing XDC File [/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/dont_touch.xdc]
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1747.742 ; gain = 0.000 ; free physical = 2295 ; free virtual = 13690
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1747.730 ; gain = 0.000 ; free physical = 1927 ; free virtual = 13195
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1747.742 ; gain = 0.000 ; free physical = 2295 ; free virtual = 13691
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1747.730 ; gain = 0.000 ; free physical = 1927 ; free virtual = 13195
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1747.742 ; gain = 0.000 ; free physical = 2295 ; free virtual = 13691
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1747.742 ; gain = 0.000 ; free physical = 2295 ; free virtual = 13691
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1747.730 ; gain = 0.000 ; free physical = 1927 ; free virtual = 13195
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1747.730 ; gain = 0.000 ; free physical = 1927 ; free virtual = 13195
 WARNING: [Timing 38-316] Clock period '20.000' specified during out-of-context synthesis of instance 'mmap_i/display/buffer_0' at clock pin 'clka' is different from the actual clock period '10.000', this can lead to different synthesis results.
 WARNING: [Timing 38-316] Clock period '20.000' specified during out-of-context synthesis of instance 'mmap_i/display/buffer_1' at clock pin 'clka' is different from the actual clock period '10.000', this can lead to different synthesis results.
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1747.742 ; gain = 194.719 ; free physical = 2372 ; free virtual = 13767
+Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1747.730 ; gain = 169.699 ; free physical = 2003 ; free virtual = 13272
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1747.742 ; gain = 194.719 ; free physical = 2372 ; free virtual = 13767
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1747.730 ; gain = 169.699 ; free physical = 2003 ; free virtual = 13272
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -466,7 +466,6 @@ Applied set_property DONT_TOUCH = true for mmap_i/display/buffer_1. (constraint 
 Applied set_property DONT_TOUCH = true for mmap_i/rst_ps7_0_100M. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for mmap_i/display/ground. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for mmap_i/display/buffer_mux_0. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for mmap_i/graphics_pipeline/gslice. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for mmap_i/graphics_pipeline/dim_convert_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for mmap_i/graphics_pipeline/xymc_packager_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for mmap_i/graphics_pipeline/div_gen_0. (constraint file  auto generated constraint, line ).
@@ -474,12 +473,13 @@ Applied set_property DONT_TOUCH = true for mmap_i/graphics_pipeline/div_gen_1. (
 Applied set_property DONT_TOUCH = true for mmap_i/cube_test_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for mmap_i/ps7_0_axi_periph. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for mmap_i/matrix_provider. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for mmap_i/graphics_pipeline/gslice_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for mmap_i/ps7_0_axi_periph/s00_couplers/auto_pc. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1747.742 ; gain = 194.719 ; free physical = 2373 ; free virtual = 13769
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1747.730 ; gain = 169.699 ; free physical = 2005 ; free virtual = 13273
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1747.742 ; gain = 194.719 ; free physical = 2373 ; free virtual = 13769
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1747.730 ; gain = 169.699 ; free physical = 2005 ; free virtual = 13274
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -519,7 +519,7 @@ WARNING: [Synth 8-3331] design mmap_ps7_0_axi_periph_0 has unconnected port ARES
 WARNING: [Synth 8-3331] design mmap_ps7_0_axi_periph_0 has unconnected port M00_ACLK
 WARNING: [Synth 8-3331] design mmap_ps7_0_axi_periph_0 has unconnected port M00_ARESETN
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:20 . Memory (MB): peak = 1747.742 ; gain = 194.719 ; free physical = 2361 ; free virtual = 13759
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1747.730 ; gain = 169.699 ; free physical = 1995 ; free virtual = 13266
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -534,13 +534,13 @@ INFO: [Synth 8-5578] Moved timing constraint from pin 'mmap_i/processing_system7
 INFO: [Synth 8-5578] Moved timing constraint from pin 'mmap_i/clk_wiz/clk_out1' to pin 'mmap_i/clk_wiz/bbstub_clk_out1/O'
 INFO: [Synth 8-5819] Moved 2 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:26 ; elapsed = 00:00:30 . Memory (MB): peak = 1747.742 ; gain = 194.719 ; free physical = 2236 ; free virtual = 13634
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 1747.730 ; gain = 169.699 ; free physical = 1864 ; free virtual = 13138
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:26 ; elapsed = 00:00:30 . Memory (MB): peak = 1747.742 ; gain = 194.719 ; free physical = 2236 ; free virtual = 13634
+Finished Timing Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 1747.730 ; gain = 169.699 ; free physical = 1864 ; free virtual = 13138
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -552,7 +552,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:26 ; elapsed = 00:00:30 . Memory (MB): peak = 1755.750 ; gain = 202.727 ; free physical = 2236 ; free virtual = 13634
+Finished Technology Mapping : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 1755.738 ; gain = 177.707 ; free physical = 1864 ; free virtual = 13137
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -576,7 +576,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 1755.750 ; gain = 202.727 ; free physical = 2234 ; free virtual = 13632
+Finished IO Insertion : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1755.738 ; gain = 177.707 ; free physical = 1855 ; free virtual = 13136
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -589,7 +589,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 1755.750 ; gain = 202.727 ; free physical = 2234 ; free virtual = 13632
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1755.738 ; gain = 177.707 ; free physical = 1855 ; free virtual = 13136
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -601,25 +601,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 1755.750 ; gain = 202.727 ; free physical = 2235 ; free virtual = 13632
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1755.738 ; gain = 177.707 ; free physical = 1852 ; free virtual = 13135
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 1755.750 ; gain = 202.727 ; free physical = 2235 ; free virtual = 13632
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1755.738 ; gain = 177.707 ; free physical = 1852 ; free virtual = 13135
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1755.750 ; gain = 202.727 ; free physical = 2235 ; free virtual = 13632
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1755.738 ; gain = 177.707 ; free physical = 1852 ; free virtual = 13135
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1755.750 ; gain = 202.727 ; free physical = 2235 ; free virtual = 13632
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1755.738 ; gain = 177.707 ; free physical = 1852 ; free virtual = 13136
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -644,7 +644,7 @@ Report BlackBoxes:
 |13    |mmap_dim_convert_0_0          |         1|
 |14    |mmap_div_gen_0_0              |         1|
 |15    |mmap_div_gen_1_0              |         1|
-|16    |mmap_gslice_0                 |         1|
+|16    |mmap_gslice_0_0               |         1|
 |17    |mmap_xymc_packager_0_0        |         1|
 +------+------------------------------+----------+
 
@@ -661,7 +661,7 @@ Report Cell Usage:
 |7     |mmap_dim_convert_0_0          |     1|
 |8     |mmap_div_gen_0_0              |     1|
 |9     |mmap_div_gen_1_0              |     1|
-|10    |mmap_gslice_0                 |     1|
+|10    |mmap_gslice_0_0               |     1|
 |11    |mmap_processing_system7_0_0   |     1|
 |12    |mmap_rgb2dvi_0_0              |     1|
 |13    |mmap_rst_ps7_0_100M_1         |     1|
@@ -675,34 +675,34 @@ Report Instance Areas:
 +------+----------------------+------------------------------+------+
 |      |Instance              |Module                        |Cells |
 +------+----------------------+------------------------------+------+
-|1     |top                   |                              |  1094|
-|2     |  mmap_i              |mmap                          |  1094|
+|1     |top                   |                              |  1106|
+|2     |  mmap_i              |mmap                          |  1106|
 |3     |    ps7_0_axi_periph  |mmap_ps7_0_axi_periph_0       |   177|
 |4     |      s00_couplers    |s00_couplers_imp_1DL44RN      |   177|
-|5     |    display           |display_imp_SMLEIP            |   175|
+|5     |    display           |display_imp_SMLEIP            |   185|
 |6     |      ground          |mmap_xlconstant_0_1           |     0|
-|7     |    graphics_pipeline |graphics_pipeline_imp_1BR0SRF |   257|
+|7     |    graphics_pipeline |graphics_pipeline_imp_1BR0SRF |   259|
 +------+----------------------+------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1755.750 ; gain = 202.727 ; free physical = 2235 ; free virtual = 13632
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1755.738 ; gain = 177.707 ; free physical = 1852 ; free virtual = 13136
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:20 ; elapsed = 00:00:22 . Memory (MB): peak = 1755.750 ; gain = 8.008 ; free physical = 2292 ; free virtual = 13690
-Synthesis Optimization Complete : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1755.758 ; gain = 202.727 ; free physical = 2303 ; free virtual = 13700
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 1755.738 ; gain = 8.008 ; free physical = 1909 ; free virtual = 13193
+Synthesis Optimization Complete : Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 1755.746 ; gain = 177.707 ; free physical = 1920 ; free virtual = 13204
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1756.750 ; gain = 0.000 ; free physical = 2229 ; free virtual = 13627
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1756.738 ; gain = 0.000 ; free physical = 1845 ; free virtual = 13129
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
 67 Infos, 19 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:33 . Memory (MB): peak = 1760.750 ; gain = 207.727 ; free physical = 2275 ; free virtual = 13673
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1760.750 ; gain = 0.000 ; free physical = 2275 ; free virtual = 13673
+synth_design: Time (s): cpu = 00:00:32 ; elapsed = 00:00:34 . Memory (MB): peak = 1760.738 ; gain = 182.707 ; free physical = 1892 ; free virtual = 13176
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1760.738 ; gain = 0.000 ; free physical = 1892 ; free virtual = 13176
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint '/home/huntingt/repos/hdmi_mmap/hdmi_mmap.runs/synth_1/mmap_wrapper.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file mmap_wrapper_utilization_synth.rpt -pb mmap_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Jan 24 16:53:13 2019...
+INFO: [Common 17-206] Exiting Vivado at Thu Jan 24 18:50:36 2019...

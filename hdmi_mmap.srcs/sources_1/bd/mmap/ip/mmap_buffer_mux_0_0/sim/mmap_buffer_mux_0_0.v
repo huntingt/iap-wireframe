@@ -99,11 +99,11 @@ input wire pixel_valid;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel buffer_sel" *)
 input wire pixel_buffer_sel;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel addr" *)
-input wire [17 : 0] pixel_addr;
+input wire [19 : 0] pixel_addr;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 pixel vsync" *)
 output wire pixel_vsync;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a ADDR" *)
-output wire [17 : 0] buffer_0_addra;
+output wire [19 : 0] buffer_0_addra;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a CLK" *)
 output wire buffer_0_clka;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a DIN" *)
@@ -116,7 +116,7 @@ output wire buffer_0_wea;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0a RST" *)
 output wire buffer_0_rsta;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b ADDR" *)
-output wire [17 : 0] buffer_0_addrb;
+output wire [19 : 0] buffer_0_addrb;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b CLK" *)
 output wire buffer_0_clkb;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b DOUT" *)
@@ -127,7 +127,7 @@ output wire buffer_0_enb;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_0b RST" *)
 output wire buffer_0_rstb;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a ADDR" *)
-output wire [17 : 0] buffer_1_addra;
+output wire [19 : 0] buffer_1_addra;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a CLK" *)
 output wire buffer_1_clka;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a DIN" *)
@@ -140,7 +140,7 @@ output wire buffer_1_wea;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1a RST" *)
 output wire buffer_1_rsta;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1b ADDR" *)
-output wire [17 : 0] buffer_1_addrb;
+output wire [19 : 0] buffer_1_addrb;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1b CLK" *)
 output wire buffer_1_clkb;
 (* X_INTERFACE_INFO = "xilinx.com:interface:bram:1.0 buffer_1b DOUT" *)
@@ -153,7 +153,7 @@ output wire buffer_1_rstb;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga clk" *)
 input wire vga_clk;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga addr" *)
-input wire [17 : 0] vga_addr;
+input wire [19 : 0] vga_addr;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga color" *)
 output wire vga_color;
 (* X_INTERFACE_INFO = "huntingt:user:pixel:1.0 vga valid" *)

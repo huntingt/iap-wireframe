@@ -295,11 +295,11 @@ module xymc_packager(input [47:0] x_tdata, y_tdata, input x_tvalid, y_tvalid, ou
                     if(mode == 3) begin
                         i_index <= 1;
                         xymc_tvalid <= 1;
-                        xymc_tdata <= {3'b0, base_color, 2'b11, 18'b0};
+                        xymc_tdata <= {1'b0, base_color, 2'b11, 20'b0};
                     end else begin
                         i_index <= 0;
                         xymc_tvalid <= 1;
-                        xymc_tdata <= {3'b0, ~base_color, mode, ~yn[47:47], yn[31:24], ~x_tdata[47:47], x_tdata[31:24]};
+                        xymc_tdata <= {1'b0, ~base_color, mode, ~yn[47:47], yn[31:23], ~x_tdata[47:47], x_tdata[31:23]};
                     end
                 end else begin
                     xymc_tvalid <= 0;
@@ -308,11 +308,11 @@ module xymc_packager(input [47:0] x_tdata, y_tdata, input x_tvalid, y_tvalid, ou
                 if(i_index == 1) begin
                     i_index <= 2;
                     xymc_tvalid <= 1;
-                    xymc_tdata <= {3'b0, base_color, 2'b00, 18'b0};
+                    xymc_tdata <= {1'b0, base_color, 2'b00, 20'b0};
                 end else if(i_index == 2) begin
                     i_index <= 0;
                     xymc_tvalid <= 1;
-                    xymc_tdata <= {3'b0, base_color, 2'b10, {18{1'b1}}};
+                    xymc_tdata <= {1'b0, base_color, 2'b10, {20{1'b1}}};
                 end
             end
         end
